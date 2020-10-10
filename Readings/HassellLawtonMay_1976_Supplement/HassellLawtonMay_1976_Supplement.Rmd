@@ -1,0 +1,67 @@
+---
+title: "Supplement to Hassell, Lawton and May 1976"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\subsection{Eqn. 1}
+
+Hassell, Lawton \& May (1976) base their work on the model
+\begin{equation}
+	N_{t+1}=\frac{\lambda N_t}{(1+\alpha N_t)^{-\beta}}
+\end{equation}
+which might be easier to visualize as
+\begin{equation*}
+		\frac{N_{t+1}}{N_t}=\frac{\lambda }{(1+\alpha N_t)^{-\beta}}.
+\end{equation*}
+
+Observe that when $a=0$ or $\beta=0$ this reduces to density-independent growth
+\begin{equation*}
+	\frac{N_{t+1}}{N_t}=\lambda.
+\end{equation*}
+
+When $a>0$ or $\beta>0$ (as assumed in the paper), we can see in the figures below that the greater their values (i.e. the greater that $a$ or $\beta$ are), the more curved the function becomes.  More specifically, $a$ determines where the inflection point of the curve is (larger values create an inflection at lower values of $N_t$), and $\beta$ determines the strength of the density-dependence (the steepness (slope) of the curve).
+
+```{r fig1, fig.height = 3, fig.width = 8, echo=FALSE}
+foo<-function(x){lambda/((1+a*x)^b)}
+par(mfrow=c(1,3))
+lambda=2;a=0;b=0;
+curve(foo,0,10,ylab=expression(N[t+1]/N[t]),xlab=expression(N[t]),main=bquote(paste(lambda==.(lambda),', ',a==.(a),', ',beta==.(b))))
+
+lambda=2;a=0.1;b=1;
+curve(foo,0,10,ylab=expression(N[t+1]/N[t]),xlab=expression(N[t]),main=bquote(paste(lambda==.(lambda),', ',a==.(a),', ',beta==.(b))))
+
+lambda=2;a=2;b=1;
+curve(foo,0,10,ylab=expression(N[t+1]/N[t]),xlab=expression(N[t]),main=bquote(paste(lambda==.(lambda),', ',a==.(a),', ',beta==.(b))))
+```
+
+\pagebreak
+\subsection*{Eqn. 2}
+They also give
+\begin{equation}
+\log \frac{N_t}{N_s}=\beta \log(1+a N_t)
+\end{equation}
+where $N_t$ is the initial number of individuals at time $t$, and $N_s$ is the number of survivors at time $t+1$ (\emph{not} the total number of individuals, $N_{t+1}$).
+
+So how is eqn. 2 related to eqn. 1?  Answer: ``simply'', according to HLM in the line after eqn. 2!
+
+First, let's note that
+\begin{equation*}
+x^{-1} = \frac{1}{x}
+\end{equation*}
+and that
+\begin{equation*}
+	\log(x^a) = a \log(x).
+\end{equation*}
+So now,
+\begin{align}
+	N_{t+1}&=\lambda N_t (1+a N_t)^{-\beta} \\
+		& = \lambda N_s\\
+	\implies \frac{N_s}{N_t}&=(1+a N_t)^{-\beta} \\
+	\implies  \frac{N_t}{N_s}&=(1+a N_t)^{\beta} \\
+	\implies \log \frac{N_s}{N_t}&=\beta \log(1+a N_t)
+\end{align}
+

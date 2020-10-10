@@ -135,6 +135,8 @@ par(mfrow=c(1,2),mar=c(4,4,1.5,1),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(2,0.5,0),tc
 
 
 #########################################################
+rm(list=ls()) # clears workspace
+# install.packages('deSolve')
 library(deSolve)
 ClogisK<-function(t,y,p){
 	N<-y[1]
@@ -161,27 +163,27 @@ par(mar=c(4,4,1.5,1),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(2,0.5,0),tcl=-0.3)
 
 # Fixed harvest effort
 par(mar=c(4,4,1.5,4),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(2,0.5,0),tcl=-0.3)
-	plot(dNdt~N[-length(N)],ylab='dN/dt',xlab='N',type='l',xlim=c(0,110),ylim=c(0,2.7), lwd=4,axes=F);box(lwd=2)
+	plot(dNdt~N[-length(N)],ylab='dG/dt',xlab='N',type='l',xlim=c(0,110),ylim=c(0,2.7), lwd=4,axes=F);box(lwd=2)
 	axis(1,at=c(0,100),labels=c(0,'K'),las=1)
 	axis(2,at=rK4,labels='rK/4',las=1)
 	segments(0,0,120,2.5,lty=1,lwd=2,col='black')
-	mtext('Harvest\nrate',side=4,line=2.5,cex=2)
+	mtext('dH/dt',side=4,line=2.5,cex=2)
 	text(65,0.4,'New equilibrium')
 	arrows(65,0.6,77,1.5,length=0.1)
 
 # Fixed harvest rate
 par(mar=c(4,4,1.5,4),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(2,0.5,0),tcl=-0.3)
-	plot(dNdt~N[-length(N)],ylab='dN/dt',xlab='N',type='l',xlim=c(0,110),ylim=c(0,2.7), lwd=4,axes=F);box(lwd=2)
+	plot(dNdt~N[-length(N)],ylab='dG/dt',xlab='N',type='l',xlim=c(0,110),ylim=c(0,2.7), lwd=4,axes=F);box(lwd=2)
 	axis(1,at=c(0,100),labels=c(0,'K'),las=1)
 	axis(2,at=rK4,labels='rK/4',las=1)
 	segments(0,1.5,100,1.5,lty=1,lwd=2,col='black')
 	axis(4,at=c(0,rK4),labels=c(0,'maxH'),las=1)
-	mtext('Harvest\nrate',side=4,line=2.5,cex=2)
+	mtext('dH/dt',side=4,line=2.5,cex=2)
 	text(30,0.7,'Unstable')
 	text(70,0.7,'Stable')
 	arrows(c(30,70),c(0.9,0.9),c(20,80),c(1.4,1.4),length=0.1)
 
-# One series of figures with increasing harvest rates
+# Series of figures with increasing harvest rates
 x<-N[-length(N)]
 par(mfrow=c(2,2),mar=c(4,4,1.5,4),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(2,0.5,0),tcl=-0.3)
 	plot(dNdt~N[-length(N)],ylab='dN/dt',xlab='N',type='l',xlim=c(0,110),ylim=c(0,2.7), lwd=4,axes=F);box(lwd=2)
@@ -217,16 +219,16 @@ plot(dNdt~N[-length(N)],ylab='dN/dt',xlab='N',type='l',xlim=c(0,110),ylim=c(0,2.
 	arrows(c(5,40,60,95),c(1.3,2.1,2.1,1.3),c(5,40,60,95),c(0.8,2.3,2.3,0.8),length=0.05,code=3)
 
 
-
-# Stochasticity
-par(mar=c(4,4,1.5,4),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(2,0.5,0),tcl=-0.3)
+##################################
+# Fake some stochasticity
+par(mfrow=c(1,1),mar=c(4,4,1.5,4),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(2,0.5,0),tcl=-0.3)
 	plot(dNdt~N[-length(N)],ylab='dN/dt',xlab='N',type='n',xlim=c(0,110),ylim=c(0,2.7), lwd=4,axes=F);box(lwd=2)
 	points(jitter(dNdt,4000)~jitter(N[-length(N)],4000),pch=19)
 	axis(1,at=c(0,100),labels=c(0,'K'),las=1)
 	axis(2,at=rK4,labels='rK/4',las=1)
 
 ##################################
-par(mar=c(4,4,1.5,4),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(1,0.5,0),tcl=-0.3)
+par(mfrow=c(1,1),mar=c(4,4,1.5,4),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(1,0.5,0),tcl=-0.3)
 	plot(dNdt~N[-length(N)],ylab='dN/dt',xlab='Population size (N)',type='l',xlim=c(0,110),ylim=c(0,2.7), lwd=4,axes=F);box(lwd=2)
 	mtext('Harvest',side=4,line=1,cex=2)
 	segments(0,0,120,2.5,lty=2,lwd=2,col='black')

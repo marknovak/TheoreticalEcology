@@ -3,56 +3,115 @@
 ##################################################
 rm(list=ls()) # clears workspace
 
-TimeSteps <- 500; t <- c(1:TimeSteps);N <- numeric();N[1] <- 1;lambda <- 1.01;mu<-0;sigma<-0
-rlambda<-numeric();for (Time in t){ rlambda[Time]<-lambda*exp(rnorm(1,mu,sigma));N[Time+1] <- N[Time]*rlambda[Time]}
+TimeSteps <- 500
+t <- c(1:TimeSteps)
+N <- numeric()
+N[1] <- 1
+lambda <- 1.01
+mu<-0
+sigma<-0
+rlambda<-numeric()
+
+for (Time in t){ 
+	rlambda[Time]<-lambda*exp(rnorm(1,mu,sigma))
+	N[Time+1] <- N[Time]*rlambda[Time]
+}
 
 quartz(width=8,height=4)
-par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
+par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
+	tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
 	plot(N,type='l',lwd=3,ylab='N_t',xlab='Time')
 	plot(N,log='y',type='l',lwd=3,ylab='log(N_t)',xlab='Time') 
 
+##################
+# With stochasticity
+N <- numeric()
+N[1] <- 1
+lambda <- 1.01
+mu<-0
+sigma<-0
+rlambda<-numeric()
 
-########################
+sigma <- 0.05
+
+for (Time in t){ 
+	rlambda[Time]<-lambda*exp(rnorm(1,mu,sigma))
+	N[Time+1] <- N[Time]*rlambda[Time]
+}
+
+quartz(width=8,height=4)
+par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
+	tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
+	plot(N,type='l',lwd=3,ylab='N_t',xlab='Time')
+	plot(N,log='y',type='l',lwd=3,ylab='log(N_t)',xlab='Time') 
+
+################################################################
+################################################################
+# Ensemble of populations
+################################################################
 # set stochastic parameters
-TimeSteps <- 1000; t <- c(1:TimeSteps);mu<-0;sigma<-0.05;reps<-300; rlambda<-array(NA,dim=c(reps,length(t)));N<-array(NA,dim=c(reps,(length(t)+1))); N[,1]<-100;
-for (r in 1:reps){for (Time in t){ rlambda[r,Time]<-lambda*exp(rnorm(1,mu,sigma));N[r,Time+1] <- N[r,Time]*rlambda[r,Time]}}
+TimeSteps <- 1000
+t <- c(1:TimeSteps)
+mu<-0
+sigma<-0.05
+reps<-300
+rlambda<-array(NA,dim=c(reps,length(t)))
+N<-array(NA,dim=c(reps,(length(t)+1)))
+N[,1]<-100
+
+for (r in 1:reps){
+	for (Time in t){ 
+		rlambda[r,Time]<-lambda*exp(rnorm(1,mu,sigma))
+		N[r,Time+1] <- N[r,Time]*rlambda[r,Time]
+	}
+}
+
 
 quartz(width=8,height=4)
-par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
-	plot(N[1,],type='l',lwd=3,ylab='N_t',xlab='Time')
-	plot(N[1,],log='y',type='l',lwd=3,ylab='log(N_t)',xlab='Time') 
-
-################
-quartz(width=8,height=4)
-par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
+par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
+	tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
 	plot(N[1,],type='n',lwd=3,ylab='N_t',xlab='Time')
 		for(i in 1:15){lines(N[i,],lwd=2)}
 	plot(N[1,],log='y',type='n',lwd=3,ylab='log(N_t)',xlab='Time')
 		for(i in 1:15){lines(N[i,],lwd=2)}
 
-####################################
-gmean<-function(x){ exp(mean(log(x)))};mu<-apply(N,2,gmean);var<-apply(N,2,var);cv<-sqrt(var)/mu
-Col<-as.vector(col2rgb('black')/255);Col<-rgb(Col[1],Col[2],Col[3], alpha=0.2)
+###############
+gmean<-function(x){
+	exp(mean(log(x)))
+}
+
+mu<-apply(N,2,gmean)
+var<-apply(N,2,var)
+cv<-sqrt(var)/mu
+
+Col<-as.vector(col2rgb('black')/255)
+Col<-rgb(Col[1],Col[2],Col[3], alpha=0.2)
 
 quartz(width=8,height=4)
-par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),tcl=-0.2,lwd=2,cex.axis=1,cex.lab=1.4)
-	plot(N[1,],log='y',type='n',lwd=3,ylab='log(N_t)',xlab='Time',ylim=c(min(N),max(N)))
+par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
+	tcl=-0.2,lwd=2,cex.axis=1,cex.lab=1.4)
+	plot(N[1,],log='y',type='n',lwd=3,ylab='log(N_t)',
+		xlab='Time',ylim=c(min(N),max(N)))
 		for(i in 1:nrow(N)){lines(N[i,],lwd=1,col=Col)}
 		legend('topleft',legend=c('Mean'),bty='n',cex=2,inset=0)
 		lines(mu,col='red',lwd=4)
-	plot(var,log='y',ylab='log(Var[N_t])',xlab='Time',lwd=3,type='l')
-			legend('topleft',legend=c('Variance'),bty='n',cex=2,inset=0.)
+	plot(var,log='y',ylab='log(Var[N_t])',
+		xlab='Time',lwd=3,type='l')
+	legend('topleft',legend=c('Variance'),
+		bty='n',cex=2,inset=0.)
 			
-quartz(width=6,height=4)
-par(mfrow=c(1,1),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),tcl=-0.2,lwd=2,cex.axis=1,cex.lab=1.4)
-	plot(cv,log='y',ylab='CV',xlab='Time',lwd=3,type='l')
-		legend('bottomright',legend=c('CV'),bty='n',cex=3)
+			
+#quartz(width=6,height=4)
+#par(mfrow=c(1,1),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
+#	tcl=-0.2,lwd=2,cex.axis=1,cex.lab=1.4)
+#plot(cv,log='y',ylab='CV',xlab='Time',lwd=3,type='l')
+#	legend('bottomright',legend=c('CV'),bty='n',cex=3)
 
-###################################################################3
-###################################################################3
-###################################################################3
+###################################################################
+###################################################################
+###################################################################
 # Class excercise: Contrast geometric and arithmetic means
-###################################################################3
+###################################################################
 data<-c(3,1,2)
 data<-runif(n=3,min=1,max=4) # draw n random numbers from a uniform distribution
 data<-rnorm(n=3,mean=2,sd=1) # draw n random numbers from a normal distribution
@@ -81,7 +140,8 @@ head(output) # take a look at the top few lines of the output
 # plot your output
 quartz(width=5,height=5)
 par(pty='s',lwd=2) # ensures that the figure is square
-	plot(gmlambda~mlambda,data=output,xlab='Arithmetic Mean',ylab='Geometric Mean')
+	plot(gmlambda~mlambda,data=output,
+		xlab='Arithmetic Mean',ylab='Geometric Mean')
 	abline(0,1,lty=2,col='grey') # adds a line with intercept=0 and slope=1  (i.e., the 1:1 line)
 	
 
@@ -99,17 +159,17 @@ output<-calc(reps=100,n=1000,mu=1.5,sigma=0.05)
 # Experiment with different amounts of data (i.e., vary n)
 # What happens as you vary n?
 output<-calc(reps=100,n=1000,mu=1.5,sigma=0.02)
-plot(gmlambda~mlambda,data=output,xlab='Arithmetic Mean',ylab='Geometric Mean')
+plot(gmlambda~mlambda,data=output,
+	xlab='Arithmetic Mean',ylab='Geometric Mean')
 abline(0,1) # adds a line with intercept=0 and slope=1  (i.e., the 1:1 line)
 output<-calc(reps=100,n=20,mu=1.5,sigma=0.02)
 points(gmlambda~mlambda,data=output,col='green')
 
-# Set sigma to 0.2 and plot the results again
-# Now experiment with different values of mu
-# You will need to plot your output in a new plot each time to see it all
+# Set sigma back to 0.2
 # What happens when mu = 1.01
 output<-calc(reps=100,n=1000,mu=1.01,sigma=0.2)
-	plot(gmlambda~mlambda,data=output,xlab='Arithmetic Mean',ylab='Geometric Mean')
+	plot(gmlambda~mlambda,data=output,
+		xlab='Arithmetic Mean',ylab='Geometric Mean')
 	abline(0,1) 
 
 ############################################################################

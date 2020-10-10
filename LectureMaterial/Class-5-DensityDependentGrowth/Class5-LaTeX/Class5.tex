@@ -11,20 +11,18 @@
 
 \begin{document}
 
-\noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 5 -- Density-independent deterministic growth}
+\noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 5 -- Density-dependent deterministic growth}
 
 \rule[0.5ex]{\linewidth}{1pt}
-\begin{center}
-	\note{Note: Probably won't finish MSY section.}
-\end{center}
-\rule[0.5ex]{\linewidth}{1pt}
+\textbf{Announcements}: \\
+	\ind PS1 due\\
+	\ind Handout Q2
 
 \textbf{Concepts}: \\
-\ind Population vs. Per capita growth rate \\
-\ind Negative vs. Positive density-dependence \\
-\ind Stable vs. Unstable fixed point equilibria \\
-\ind Maximum Sustainable Yield (MSY)
-
+	\ind Population vs. Per capita growth rate \\
+	\ind Negative vs. Positive density-dependence \\
+	\ind Stable vs. Unstable fixed point equilibria \\
+	\ind Maximum Sustainable Yield (MSY) \note{Probably won't finish this section}\\
 \rule[0.5ex]{\linewidth}{1pt}
 
 \begin{equation*}
@@ -278,7 +276,7 @@ $\frac{dN}{dt}$ vs. $N$  = Stock-recruitment function. \note{Replace axis labels
 
 \rule[0.5ex]{\linewidth}{1pt}
 
-\textbf{Fixed-harvest scenario}
+\textbf{Fixed-quota harvest scenario}
 \begin{equation*}
 	\frac{dN}{dt}=f(N)=rN\left(1-\frac{N}{K}\right)-H
 \end{equation*}
@@ -309,9 +307,14 @@ Step \#2: Solve for $N^*$\\
 \begin{equation*}
 	N^*=\frac{-r \pm \sqrt{r^2 - 4rH/K}}{-2r/K}=\frac{rK \pm \sqrt{r^2 K^2 - 4rKH}}{2r}
 \end{equation*}
-Thus model contains \emph{two} non-trivial solutions  and \emph{one} trivial solution!
+Thus model contains \emph{two} non-trivial solutions  and \emph{one} trivial solution!\\
+
+Graphical representation:
+\begin{equation*}
+\frac{dN}{dt}=\underbrace{rN\left(1-\frac{N}{K}\right)}_{\frac{dG}{dt}}\underbrace{-H}_{\frac{dH}{dt}}=0
+\end{equation*}
 \begin{center}
-\includegraphics[width=4cm]{figs/dNdt_harvestquota.jpg}
+\includegraphics[width=6cm]{figs/dNdt_harvestquota.jpeg}
 \end{center}
 
 Right-hand equilibrium is a stable fixed point.\\
@@ -344,9 +347,13 @@ Step \#2: Solve for $N^*$\\
 	N^*=\frac{rK-hK}{r}=\frac{(r-h)K}{r}
 \end{equation*}
 Thus model as \emph{one} trivial and \emph{one} non-trivial solution.\\
-Visualize as slope = $h$
+
+Graphical representation:\\
+\begin{equation*}
+\frac{dN}{dt}=\underbrace{rN\left(1-\frac{N}{K}\right)}_{\frac{dG}{dt}}\underbrace{-hN}_{\frac{dH}{dt}}=0
+\end{equation*}
 \begin{center}
-\includegraphics[width=4cm]{figs/dNdt_harvesteffort.jpg}
+\includegraphics[width=6cm]{figs/dNdt_harvesteffort.jpeg}
 \end{center}
 Non-trivial solution is always stable!\\
 Also note intuitive interpretation:\\
@@ -356,7 +363,6 @@ Also note intuitive interpretation:\\
 
 \rule[0.5ex]{\linewidth}{1pt}
 
-\pagebreak 
 
 \textbf{Polynomial representation of $\frac{dN}{dt}$}
 
@@ -378,7 +384,10 @@ such that exponential growth corresponds to ...
 
 and logistic growth corresponds to...
 \begin{align*}
-& 	\beta_0=0, \;\; \beta_1 = r, \;\; \beta_2 = -\frac{r}{K}, \;\; \beta_{n>2}=0\\
+	\beta_0 &= 0\\
+	\beta_1 &= r\\
+	\beta_2 &= -\alpha = -\frac{r}{K}\\
+	\beta_{n>2} & =0
 \end{align*}
 
 \rule[0.5ex]{\linewidth}{1pt}

@@ -23,7 +23,7 @@ quartz()
 plot(out,type='o',xlab='Time',ylab='N',ylim=c(0,150))
 
 # overlay dynamics for different parameter values. For example, N0=1...
-out2<-DlogisK(N0=100,T=30,rd=0.5,K=100)
+out2<-DlogisK(N0=1,T=30,rd=0.5,K=100)
 points(out2,type='o',col='grey')
 
 # What happens when N0 > K?
@@ -48,11 +48,13 @@ points(out2,type='o',col='grey')
 # Let's clear all the results of our previous simulations using the command:
 rm(list=ls()) # clears workspace
 # (I put this line of code at the top of all my scripts to avoid mistakes.)
-# If it's not already installed on your computer, install the R-package called 'deSolve'.  On a Mac this is done using the Package Installer in the 'Packages and Data' dropdown menu. With CRAN (binaries)' selected, either hit the 'Get List' button to see all available packages, or type the name of the package you want into the search field before hitting 'Get List'. Wait for the list to populate.  Click on the package you want, select 'Install dependencies' and 'At System Level', and then 'Install Selected'.
-# On a Windows machine the package installer is found in the 'Packages' dropdown menu.  Click on 'Install package(s)', select a local mirror, and then select your package.
-# To use your newly installed package you first have to 'load' it into the library.
-# Thus, start your script with the line:
 
+# If it's not already installed on your computer, install the R-package called 'deSolve'.
+# This only needs to be done once (unless you want to update the installed package).
+
+# install.packages('deSolve')
+
+# To use the installed package you first have to 'load' it into the library.
 library(deSolve)
 
 # Then define the function for the continuous logistic
@@ -80,7 +82,7 @@ out<-ode(y=N0,times=t,func=ClogisK,parms=params)
 
 # Convert this output to a data.frame to ease plotting and data extraction
 out<-data.frame(out)
-quartz()
+quartz() # Windows users may need to comment-out this line
 plot(out$time,out$N)
 
 # Plot the change in N between time t and t+1 as a function N(t)

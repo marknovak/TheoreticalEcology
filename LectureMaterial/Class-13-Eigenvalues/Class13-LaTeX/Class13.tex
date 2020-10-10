@@ -27,8 +27,7 @@
 \textbf{Concepts:}\\
 \ind - n-spp. stability\\
 \ind - eigenvalues \& complex numbers\\
-\ind - Determinant, Traces \& Routh-Hurwitz criteria\\
-\ind - Touch on Complexity vs. Stability debate
+\ind - Matrix determinant
 
 \rule[0.5ex]{\linewidth}{1pt}
 
@@ -46,9 +45,9 @@ $\begin{bmatrix} a\\ b \end{bmatrix}$ - column vector \ind \ind $\begin{bmatrix}
 \hline
 \textbf{Eigenvalues ($\lambda_i$)} & \textbf{Interpretation} \\ 
 \hline
- $Re(\lambda_i)< 0$  for all $i$& Stable point attractor \\ 
-  $Re(\lambda_i)< 0$ for some $i$ & Saddle node (repellor-attractor) (`unstable') \\ 
- $Re(\lambda_i)> 0$ for all $i$ & Unstable point repellor  \\ 
+ $Re(\lambda_i)< 0$  for all $i$& Stable node\\ 
+  $Re(\lambda_i)< 0$ for some $i$ & Saddle node \\ 
+ $Re(\lambda_i)> 0$ for all $i$ & Unstable node \\ 
  $Re(\lambda_i) = 0$ for all $i$ & Neutrally stable \\ 
  \hline
   $Im(\lambda_i) = 0$ for all $i$ & No oscillations \\ 
@@ -60,16 +59,16 @@ $\begin{bmatrix} a\\ b \end{bmatrix}$ - column vector \ind \ind $\begin{bmatrix}
 	\includegraphics[width=7cm]{figs/Points.pdf}
 	\includegraphics[width=3cm]{figs/Saddle.pdf}
 \end{center}
-Recall:
+Recall, for perturbations $x$ and $y$ to species $u_1$ and $u_2$:
 \begin{equation*}
-	f_1(u_1^* + x, u_2^* + y)\approx \underbrace{\left. \frac{\partial f_1}{\partial u_1}\right|_{u_1^*, u_2^*}}_{A_{11}} \cdot x + \underbrace{\left. \frac{\partial f_1}{\partial u_2}\right|_{u_1^*, u_2^*}}_{A_{12}} \cdot y
+	\frac{d x}{dt}=f_1(u_1^* + x, u_2^* + y)\approx \underbrace{\left. \frac{\partial f_1}{\partial u_1}\right|_{u_1^*, u_2^*}}_{A_{11}} \cdot x + \underbrace{\left. \frac{\partial f_1}{\partial u_2}\right|_{u_1^*, u_2^*}}_{A_{12}} \cdot y
 \end{equation*}
 and
 \begin{equation*}
-	f_2(u_1^* + x, u_2^* + y)\approx \underbrace{\left. \frac{\partial f_2}{\partial u_1}\right|_{u_1^*, u_2^*}}_{A_{21}} \cdot x + \underbrace{\left. \frac{\partial f_2}{\partial u_2}\right|_{u_1^*, u_2^*}}_{A_{22}} \cdot y
+	\frac{d y}{dt}=	f_2(u_1^* + x, u_2^* + y)\approx \underbrace{\left. \frac{\partial f_2}{\partial u_1}\right|_{u_1^*, u_2^*}}_{A_{21}} \cdot x + \underbrace{\left. \frac{\partial f_2}{\partial u_2}\right|_{u_1^*, u_2^*}}_{A_{22}} \cdot y
 \end{equation*}
 
-Therefore, if $x$ and $y$ are small, can approximate dynamics of perturbation as:
+Therefore, if $x$ and $y$ are small, can approximate dynamics as
 \begin{align*}
 	\frac{dx}{dt}&=A_{11} \cdot x + A_{12} \cdot y\\	
 	\frac{dy}{dt}&=A_{21} \cdot x + A_{22} \cdot y
@@ -129,7 +128,7 @@ Vector $\vec{w}$ the \textbf{right eigenvector} of $\mathbf{A}$.\\
 \ind $\vec{w}$ is a column vector.\\
 
 
-\textbf{Side-note} (since we won't actually use this fact)\\
+\textbf{Side-note} (we won't actually use this fact)\\
 \ind The \textbf{left eigenvector} comes from:
 \begin{equation*}
 	\vec{v}\mathbf{A} = \vec{v}\lambda
@@ -140,23 +139,22 @@ Vector $\vec{w}$ the \textbf{right eigenvector} of $\mathbf{A}$.\\
 \pagebreak
 
 \textbf{What is an eigenvalue?}\\
-Can think of both any matrix $A$ and its associated eigenvalues $\lambda$ as equivalent transformation operations,\\
+Can think of any square matrix $A$ and its associated eigenvalues $\lambda$ as equivalent transformation operations,\\
 \ind ...like a multiplication by a `slope' or `direction'.\\
 
-For example, 
-\begin{center}
-	\includegraphics[width=6cm]{figs/eigen1.pdf}
-\end{center}
-
-That is,  if we let $\mathbf{A}  = \begin{bmatrix} a_1 & a_2 \\ a_3 & a_4 \end{bmatrix}$ and $\vec{w} = \begin{bmatrix}b \\ c \end{bmatrix}$.\\
+For example,  if we let $\mathbf{A}  = \begin{bmatrix} a_1 & a_2 \\ a_3 & a_4 \end{bmatrix}$ and $\vec{w} = \begin{bmatrix}b \\ c \end{bmatrix}$.\\
 Then:
 \begin{align*}
 	\mathbf{A} \vec{w} &= \begin{bmatrix} a_1 & a_2 \\ a_3 & a_4 \end{bmatrix} \cdot \begin{bmatrix} b \\ c\end{bmatrix} = \begin{bmatrix} a_1 b +  a_2 c \\ a_3 b + a_4 c \end{bmatrix} = \begin{bmatrix} d \\ e \end{bmatrix}\\
 	\lambda \vec{w} &= \lambda \begin{bmatrix}b \\ c \end{bmatrix}=  \begin{bmatrix}\lambda b \\ \lambda c \end{bmatrix}  = \begin{bmatrix} d \\ e \end{bmatrix}
 \end{align*}
 
+\begin{center}
+	\includegraphics[width=6cm]{figs/eigen1.pdf}
+\end{center}
+
 \textbf{Numerical example:}\\
-\ind Start at $\vec{w}=\begin{bmatrix} x \\ y \end{bmatrix}=\begin{bmatrix}2 \\ 1 \end{bmatrix} $ and $\mathbf{A} = \begin{bmatrix} 2 & 1 \\ 1 & 3 \end{bmatrix} \qquad \qquad  \Rightarrow  \qquad \qquad\begin{bmatrix} 2 & 1 \\ 1 & 3 \end{bmatrix} \cdot \begin{bmatrix}2 \\ 1 \end{bmatrix}  = \begin{bmatrix} 4+1 \\ 2+3 \end{bmatrix} =\begin{bmatrix}5 \\ 5 \end{bmatrix}$ 
+\ind Start at $\vec{w}=\begin{bmatrix} x \\ y \end{bmatrix}=\begin{bmatrix}2 \\ 1 \end{bmatrix} $ and $\mathbf{A} = \begin{bmatrix} 2 & 1 \\ 1 & 3 \end{bmatrix} \qquad  \Rightarrow   \qquad\begin{bmatrix} 2 & 1 \\ 1 & 3 \end{bmatrix} \cdot \begin{bmatrix}2 \\ 1 \end{bmatrix}  = \begin{bmatrix} 4+1 \\ 2+3 \end{bmatrix} =\begin{bmatrix}5 \\ 5 \end{bmatrix}$ 
 \begin{center}
 	\includegraphics[width=6cm]{figs/eigen2.pdf}
 \end{center}
@@ -227,7 +225,7 @@ If $\lambda$ is just a scaling factor, then the volume of $\mathbf{A}-\lambda \m
 	& = \underbrace{\lambda^2 - (A_{11}+A_{22})\lambda + A_{11}A_{22} - A_{12} A_{21}}_{\text{Characteristic equation}}
 \end{align*}
 
-\ind $\Rightarrow$ Solve for $\lambda_i$'s by solving the \textbf{characteristic equation}.\\
+\ind $\Rightarrow$ Solve for $\lambda$ by solving the \textbf{characteristic equation}.\\
 
 Solve for $\lambda$ using quadratic formula:
 \begin{equation*}
@@ -286,7 +284,7 @@ But how do we take the $\sqrt{\phantom{x}}$ of a negative number?\\
 	\text{e.g.,} \quad	\sqrt{-4} \quad = \quad \sqrt{-1 \cdot 4} \quad = \quad \sqrt{i^2 4} \quad = \quad i \sqrt{4} \quad = \quad 2i
 \end{align*}
 \begin{equation*}
-	\lambda = \underbrace{\tfrac{1}{2}\text{A}_1}_{\text{Real}} \pm \underbrace{\tfrac{1}{2}\sqrt{(-\text{A}_1)^2 - 4\text{A}_2} \; i}_{\text{imaginary}}
+	\lambda = \tfrac{1}{2}\text{A}_1 \pm \tfrac{1}{2}\sqrt{(-\text{A}_1)^2 - 4\text{A}_2} \; i
 \end{equation*}
 
 There is nothing `imaginary' about imaginary numbers!  They're as `real' as negative numbers!\\
@@ -329,11 +327,11 @@ From the theory of complex numbers:
 \end{align*}
 Thinking  of $bt$ as $\Theta$ gives:
 \begin{equation*}
-	e^{i bt} = \cos (bt) + \sin (bt)
+	e^{i bt} = \cos (bt) + i\sin (bt)
 \end{equation*} 
 Thus:
 \begin{equation*}
-	e^{(a \pm bi) t} =  e^{at} \cdot  [\cos (bt) \pm \sin (bt)]
+	e^{(a \pm bi) t} =  e^{at} \cdot  [\cos (bt) \pm i\sin (bt)]
 \end{equation*} 
 
 Therefore, $a$ controls stability
@@ -344,51 +342,6 @@ Therefore, $a$ controls stability
 \end{align*}
 And $b$ controls the \emph{frequency} of the oscillations.
 
-\rule[0.5ex]{\linewidth}{1pt}
-
-\textbf{Back to Biology:  Classifying steady states}\\
-For 2x2 system:
-\begin{equation*}
-	\lambda^2 - \underbrace{(A_{11}+A_{22})}_{\text{A}_1}\lambda + \underbrace{A_{11}A_{22} - A_{12}A_{21}}_{\text{A}_2}
-\end{equation*}
-
-For $n$x$n$-species system:
-\begin{equation*}
-	\lambda^n - \text{A}_1 \lambda^{n-1} + ... + (-1)\text{A}_n = 0
-\end{equation*}
-
-For 3x3: $\text{A}_n = \text{A}_3$.  That is, there's a conjugate pair and a 3rd $\lambda$.\\
-
-For 2x2:
-\begin{align*}
-&\text{A}_1 = A_{11}+A_{22} \quad = \quad \text{\textbf{Trace}} \quad = \quad \sum A_{ii}\\
-&\text{A}_2 = A_{11}\cdot A_{22} - A_{12}\cdot A_{21} \quad = \quad \text{\textbf{Determinant}} \quad = \quad Det(\mathbf{A})
-\end{align*}
-Therefore, we could either evaluate all the $\lambda$'s (i.e. if $\lambda_i < 0 \; \forall i$) $\Rightarrow$ stable system
-
-
-or use \textbf{Routh-Hurwitz stabiliy criteria}\\
-\ind \ind Provide \emph{biological insight} (not possible using just $\lambda$'s)\\
-
-\ind Trace$(\mathbf{A})<0 \quad \Rightarrow \quad A_{11}+A_{22}<0$ is necessary for stability\\
-\ind \ind $\Rightarrow$ \emph{At least some species must be strongly self-limiting for stability} $\Leftarrow$ \\
-
-\ind Det$(\mathbf{A})>0  \quad \Rightarrow \quad A_{11} A_{22} - A_{12} A_{21} > 0$ is necessary for stability\\
-\ind \ind $\Rightarrow$ \emph{Overall self-limitation must be stronger then interspecific effects for stability} $\Leftarrow$\\
-\ind \ind $\Rightarrow$ \emph{Intra > inter-specific effects} $\Leftarrow$ \\
-
-Each condition by itself is \emph{necessary, but not sufficient}.
-
-\begin{equation*}
-	\lambda = \tfrac{1}{2}\text{Tr}(\textbf{A}) \pm \tfrac{1}{2}\sqrt{(-\text{Tr}(\textbf{A}))^2 - 4\cdot\text{Det}(\textbf{A})} \; i
-\end{equation*}
-
-\ind Whichever parts of $\sqrt{\phantom{x}}$ is bigger determines with or without oscillations.\\
-\ind Bifurcation occurs at $(-\text{Tr}(\textbf{A}))^2 = 4\cdot \text{Det}(\textbf{A})$.
-
-\begin{center}
- 	\includegraphics[width=16cm]{figs/Classify.pdf}
-\end{center}
  
 \rule[0.5ex]{\linewidth}{1pt}
 \rule[0.5ex]{\linewidth}{1pt}

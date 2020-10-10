@@ -23,76 +23,10 @@
 \noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 11 -- 2-D Stability Analysis -- Competition Part 2}
 \rule[0.5ex]{\linewidth}{1pt}
 \textbf{Today:} 
-\ind Go over graphical analysis LV-competition \\
-\ind \ind ...then proceed to do formal stability analysis of equilibria\\
-\textbf{Next class} move on to Consumer-Resource \& nonlinear intxns.
+\ind Formal stability analysis of two-species competition equilibria\\
+\textbf{Next class} move on to Consumer-Resource \& nonlinear interactions.
 
 \rule[0.5ex]{\linewidth}{1pt}
-
-2-spp. competition Main questions:\\
-\ind When can both spp. coexist?\\
-\ind When can sp 1 out-compete sp 2?\\
-\ind When can sp 1 invade sp 2?
-
-\textbf{Naive simulations}\\
-\ind \note{R-demonstration - (Vector field section.)}\\
-\ind \note{Walk through first set of parameter values. ``Naive simulations''}\\
-\ind \ind \note{Then show full table before showing results with R code for other parameters.}\\
-
-\ind With $r_1 = r_2 = K_1 = K_2 = 1$ and $N_1(0) = N_2(0)=0.01$
-
-\begin{table*}[h]
-\centering
-\begin{tabular}{cccc}
-$\alpha_{21}$ & $\alpha_{12}$ & Outcome \\ 
-\hline
-0.5 & 0.7 & coexist & \\
-1.5 & 0.5 & sp1 & \\
-0.5 & 1.5 & sp2 & $N_1(0)=N_2(0)$\\
-1.5 & 1.7 & sp2 & \\
-\hline
-1.5 & 1.7 & sp1 & $N_1(0)>N_2(0)$\\
- \hline
-\end{tabular} 
-\end{table*}
-\ind \ind \ind \ind \ind \ind $\Rightarrow$ Priority effect\\
-\ind \ind \ind \ind \ind \ind  $\Rightarrow$ Alternative stable states
-
-\vspace{0.5cm}
-
-\textbf{Graphical Analysis}\\
-Earlier we showed that from $\frac{dN_i}{dt}=0$ that:
-\begin{align*}
-	N_i^* = & K_i - \alpha_{ij} N_j \quad \text{and}\quad N_j^* = K_j - \alpha_{ji} N_i\\
-	\Rightarrow N_j = & \frac{K_j-N_i^*}{\alpha_{ij}}\\
-	\text{Thus isocline interesects x-axis at}\\
-  N_j = & \frac{K_j-0}{\alpha_{ij}}=\frac{K_j}{\alpha_{ij}}
-	\end{align*}
-
-Same goes for 2nd species.
-\begin{center}
-\includegraphics[width=10cm]{figs/LV_comp_isoclines.pdf}
-\end{center}
-\note{Work through all other cases on board}\\
-\note{R-code: Work through other parameter values}
-
-\pagebreak
-
-\textbf{Inferences/Conclusions:}
-
-\begin{table*}[h]
-\centering
-\begin{tabular}{ll}
-Coexistence: & intra $>$ inter for both species  \\
-& \ind \ind (i.e. $\dfrac{K_j}{\alpha_{jj}}=\dfrac{K_j}{1} < \dfrac{K_j}{\alpha_{ji}} \Rightarrow \alpha_{jj}>\alpha_{ji}$)\\
-Sp $i$ dominance: & intra $>$ inter for $i$ \& intra $<$ inter for $j$\\
-Priority effect: & intra $<$ inter for both\\
-& \ind \ind (i.e. $\dfrac{K_j}{\alpha_{jj}}=\dfrac{K_j}{1} > \dfrac{K_j}{\alpha_{ji}} \Rightarrow \alpha_{jj}<\alpha_{ji}$)
-\end{tabular} 
-\end{table*}
-
-\rule[0.5ex]{\linewidth}{1pt}
-
 
 \textbf{Evaluate stability of equilibria} \\
 Just as for 1 species model:\\
@@ -241,7 +175,7 @@ We will return to this in more detail next time.\\
 When $\alpha_{ii}>\alpha_{ij}$ \\
 \ind (intra- is stronger than inter-specific competition)...
 \begin{center}
-	\includegraphics[width=6cm]{figs/LVcomp-Case1.pdf}
+	\includegraphics[width=5cm]{figs/LVcomp-Case1.pdf}
 \end{center}
 \ind \circled{1} Both $\lambda's <0 \Rightarrow$ Stable coexistence\\
 \ind \circled{2} Both $\lambda's > 0 \Rightarrow$ Unstable\\
@@ -252,7 +186,7 @@ When $\alpha_{ii}>\alpha_{ij}$ \\
 When $\alpha_{ii}>\alpha_{ij}$  \& $\alpha_{jj}<\alpha_{ji}$\\
 \ind (inter- is stronger than intra-specific competition for one species but not the other)...
 \begin{center}
-	\includegraphics[width=6cm]{figs/LVcomp-Case2.pdf}
+	\includegraphics[width=5cm]{figs/LVcomp-Case2.pdf}
 \end{center}
 \ind \circled{1} $\lambda_1<0$ \& $\lambda_2 > 0 \Rightarrow$ unstable (attractor-repellor)\\
 \ind \circled{2} Both $\lambda's > 0 \Rightarrow$ Unstable\\

@@ -16,96 +16,12 @@
 \noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 10 -- Two-species competition}
 
 \rule[0.5ex]{\linewidth}{1pt}
-\textbf{Outline:}\\
-\ind Do everything we did by hand last class in Mathematica.\\
-\ind The move on to Graphical analysis of two-species competition.\\
+\textbf{Today:} Graphical analysis of two-species competition.\\
+\textbf{Next:} 2-D stability analysis\\
 \textbf{Concepts for the road ahead:}\\
 \ind Coexistence, Invasibility, Priority effects, Alternative Stable States\\
 \ind Phase diagrams \& Zero Net Growth Isoclines (ZNGI's) \\
-\ind 2-D stability analysis
-
 \rule[0.5ex]{\linewidth}{1pt}
-
-\textbf{Intro to Mathematica - Local stability analysis of continuous logistic}\\
-\note{Walk through Mathematica code: \emph{'Class9-Stability-cLogistic.nb'}}
-
-Functions use square brackets [ ].\\
-Important functions:\\
-\ind \emph{Solve[y=ax,x]}\\
-\ind \emph{D[f(x),x]}\\
-\ind \emph{Simplify}\\
-\ind $func\; /. \; x \to y$\\ 
-\ind $var\; /. \; x$
-
-\rule[0.5ex]{\linewidth}{1pt}
-
-\textbf{Non-dimensionalization - 1 sp. logistic}\\
-The equation
-\begin{equation*}
-	\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)
-\end{equation*}]
-has  1 variable and 2 parameters (+1 that's implicit!).\\
-\ind \ind $N : \#$
-\ind \ind $r : \frac{\#}{\# time}$
-\ind \ind $K : \#$
-
-\vspace{0.5cm}
-
-Define $x$ to be the population size relative to the carrying capacity (i.e. fraction of the carrying capacity).:
-\begin{equation*}
-	x := \frac{N}{K}
-\end{equation*}
-
-$x$ is dimensionless!
-
-\vspace{0.5cm}
-
-(Note:  The symbol $:=$ means \emph{define}.  Sometimes the symbol $\equiv$ meaning \emph{equivalent} is also used.)
-
-\vspace{0.5cm}
-
-Rearrange to $N=xK$ and substitute:
-\begin{align*}
-      \frac{dxK}{dt}&=rxK \left( 1- \frac{xK}{K} \right)\\
-       \frac{dx}{dt}&=rx \left( 1- x \right)
-\end{align*}
-
-Only 1 variable ($x$ )and 1 parameter ($r$), same dynamical properties.
-
-Can reduce further...
-
-\begin{equation*}
-	\tau := r t
-\end{equation*}
-($\tau$ = `tau') - dimensionless - the units of $r$ are \#'s per \# per time $(=1/t)$. 
-
-That is,
-\begin{equation*} 
-	\frac{d}{dt} = \frac{d}{d\tau} \cdot \frac{d\tau}{dt} 
-\end{equation*}
-Rewriting $r=\tau/t =d\tau/dt  $, this simplifies to
-\begin{equation*}
-	\frac{d}{dt} = \frac{d}{d\tau}r
-\end{equation*}
-
-\vspace{0.5cm}
-Therefore
-\begin{align*}
-       \frac{dx}{dt}&=rx \left( 1- x \right)\\
-       \frac{drx}{d\tau}&=rx \left( 1- x \right)\\
-       \frac{dx}{d\tau}&=x \left( 1- x \right)
-\end{align*}
-Only 1 variable and 0 parameters!!!
-
-Of course, `time-scale' $\tau$ is tricky to conceptualize.\\
-\ind $\to$ scaled realized rate of population dynamics (i.e. $dN/dt$ or $dx/dt$)...\\
-\ind \ind ...relative to the maximum growth rate of the population ($r$). \\
-
-Model is thus in terms of the realized growth relative to the maximum intrinsic growth.\\
-
-Won't do all that much more non-dimensionalization (except in 2-spp. competition model, next), but can be extremely useful.  (e.g., when absolute values of parameters are not known, but their relative values is (or can be approximated, or qualitatively known  $>1$ or $< 1$).)
-
-\rule[0.5ex]{\linewidth}{2pt}
 
 \textbf{Two-species competition} \ind \note{Motivate with Crombie (1946) flour beetle experiments. 2 slides.}\\
 Extend 1 sp. logistic to 2 spp.
@@ -139,7 +55,7 @@ That is:
 \textbf{Explicit} - Resource dynamics \emph{are} modeled\\
 \ind \ind e.g. Consumer-resource models (\note{next class})
 \begin{align*}
-	\frac{dN_i}{dt}=f_i(N_i,N_j,R) \quad \quad 
+	\frac{dN_i}{dt}=f_i(N_i,R) \quad \quad 
 	\frac{dR}{dt}=f_R(N_i,N_j,R)
 \end{align*}
 \begin{center}
@@ -159,9 +75,9 @@ That is:
 \ind \ind $\Rightarrow$ Are equilibria stable or unstable?\\
 
 \rule[0.5ex]{\linewidth}{1pt}
+\pagebreak
 
 \note{Hand out and work through quiz as group:}
-
 (a)
 \begin{equation*}
 		\frac{dN_i}{dt}=r_i N_i \left (1-\frac{N_i}{K_i} - \alpha_{ij}\frac{N_j}{K_i}\right)
@@ -257,10 +173,10 @@ $\alpha_{21}$ & $\alpha_{12}$ & Outcome \\
 \textbf{Graphical Analysis}\\
 Earlier we showed that from $\frac{dN_i}{dt}=0$ that:
 \begin{align*}
-	N_i^* = & K_i - \alpha_{ij} N_j \quad \text{and}\quad N_j^* = K_j - \alpha_{ji} N_i\\
-	\Rightarrow N_j = & \frac{K_j-N_i^*}{\alpha_{ij}}\\
+	N_i^* = & K_i - \alpha_{ij} N_j\\
+	\Rightarrow N_j = & \frac{K_i-N_i^*}{\alpha_{ij}}\\
 	\text{Thus isocline interesects x-axis at}\\
-  N_j = & \frac{K_j-0}{\alpha_{ij}}=\frac{K_j}{\alpha_{ij}}
+  N_j = & \frac{K_i-0}{\alpha_{ij}}=\frac{K_i}{\alpha_{ij}}
 	\end{align*}
 
 Same goes for 2nd species.
@@ -284,9 +200,6 @@ Priority effect: & intra $<$ inter for both\\
 
 \rule[0.5ex]{\linewidth}{1pt}
 \rule[0.5ex]{\linewidth}{1pt}
-
-
-
 
 
 \end{document}

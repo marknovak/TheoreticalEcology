@@ -13,6 +13,10 @@
 
 \noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 8 -- 1-D Stability Analysis}
 \rule[0.5ex]{\linewidth}{1pt}
+\textbf{Today}: PS2 due!\\
+\textbf{Next class:} Bring laptops again (w/ Mathematica!)\\
+\ind \ind May \& Hassell et al. paper discussions\\
+\rule[0.5ex]{\linewidth}{1pt}
 \textbf{Future:}
 Dynamics \& Stability \& Species-coexistence\\
 \ind \ind - 1-sp. models (limit-cycles \& chaos)\\
@@ -21,9 +25,7 @@ Dynamics \& Stability \& Species-coexistence\\
 \ind \ind - $n$ spp. models\\
 \ind \emph{ = unstructured models} (but methods apply to structured models too!)
 
-\rule[0.5ex]{\linewidth}{1pt}
-
-\textbf{Concepts:}\\
+\textbf{Today's concepts:}\\
 \ind Stable point-equilibrium vs. Stable limit cycles vs. Deterministic chaos\\
 \ind Time-delays / Response-lags \& Over- and under-compensation\\
 \ind Formal local stability analysis
@@ -31,24 +33,23 @@ Dynamics \& Stability \& Species-coexistence\\
 \rule[0.5ex]{\linewidth}{1pt}
 
 \textbf{Quick review:} \note{Overlay on same three graphs}\\
-Discrete-time difference equation: $N_{t+1}=F(N_t)$\\
+Discrete-time difference equation: $N_{t+1}=F(N_t)$
 \begin{equation*}
 	F(N_t)=N_t + r_d N_t \to \; \text{geometric growth}
 \end{equation*}
 
 \begin{center}
-\includegraphics[width=5cm]{figs/a.png}
-\includegraphics[width=5cm]{figs/b.jpg}
-\includegraphics[width=5cm]{figs/c.jpg}
+\includegraphics[width=4cm]{figs/a.png}
+\includegraphics[width=4cm]{figs/b.jpg}
+\includegraphics[width=4cm]{figs/c.jpg}
 \end{center}
-
 \begin{equation*}
 	F(N_t)=N_t + r_d N_t \left(1-\frac{N_t}{K}\right) \to \; \text{discrete logistic growth}
 \end{equation*}
 \begin{center}
-\includegraphics[width=4.5cm]{figs/d.png}
-\includegraphics[width=4.5cm]{figs/e.png}
-\includegraphics[width=4.5cm]{figs/f.png}
+\includegraphics[width=3.5cm]{figs/d.png}
+\includegraphics[width=3.5cm]{figs/e.png}
+\includegraphics[width=3.5cm]{figs/f.png}
 \end{center}
 
 Notice \textbf{transient} versus \textbf{steady-state/equilibrial} dynamics.
@@ -71,24 +72,23 @@ $\mathbf{r_d}$ & \textbf{Number of different popn sizes} \\
 2.544 & 8-point \\ 
 2.564 &  16-point\\ 
 2.5687 & 32-point \\ 
-$> 2.7$ & deterministic chaos \\ 
+$> 2.7$ & deterministic chaos\\
  \hline
 \end{tabular} 
 \end{table*}
-
 \note{Let class experiment with $r_d<2.7$ at different $N_0$.}\\
-Conclusion:\\
- \ind $\to$ Period doubling bifurcations\\
+Conclusion:
+$\to$ Period doubling bifurcations\\
 \ind \ind $\to$ \textbf{Stable limit cycles} (stable attractor orbits independent of initial conditions)
 
-\textbf{Deterministic chaos-} Sensitivity to initial conditions\\
+\textbf{Deterministic chaos:} Sensitivity to initial conditions\\
 \note{Experiment with $r_d > 2.7$ at different $N_0$} \\
 \ind (look at \emph{out} vector with $N_0=0.0100...001$, up to computer precision $<10^{-18}$)
 
 \begin{table*}[h]
 \centering
 \begin{tabular}{ll}
-$\mathbf{N_0}$ & $\mathbf{N_{t=2000}}\;\; (r_d-3)$ \\ 
+$\mathbf{N_0}$ & $\mathbf{N_{t=2000}}\;\; (r_d=3)$ \\ 
 \hline
 0.01 & 13.26...\\
 0.011 & 12.46... \\
@@ -114,7 +114,7 @@ $\to$ Not stochastic!  Rather, deterministic!
 \textbf{Lyapunov exponent} - $\lambda$ (not popn growth rate!)\\
 \ind Measure of sensitivity to initial conditions.\\
 \begin{equation*}
-	\vert \Delta_t \vert = \vert \Delta_0 \vert \cdot  e^{t \lambda}
+	\vert \Delta_t \vert = \vert \Delta_0 \vert \cdot  e^{\lambda t}
 \end{equation*}
 \ind \ind where $N_0 + \Delta_0$ is some small addition to $N_0$.\\
 That is,
@@ -166,8 +166,7 @@ Note: For simple delay model, only 2-point limit cycle.  \\
 \ind - \emph{Daphnia} example from Case\\
 \ind \ind \note{Class Q:} Why is Case's use as an example of period-doubling wrong!?!\\
 \ind \ind \note{A:} \emph{Daphnia} exhibit continuous reproduction (w/ lag)! (see slide)\\
-\ind - Flour beetles\\
-\ind - Hassel \& May insect dynamics\\
+\ind - Cowpea weevils \& review by Hassel and May of insect dynamics\\
 \ind - Other examples: Herring, Salmon, Cicadas\\
 
 \rule[0.5ex]{\linewidth}{1pt}

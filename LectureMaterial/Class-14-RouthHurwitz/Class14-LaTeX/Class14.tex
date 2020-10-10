@@ -33,7 +33,7 @@
 \textbf{Back to Biology:  Classifying steady states}\\
 For 2x2 system:
 \begin{equation*}
-	\lambda^2 - \underbrace{(A_{11}+A_{22})}_{\text{Trace}}\lambda + \underbrace{A_{11}A_{22} - A_{12}+A_{21}}_{\text{Determinant}}
+	\lambda^2 - \underbrace{(A_{11}+A_{22})}_{\text{Trace}}\lambda + \underbrace{A_{11}A_{22} - A_{12}A_{21}}_{\text{Determinant}}
 \end{equation*}
 
 \textbf{Routh-Hurwitz stabiliy criteria}\\
@@ -49,13 +49,13 @@ For 2x2 system:
 
 Each condition by itself is \emph{necessary, but not sufficient}.
 \begin{equation*}
-	\lambda = \tfrac{1}{2}\text{Tr}(\textbf{A}) \pm \tfrac{1}{2}\sqrt{(-\text{Tr}(\textbf{A}))^2 - 4\cdot\text{Det}(\textbf{A})} \; i
+	\lambda = \tfrac{1}{2}\text{Tr}(\textbf{A}) \pm \tfrac{1}{2}\sqrt{(-\text{Tr}(\textbf{A}))^2 - 4\cdot\text{Det}(\textbf{A})}
 \end{equation*}
 
 \ind Whichever parts of $\sqrt{\phantom{x}}$ is bigger determines with or without oscillations.\\
 \ind Bifurcation occurs at $(-\text{Tr}(\textbf{A}))^2 = 4\cdot \text{Det}(\textbf{A})$.\\
 \begin{center}
- 	\includegraphics[width=16cm]{figs/Classify.pdf}
+ 	\includegraphics[width=16cm]{figs/Classify}
 \end{center}
  
 \rule[0.5ex]{\linewidth}{1pt}
@@ -138,21 +138,21 @@ Graphical analysis:\\
 \ind Set $Tr(\mathbf{A})$ \& $Det(\mathbf{A})=0$ and plot as functions of $K$ and $h$:\\
 \ind Or plot $Tr(\mathbf{A})$ = $Det(\mathbf{A})$
 \begin{center}
- 	\includegraphics[width=7cm]{figs/h_v_K.pdf}
-  	\includegraphics[width=8cm]{figs/Tr_v_Det.png}
+ 	\includegraphics[width=7cm]{figs/h_v_K.pdf}\\
 \end{center}
 
 \rule[0.5ex]{\linewidth}{1pt}
+\pagebreak
 
-\textbf{Summary}: Transitions from stability to local `instability'
+\textbf{Summary}: Two transitions between stability to local `instability' (two bifurcation points)
 \begin{equation*}
-	\lambda = \tfrac{1}{2}\text{Tr}(\textbf{A}) \pm \tfrac{1}{2}\sqrt{(-\text{Tr}(\textbf{A}))^2 - 4\cdot\text{Det}(\textbf{A})} \; i
+	\lambda = \tfrac{1}{2}\text{Tr}(\textbf{A}) \pm \tfrac{1}{2}\sqrt{(-\text{Tr}(\textbf{A}))^2 - 4\cdot\text{Det}(\textbf{A})} 
 \end{equation*}
 
 \begin{minipage}[t]{\dimexpr.5\textwidth-.5\columnsep}
-\textbf{Zero real root:}\\
-\ind When $\lambda$ has only real part\\
-\ind \ind i.e. $\text{Tr}(\textbf{A})^2 > 4\cdot\text{Det}(\textbf{A})$\\
+\textbf{Extinction of consumer:}\\
+\ind $\lambda$ has only real part\\
+\ind \ind $\text{Tr}(\textbf{A})^2 > 4\cdot\text{Det}(\textbf{A})$\\
 \ind Transition at:\\
 \ind \ind $\lambda = 0$\\
 \ind \ind $ Det(\mathbf{A})=0$\\
@@ -166,11 +166,11 @@ Appearance of new (boundary) equilibrium.\\
 \ind $\Rightarrow$ \emph{Saddle-node bifurcation} $\Leftarrow$
 \end{minipage} %
 \begin{minipage}[t]{\dimexpr.5\textwidth-.5\columnsep}
-\textbf{Complex root with zero real part}\\
-\ind When $\lambda$ is complex\\
-\ind \ind (i.e. $\text{A}_1^2 < 4\text{A}_2$)\\
+\textbf{Emergence of limit cycle}\\
+\ind $\lambda$ is complex\\
+\ind \ind $\text{Tr}(\textbf{A})^2 < 4\cdot\text{Det}(\mathbf{A})$\\
 \ind Transition at:\\
-\ind \ind $\lambda = 0 \pm i \sqrt{\text{A}_2}$\\
+\ind \ind $\lambda = 0 \pm i \sqrt{\#}$\\
 \ind \ind $Det(\mathbf{A})>0$\\
 \ind \ind $Tr(\mathbf{A})=0$\\
 
@@ -179,10 +179,15 @@ Transition from damped oscillations\\
 \ind to sustained oscillations.\\
 Equilibrium doesn't disappear.\\
 
-\ind \ind $\Rightarrow$ \emph{Hopf-bifurcation}  $\Leftarrow$
+\ind \ind $\Rightarrow$ \emph{Hopf bifurcation}  $\Leftarrow$
 \end{minipage}
 
+\begin{center}
+  	\includegraphics[width=12cm]{figs/Tr_v_Det.png}
+\end{center}
 
+
+\rule[0.5ex]{\linewidth}{1pt}
 \rule[0.5ex]{\linewidth}{1pt}
 
 

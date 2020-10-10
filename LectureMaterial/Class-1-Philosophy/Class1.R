@@ -5,8 +5,6 @@ options(stringsAsFactors=F,warn=-1)
 # Sum of Polynomials - Lynx-Hare Dynamics
 ###########################################################
 ###########################################################
-rm(list=ls()) # clears workspace
-options(stringsAsFactors=F,warn=-1)
 dat<-read.csv("LynxHare.csv", header=TRUE,nrows=59)
 x<-dat$Year; y<-dat$Hare; z<-dat$Lynx
 

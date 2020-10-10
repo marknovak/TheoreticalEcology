@@ -70,31 +70,39 @@ abline(r_obs,0,lty=2,col='red',lwd=2)
 abline(h=r_proc,lty=2,col='blue',lwd=2)
 
 
-########################################################################################
-# Simulate future population growth for 100 years with parameters assuming process error
-########################################################################################
+#################################################
+# Simulate future population growth for 100 years 
+# with parameters assuming process error
+# and compare to
+# with parameters assuming observation error
+#################################################
 library(sfsmisc) # for eaxis function - log-scale tick-marks
 
 reps<-100
 FutureTime<-100 # Number of time-steps into future
-N<-array(NA,dim=c(reps,FutureTime+1))
-N[,1]<-Nobs[T] # Starting population size is last observed population size
+Np<-array(NA,dim=c(reps,FutureTime+1))
+Np[,1]<-Nobs[T] # Starting population size is last observed population size
+No<-Np
 
 for (i in 1:reps){
     for (t in 1:FutureTime){
-        N[i,t+1]<- N[i,t]*exp(r_proc+rnorm(1,0,sd_proc))
+        Np[i,t+1]<- Np[i,t]*exp(r_proc+rnorm(1,0,sd_proc))
+        No[i,t+1]<- No[i,t]*exp(r_obs+rnorm(1,0,sd_obs))
 }}
 
-quartz()
-plot(Nobs~Year,xlim=c(min(Year),max(Year)+FutureTime), ylim=c(min(Nobs),max(N)),type='l',log='y',axes=FALSE)
+
+plot(Nobs~Year,xlim=c(min(Year),max(Year)+FutureTime), ylim=c(min(Nobs),max(Np)),type='l',log='y',axes=FALSE)
 
 xt<-seq(max(Year)+1,max(Year)+(t+1),1)
 axis(1); eaxis(2); box(lwd=1);
 for (i in 1:reps){
-    lines(xt,N[i,])
+    lines(xt,Np[i,])
+}
+for (i in 1:reps){
+  lines(xt,No[i,],col='red')
 }
 
-#############################################################################
-#############################################################################
-#############################################################################
+#######################################################################
+#######################################################################
+#######################################################################
 

@@ -60,6 +60,7 @@ peaks <- function(x) {
 # Plot a bifurcation diagram as a function of rd
 # This might take a while to run
 rd.vals<- seq(1,3,0.001)
+quartz()
 plot(0,0, xlim=range(rd.vals), ylim=c(0,15),type="n", xlab=bquote(r[d]), ylab="N*")
 for (rd in rd.vals) {
 	out <- Dlogis(rd=rd,K=10,N0=0.01,T=2000)
@@ -113,6 +114,7 @@ plot(out$time,out$N,type='o',ylim=c(0,1.1*max(out$N)))
 
 ################
 # Bifurcation plot of continuous logistic
+quartz()
 plot(0,0, xlim=c(1,3), ylim=c(0,15),type="n", xlab='r', ylab="N*")
 for (r in seq(1,3,0.001)) {
 	params<-c(K=10,r=r)

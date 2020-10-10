@@ -6,7 +6,7 @@ library(deSolve)
 model<-function(t, x, params){
   N1<-x[1];
   N2<-x[2];
-with(as.list(parameters),{
+with(as.list(params),{
     dN1dt<-r1*N1*(1-N1/K1-a12*N2/K1)
     dN2dt<-r2*N2*(1-N2/K2-a21*N1/K2)
     out<-c(dN1dt,dN2dt)
@@ -17,7 +17,7 @@ with(as.list(parameters),{
 T<-30
 t<-seq(0, T, by=1)
 
-xstart <- c(N1=0.01,N2=0.01)
+xstart <- c(N1=0.01,N2=0.0)
 parameters<-c(a21=0.5,a12=0.7,r1=1,r2=1,K1=1,K2=1)
 ###########
 out <- as.data.frame(ode(xstart, t, model, parameters))
@@ -202,7 +202,7 @@ par(op)
 ####################################################
 
 # source vector field function
-source('~/Dropbox/Research/R-Codes/aaaFunctions/VectorField.R')
+source('VectorField.R')
 
 isoN1<-function(x){-x*a21+K2}
 isoN2<-function(x){(K1-x)/a12}

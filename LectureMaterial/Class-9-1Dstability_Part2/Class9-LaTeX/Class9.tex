@@ -13,6 +13,9 @@
 
 \noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 9 -- 1-D Stability Analysis - Part 2}
 \rule[0.5ex]{\linewidth}{1pt}
+\textbf{Today:} 1D stability cont., non-dimensionalization, and paper discussion\\
+\textbf{Next class:} 2 sp. LV competition (Bring laptops -- \emph{might} need them depending on how far we get)\\
+\rule[0.5ex]{\linewidth}{1pt}
 
 \textbf{Ricker plots \& Intuitive notion of Lyapunov exponent}
 \begin{center}
@@ -50,7 +53,7 @@ Now let's determine this formally...
 	F'(N^*)=\left.\frac{d F(N_t)}{dN}\right\vert_{N^*}
 \end{equation*}
 \begin{center}
-\ind \ind If $\vert F'(N^*)\vert <1 \to$ stable.
+$\boxed{\text{If }\vert F'(N^*)\vert <1 \to \text{ stable.}}$
 \end{center}
 For discrete logistic:
 \begin{align*}
@@ -76,7 +79,7 @@ For discrete logistic:
 
 \textbf{Step 1}:  Solve $f(N)$ for $N^*$:
 \begin{align*}
-	\text{By definition:  At }\; N^{*} \; \text{when} \; f(N^*)=0&\\
+	\text{By definition:  At}\; N^{*} \; \text{when} \; f(N^*)=0&\\
 	0 & = rN-\frac{rN^2}{K}\\
 	\frac{rN^2}{K}&=rN\\
 	rN^2&=rNK\\
@@ -88,7 +91,7 @@ For discrete logistic:
 	f'(N^*)=\left.\frac{d f(N_t)}{dN}\right\vert_{N^*}
 \end{equation*}
 \begin{center}
-\ind \ind If $ f'(N^*) < 0 \to$ stable.
+	$\boxed{\text{If } f'(N^*) < 0 \to \text{ stable.}}$
 \end{center}
 \ind \ind For continuous-logistic:\\
 \begin{align*}
@@ -117,8 +120,8 @@ Step \#2: Evaluate $f'(N^*)$\\
 
 \rule[0.5ex]{\linewidth}{1pt}
 
-\textbf{ 1-D Stability analysis - Dig deeper}\\
-\ind (Will do it in discrete time, but same applies to continuous time models)
+\textbf{ 1-D Stability analysis - Dig deeper}
+(In discrete time, but same applies to continuous time models)
 \begin{equation*}
 	N_{t+1}=F(N_t) \; \; \to \;\; N^*
 \end{equation*}
@@ -175,7 +178,7 @@ Recall polynomial series:
 
 Taylor series is similar, but with derivatives...
 \begin{equation*}
-	F(N^*+n_t)= \sum_{i=0}^\infty \frac{f^{(i)}(N^*)}{i!}n_t^i = F(N^*) + \underbrace{\frac{F'(N^*)}{1!}n_t^1 + \frac{F''(N^*)}{2!} n_t^2 + \frac{F'''(N^*) }{3!}n_t^3 + ...}_{\text{h.o.t.}}
+	F(N^*+n_t)= \sum_{i=0}^\infty \frac{F^{(i)}(N^*)}{i!}n_t^i = F(N^*) + \underbrace{\frac{F'(N^*)}{1!}n_t^1 + \frac{F''(N^*)}{2!} n_t^2 + \frac{F'''(N^*) }{3!}n_t^3 + ...}_{\text{h.o.t.}}
 \end{equation*}
 
 \begin{center}
@@ -183,7 +186,7 @@ Taylor series is similar, but with derivatives...
 \end{center}
 
 \emph{Higher order terms} get smaller and smaller.\\
-First to terms are good approximation when $n_t$ is small.
+First two terms are good approximation when $n_t$ is small.
 
 Thus:
 \begin{align*}
@@ -196,16 +199,15 @@ Thus:
 
 \vspace{1cm}
 
-If $\lambda <1 \to n_{t+1} < n_t \to $ Perturbation decays (i.e. stable system)\\
-If $\lambda > 1 \to n_{t+1} < n_t \to $ Perturbation expands (i.e. unstable system)\\
+\ind \ind \ind If $\lambda <1 \to n_{t+1} < n_t \to $ Perturbation decays (i.e. stable system)\\
+\ind \ind \ind If $\lambda > 1 \to n_{t+1} < n_t \to $ Perturbation expands (i.e. unstable system)\\
 
-Note that $n_t$ could be a \emph{removal} (i.e. $n_t>0$) of individuals (rather than an \emph{addition}.\\
+Note that $n_t$ could be a \emph{removal} (i.e. $n_t<0$) of individuals (rather than an \emph{addition}).\\
 
 Thus \textbf{for discrete-time model:}\\
 \begin{equation*}
 \boxed{\vert F'(N^*)\vert < 1 \; \text{ for stability}}
 \end{equation*}
-
 \begin{align*}
 -1<\lambda &< 0 \to \text{decay w/ damped oscillations}\\
  0<\lambda &< 1 \to \text{geometric decay}\\
@@ -225,7 +227,7 @@ Thus \textbf{for discrete-time model:}\\
 \end{equation*}
 
 We'll get much deeper into stability of continuous-time models from now on.  \\
-Will also talk about how oscillations occur and their presence is analytically determined. 
+Will also talk about how oscillations occur and how their presence is analytically determined. 
 
 \vspace{1cm}
 \textbf{Remember} that we're only dealing with \textbf{local} stability (i.e. small $n_t$) not global stability!
@@ -259,7 +261,7 @@ Important functions:\\
 \textbf{Non-dimensionalization}\\
 The equation
 \begin{equation*}
-	\frac{dN}{dt}=rn\left(1-\frac{N}{K}\right) = \lim_{\Delta t\to 0}\left(\frac{\Delta N}{\Delta t}\right)
+	\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right) = \lim_{\Delta t\to 0}\left(\frac{\Delta N}{\Delta t}\right)
 \end{equation*}
 has 2 parameters (+1 that's implicit!) and 1 variable.\\
 \ind \ind $r : \frac{\#}{\# time}$

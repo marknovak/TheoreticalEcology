@@ -1,0 +1,27 @@
+rm(list=ls()) # clears workspace
+quartz(height=4,width=10)#
+lab<-c(1,2,4,8,16,32);#
+lambda<-2; N<-numeric(); N[1]<-1; T<-1:5; x<-c(T,max(T)+1); for(t in T){N[t+1]<-lambda*N[t]}#
+par(mfrow=c(1,2));par(mar=c(5,5,1.5,1),lwd=2,cex.lab=1.2,mgp=c(2,0.5,0),tcl=-0.3)#
+#---- Natural scale#
+	plot(N~x,xlab='Time Steps',ylab='Population size - N(t)',type='b',pch=19,axes=F)#
+	box(lwd=2);axis(1,at=x,label=x-1);axis(2,at=lab,labels=lab)#
+#---- Log-scale#
+	plot(N~x,log='y',xlab='Time Steps',ylab='log N(t)',type='b',pch=19,axes=F)#
+	box(lwd=2);axis(1,at=x,label=x-1);axis(2,at=lab,labels=lab)
+# N vs. t;  Different N(0)#
+quartz(height=4,width=10)#
+lab<-c(1,2,4,8,16,32,64,128,256)#
+par(mfrow=c(1,2));par(mar=c(5,5,1.5,1),lwd=2,cex.lab=1.2,mgp=c(2,0.5,0),tcl=-0.3)#
+	lambda<-2; N<-numeric(); N[1]<-1; T<-1:7; x<-c(T,max(T)+1); for(t in T){N[t+1]<-lambda*N[t]}#
+#---- Natural scale#
+	plot(N~x,xlab='Time Steps',ylab='Population size - N(t)',type='b',pch=19,axes=F,ylim=c(1,max(lab)))#
+		box(lwd=2);axis(1,at=x,label=x-1);axis(2,at=lab,labels=lab)#
+	lambda<-2;N<-numeric();N[1]<-2;T<-1:7;x<-c(T,max(T)+1);for (t in T){N[t+1]<-lambda*N[t]}#
+		points(N~x,type='b',pch=19)#
+#---- log scale#
+	lambda<-2;N<-numeric();N[1]<-1;T<-1:7;x<-c(T,max(T)+1);for (t in T){N[t+1]<-lambda*N[t]}#
+plot(N~x,log='y',xlab='Time Steps',ylab='log N(t)',type='b',pch=19,axes=F,ylim=c(1,max(lab)))#
+		box(lwd=2);axis(1,at=x,label=x-1);axis(2,at=lab,labels=lab)#
+	lambda<-2;N<-numeric();N[1]<-2;T<-1:7;x<-c(T,max(T)+1);for (t in T){N[t+1]<-lambda*N[t]}#
+		points(N~x,type='b',pch=19)

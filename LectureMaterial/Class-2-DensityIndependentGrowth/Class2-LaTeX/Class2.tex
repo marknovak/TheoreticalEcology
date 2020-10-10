@@ -17,18 +17,17 @@
 
 \rule[0.5ex]{\linewidth}{1pt}
 \textbf{Announcements}: \\
-Today - Paper discussion until $\approx$ 10:45, then 5 min break, then lecture.\\
-Next class: Bring laptop \& R, having read readings \& problem set \\
+Today - Paper discussion until $\approx$ 10:30, then lecture.\\
+Next class: Bring laptop with R, having read readings and problem set. \\
 Will provide intro to R, then start problem set together.\\
 
 \textbf{Today's concepts}: \\
 Geometric vs. Exponential growth \\
 Discrete vs. Continuous (Difference vs. Differential equations) \\
-Population vs. Per capita rates of change \\
-Simulations vs. Analytical Solutions
+Population vs. Per capita rates of change
 
 \rule[0.5ex]{\linewidth}{1pt}
-Overview:
+Overview \note{[write out before lecture]}:
 \begin{center}
 \includegraphics[width=12cm]{figs/EqnConnections.png}
 \end{center}
@@ -45,7 +44,7 @@ $B$-Total births; $D$-Total deaths; $I$-Immigration; $E$-Emigration
 
 Let: $\;\;\;\ I=E$, $B=b_d N$, $D=d_d N$.
 \begin{center}
-	$b_d$ - births per individual; \\$d_d$ - deaths per individual i.e. probability of individual dying per time-step 
+	$b_d$ - births per individual; \\$d_d$ - deaths per individual (i.e. probability of each individual dying) per time step
 \end{center}
 
 Thus:
@@ -53,8 +52,9 @@ Thus:
 	N_{t+1}=N_t+(b_d-d_d)N_t=(1+b_d-d_d)N_t=(1+r_d)N_t=\lambda N_t
 \end{equation*}
 
-$\lambda$ - “finite rate of increase” - per capita rate of growth if population is growing geometrically\\ 
-$r_d$ - discrete growth factor/increment (Ted Case writes this as $R$).
+$r_d$ - discrete growth factor/increment (Ted Case writes this as $R$).\\
+$\lambda$ - “finite rate of increase” - per capita rate of growth if population is growing geometrically.
+
 
 \vspace{1cm}
 
@@ -71,7 +71,7 @@ NOTE:  Not just doubling!  $\lambda$ can be any number!
 
 \note{Show R plots}
 
-\note{Q:}  What happens if we start at different population size at same lambda?
+\note{Q:}  What happens if we start at different population size at same $\lambda$?
 
 \note{Add points for N(0)=2 on drawing. Plot in R}
 \begin{center}
@@ -81,11 +81,12 @@ NOTE:  Not just doubling!  $\lambda$ can be any number!
 \note{Q:}  Why linear on log-scale?
 
 \note{A:} On log-scale, products become sums, ratios become differences:
-
-\begin{align*}
-& y=a \cdot b & y=\frac{a}{b}  & \\
- & log(y)=log(a \cdot b) = log(a) + log (b) & log(y)=log\left(\frac{a}{b}\right )=log(a)-log(b)&
-\end{align*}
+\begin{center}
+  \begin{tabular}{c|c}
+  $y=a \cdot b $ & $y=\frac{a}{b}$  \\
+  $log(y)=log(a \cdot b) = log(a) + log (b)$ & $log(y)=log\left(\frac{a}{b}\right )=log(a)-log(b)$
+  \end{tabular}
+\end{center}
 
 \note{Q:} Why do we call this density-independent population growth? 
 
@@ -108,7 +109,7 @@ Want to predict $N(T)$:  Analytical solution of $\lambda...(\lambda(\lambda N_0
 \end{itemize}
 
 Note:\\
-Will go back and forth between calculating per capita growth as either $\frac{N_{t+1}}{N_t}$ or $\frac{(N_{t+1}-N_t)}{N_t}$.
+Will go back and forth between calculating per capita growth rate as either $\frac{N_{t+1}}{N_t}$ or $\frac{(N_{t+1}-N_t)}{N_t}$.
 
 Why? Because:
 \begin{align*}
@@ -129,7 +130,8 @@ Why? Because:
 
 Recovering the continuous from the discrete:
 \begin{align*}
-	& r_d=0.5 \implies \lambda=1.5, \;\; t=1 \; year\\
+	& r_d=0.5 \implies \lambda=1.5 \\ 
+	& t=1 \; year\\
 	& N_1 = \lambda N_0=(1+0.5)N_0\\[1.5em]
 	& t=\frac{1}{2} year \\
 	& N_1 = \lambda^2 N_0 = \left(1+\tfrac{r_d}{2}\right)^2 N_0 = (1+0.25)^2 N_0 \\[1.5em]
@@ -144,17 +146,16 @@ $r$ - instantaneous per capita growth rate
 
 \textbf{R-demonstration: Euler's constant}
 
-\note{First: $n=1, \; N(0)=1, \; r_d=1 $}
-
-\note{true $e$ = $exp(1)$}
-
-\note{est $e$ = $\tfrac{N_1}{N_0}$ ... increasing $n$}
+Let: $n=1, \; N_0=1, \; r_d=1$\\
+True $e$ = $exp(1) = 2.71828...$\\
+Estimate $e$ as $\tfrac{N_1}{N_0}$ over increasing values of $n$\\
+\-\hspace{1cm} e.g., $n=1 \Rightarrow  \;\;\; \frac{N_1}{1}=\left(1+\tfrac{r_d}{n}\right)^n $
 
 \begin{align*}
-	n=1 \Rightarrow & \;\;\; \frac{N_1}{1}=\left(1+\tfrac{r_d}{n}\right)^n &= \left(1+\tfrac{1}{1}\right)^1= 2 \\
-	n=2 \Rightarrow & &= \left(1+\tfrac{1}{2}\right)^2= 2.25 \\
-	n=3 \Rightarrow & &= \left(1+\tfrac{1}{3}\right)^3= 2.30707... \\
-	n=\infty \Rightarrow & &=e^1 = 2.71828...
+	n=1 \Rightarrow & \frac{N_1}{1}= \left(1+\tfrac{1}{1}\right)^1= 2 \\
+	n=2 \Rightarrow & \frac{N_1}{1}= \left(1+\tfrac{1}{2}\right)^2= 2.25 \\
+	n=3 \Rightarrow & \frac{N_1}{1}= \left(1+\tfrac{1}{3}\right)^3= 2.30707... \\
+	n \to\infty \Rightarrow & \frac{N_1}{1} = \left(1+\tfrac{r_d}{n}\right)^n =  2.71828...
 \end{align*}
 
 \rule[0.5ex]{\linewidth}{1pt}
@@ -171,9 +172,8 @@ Note that $log=log_e=ln$.
 The same is true for logarithms of other bases:
 \begin{align*}
 &	log_{10}(10^x)=x \;\; (\text{e.g.,}\; 1, 10, 100, 1000, ...)\\
-&   log_2(2^x)=x \;\; (\text{e.g., }\; log_2(2)=1, \; log_2(4)=2, \; log_2(8)=3, ...)\\
+&   log_2(2^x)=x \;\; (\text{e.g., }\; log_2(2)=1, \; log_2(4)=2, \; log_2(8)=3, ...)
 \end{align*}
-
 \rule[0.5ex]{\linewidth}{1pt}
 Summarize $r$ vs. $r_d$ vs. $\lambda$
 \begin{equation*}
@@ -181,7 +181,7 @@ Summarize $r$ vs. $r_d$ vs. $\lambda$
 \end{equation*}
 And since $ln$ is the anti-exponential (i.e. $ln(e^x)=x$), we equivalently have
 \begin{equation*}
-	r = ln(\lambda) = ln(1+r_d).
+	 ln(1+r_d) = ln(\lambda) = r
 \end{equation*}
 
 Thus another way to write population growth is...
@@ -198,8 +198,7 @@ Thus another way to write population growth is...
 \includegraphics[width=8cm]{figs/image2}
 \end{center}
 
-Why emphasize this?\\
-Empirical measurements of real populations are intrinsically discrete (we measure $N_0, N_1, N_2, ...$). Many empiricists therefore (inappropriately) default to discrete time models to estimate parameters like $\lambda$, even when biology of  species exhibits continuous growth on  time-scales being considered (for which estimating parameters like $r$ is appropriate for subsequent inferences).
+Why emphasize this?  Empirical measurements of real populations are intrinsically discrete (we measure $N_0, N_1, N_2, ...$). Many empiricists therefore (inappropriately) default to discrete time models to estimate parameters like $\lambda$, even when biology of  species exhibits continuous growth on  time-scales being considered (for which estimating parameters like $r$ is appropriate for subsequent inferences).
 
 \rule[0.5ex]{\linewidth}{1pt}
 
@@ -214,21 +213,21 @@ Need to take the derivative of $N_0 e^{rt}$ with respect to time $t$.  Use Produ
 \begin{equation*}
 \frac{d(XY)}{dt}=\frac{d(X)}{dt}\cdot Y + X \cdot \frac{d(Y)}{dt}
 \end{equation*}
-\emph{``The derivative of a product is the sum of the product of the derivative of each term multiplied by the other term.''} Thus:
+\begin{center}
+\emph{``The derivative of a product is the sum of the product of the derivative of each term\\multiplied by the other term.''}
+\end{center}
+ Thus:
 \begin{equation*}
 \frac{d(N_0 \cdot e^{rt})}{dt}=\frac{d(N_0)}{dt}\cdot (e^r)^t + N_0 \cdot \frac{d((e^r)^t)}{dt}
 \end{equation*}
 
-Note:\\
-\-\hspace{1cm} Derivative of a constant = 0\\
-\-\hspace{1cm} Derivative of $a^x = ln(a)\cdot a^x$.
-
+Recall that derivative of a constant = 0  \& derivative of $a^x = ln(a)\cdot a^x$.\\
 Thus:
 \begin{align*}
-	\frac{d(N_0 e ^{rt})}{dt} & =0 \cdot (e^r)^t + ln(e^r)\cdot (e^r)^t \cdot N_0\\
-	&= r \cdot (e^r)^t \cdot N_0\\
-	&= r \cdot e^{rt} \cdot N_0 \\
-	&= r \cdot N_0 e^{rt} \\
+	\frac{d(N_0 e ^{rt})}{dt} & =0 \cdot (e^r)^t + N_0 \cdot ln(e^r)\cdot (e^r)^t\\
+	&=  N_0  \cdot r \cdot (e^r)^t \\
+	&=  N_0 \cdot r \cdot e^{rt}\\
+	&=   r \cdot N_0 e^{rt} \\
 \text{Since } N=N_0 e^{rt} \text{ for any time } t ...&\\
 	&=rN=\frac{dN}{dt}
 \end{align*}
@@ -240,13 +239,13 @@ Could also go in opposite direction from $\frac{dN}{dt} \rightarrow N_0 e^{rt}$:
 \begin{align*}
 &	\frac{dN}{dt}=rN\\
 &	\frac{1}{N}\frac{dN}{dt}=r\\
-&	\int_0^T \frac{1}{N}\frac{dN}{dt} \; dt = \int_0^T r\; dt \;\;\;\;(\text{Think of T as a constant, and t in dt as a variable})\\
-&	\int_0^T \frac{1}{N}\frac{dN}{dt}  = r t \vert_0^T = r \cdot T - r \cdot 0\\
+&	\int_0^T \frac{1}{N}\frac{dN}{dt} \; dt = \int_0^T r\; dt \;\;\;\;(\text{Think of }T \text{ as a constant, and }t\text{ in }dt\text{ as a variable})\\
+&	\int_0^T \frac{1}{N}\frac{dN}{dt}  = r t \vert_0^T = r \cdot T - r \cdot 0 = r T\\
 	\text{Using} \; \int \frac{1}{x}\; dx = ln(x)...\\
-&	ln(N(T))-ln(N(0))=rT\\
-& ln\left( \frac{N(T)}{N(0)}\right) = rT\\
-& \frac{N(T)}{N(0)}= e^{rT}\\
-& N(T)=N(0)e^{rT}
+&	ln(N_T)-ln(N_0)=rT\\
+& ln\left( \frac{N_T}{N_0}\right) = rT\\
+& \frac{N_T}{N_0}= e^{rT}\\
+& N_T=N_0e^{rT}
 \end{align*}
 
 \rule[0.5ex]{\linewidth}{1pt}
@@ -269,7 +268,7 @@ Q for class: Qualitative analysis of population \emph{growth vs. decline}
 \note{A:} `Individuals \emph{per individual} per time'
 
 \note{Q:}  What are the units of population growth rate, $\tfrac{dN}{dt}$?
-\note{A:} `Individual per time'
+\note{A:} `Individuals per time'
 
 \note{Q:}  What are the units of per capita growth rate, $\tfrac{1}{N}\tfrac{dN}{dt}$?
 \note{A:} `Individuals \emph{per individual} per time'
@@ -278,30 +277,22 @@ Q for class: Qualitative analysis of population \emph{growth vs. decline}
 
 \textbf{Polynomial representation of $\frac{dN}{dt}$}
 
-Recall: population size as function of time as polynomial
-\begin{equation*}
-	N(t)=\sum_{n=0}^\infty \beta_n t^n = \beta_0 + \beta_1 t + \beta_2 t^2 +...
-\end{equation*}
+Recall from class 1:\\
+Population size as function of time expressed using polynomial:
+\begin{align*}
+	N(t)& =\sum_{n=0}^\infty \beta_n t^n\\
+	& = \beta_0 + \beta_1 t + \beta_2 t^2 +...
+\end{align*}
 
 
-Could also think of exponential growth as
+Thus, could also think of exponential growth as
 \begin{align*}
 &	\frac{dN}{dt}=f(N)=\sum_{n=0}^\infty \beta_n N^n \\
-& 	\text{with } \beta_0=0, \;\; \beta_1 = r, \;\; \beta_{n>1}=0\\
-\end{align*}
-It's a `first-order' approximation.
-
-\rule[0.5ex]{\linewidth}{1pt}
-
-\note{Monod's nightmare}
-\begin{align*}
-&	t=20 \; min.,  \;\; N_t = 2N_0\\
-&	N_t=N_0 e^{rt}\\
-&	ln\left(\frac{N_t}{N_0}\right)=rt\\
-&	ln(2)=rt\\
-&	r=\frac{ln(2)}{t}=\frac{ln(2)}{20} \approx \frac{0.693}{20} = 0.035\% \text{ per minute}
+& 	\text{with }\\
+&  \beta_0=0, \;\; \beta_1 = r, \;\; \beta_{n>1}=0.\\
 \end{align*}
 
+Exponential growth is nothing more than a `first-order' approximation!
 
 \rule[0.5ex]{\linewidth}{1pt}
 

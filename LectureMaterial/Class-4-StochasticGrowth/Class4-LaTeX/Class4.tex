@@ -14,23 +14,29 @@
 \begin{document}
 
 
-\noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 4 - Density-independent stochastic growth}
+\noindent\makebox[\textwidth][c]{\Large\bfseries  Lecture 4 - Density-independent stochastic growth}
 
 \rule[0.5ex]{\linewidth}{1pt}
 \textbf{Announcement}: \\
+Hand back Q1\\
 Bring laptops next class
 
 \textbf{Today's concepts}: \\
-Environmental vs. Demographic stochasticity\\
+Stochasticity (Environmental vs. Demographic)\\
 Expectation vs. Variance (uncertainty)\\
 Geometric vs. Arithmetic expectation
+
+\rule[0.5ex]{\linewidth}{1pt}
+Review:
+Exponential (geometric) as first-order approximation \note{Show examples of population time series}
+Discrete vs. continuous \note{Show videos}
 
 \rule[0.5ex]{\linewidth}{1pt}
 All previous equations have been deterministic\\
 ... if we start with same $N(0)$ and $r$ we get exactly the same answer.\\
 Add stochasticity:   ``Adding stochastic shell to deterministic core of our model''\\
 
-\textbf{Stochastic} (from the Greek for aim or guess) = random with respect to considered variables\\
+\textbf{Stochastic} (from the Greek for \emph{aim} or \emph{guess}) = random with respect to considered variables\\
 A stochastic process is one whose subsequent state is determined by a random element.
 \begin{equation*}
 	N_T = N_0 e^{(r\pm noise)T} = N_0 (\lambda \pm noise)^T
@@ -45,27 +51,26 @@ E.g., 4 years of stochastic growth
 	\lambda_4 &= 2 & N_4 = N_0 \lambda_1 \lambda_2 \lambda_3 \lambda_4 =  12
 \end{align*}
 
-\note{Run in R...}
+\note{Show code in R...}
 \begin{center}
 \includegraphics[width=8cm]{figs/image}\\
 \includegraphics[width=8cm]{figs/image0}
 \end{center}
 
-Want to characterize two things: \note{Show on plot of $log(N_t)$ vs. $t$.}
-\begin{center}
-Expectations (mean) of $\lambda$ ($\bar{\lambda}$) and of $N_T$ ($\bar{N}_T$)\\
-Variance of $\lambda$ ($\sigma_\lambda^2$) and of $N_T$ ($\sigma_{N_T}^2$)\
-\end{center}
+If we wanted to determine:\\
+Expectation (mean) of $N_T$ ($\bar{N}_T$) and variance of $N_T$ ($\sigma_{N_T}^2$) \underline{over all time points}:
 \begin{align*}
 	\bar{N}_T &= E[N_T] = \frac{1}{T}\sum_t^T N_t = \frac{1+2+2+6+12}{5} = 4.6\\
-	\sigma_{N_T}^2 & = Var[N_T] =  \sum_t^T (N_t - \bar{N}_T)^2\\
-	& = (1-4.6)^2 + (2-4.6)^2 + (2-4.6)^2 + (6-4.6)^2 + (12-4.6)^2 = 83.2
+	\sigma_{N_T}^2 & = Var[N_T] =  \frac{1}{T}\sum_t^T (N_t - \bar{N}_T)^2\\
+	& = \frac{(1-4.6)^2 + (2-4.6)^2 + (2-4.6)^2 + (6-4.6)^2 + (12-4.6)^2}{5} = 83.2/5 = 16.64
 \end{align*}
 
 Note that $\sigma$ = standard deviation\\
-\ind and that $CV$ (coefficient of variation) = $\frac{\sigma_N^2}{\bar{N}}$
+\ind and that $CV$ (coefficient of variation) = $\sigma^2/\bar{N}$
 
 \rule[0.5ex]{\linewidth}{1pt}
+
+\pagebreak
 
 \textbf{Environmental Stochasticity} - \emph{temporal variation in population's per capita growth rate}
 
@@ -77,16 +82,16 @@ Example: Dynamics of two populations with same initial size:
 \end{equation*}
 \begin{center}
 	Population A: $N_A(3) = N_0 \cdot 2 \cdot 1 \cdot 3 = 6 \cdot N_0$\\
-	Population B: $N_B(3) = N_0 \cdot 2 \cdot 2 \cdot 2 = 8 \cdot N_0$\\
+	Population B: $N_B(3) = N_0 \cdot 2 \cdot 2 \cdot 2 = 8 \cdot N_0$
 \end{center}
 
 \begin{equation*}
-	\bar{\lambda} = \sum_t^T \frac{\lambda_t}{T}
+	\bar{\lambda} = \frac{1}{T} \sum_t^T \lambda_t
 \end{equation*}
 On natural (arithmetic) scale, $\bar{\lambda}_A = \bar{\lambda}_B = 2$.\\
 
 \emph{So why does population $B$ grow more?}\\
-Appropriate measure is the geometric mean (remember popn growth is a multiplicative process):\\
+Appropriate measure is the geometric mean (remember: popn growth is a multiplicative process):\\
 (No standard symbol for geometric mean)
 
 \begin{equation*}
@@ -97,10 +102,24 @@ Appropriate measure is the geometric mean (remember popn growth is a multiplicat
 	Geometric mean of $\lambda_A = \sqrt[3]{\lambda_1 \cdot \lambda_2 \cdot \lambda_3} = \sqrt[3]{2 \cdot 1 \cdot 3} = 1.817...$\\
 	So in fact $N_A(3) = N_0 \cdot 1.817 \cdot 1.817 \cdot 1.817 = 6 \cdot N_0$
 \end{center}
+
+\begin{center}\rule[0.1ex]{0.6\linewidth}{1pt}\end{center}
+\textbf{Side note: Contrasting arithmetic vs. geometric mean}\\
+Two numbers (expressed relative to $x$):
+\includegraphics[width=2cm]{figs/ab_line}  What is $x$?
+\begin{align*}
+	a-x & = x-b & & \frac{a}{x} = \frac{x}{b}\\
+	a+b&=2x & & a \cdot b = x \cdot x\\
+	\frac{a+b}{2}&=x & & a \cdot b = x^2\\
+	&&& \sqrt[2]{a+b} = x
+\end{align*}
+\begin{center}\rule[0.1ex]{0.6\linewidth}{1pt}\end{center}
+
 Will show that: 	\emph{Natural log of geometric mean $\lambda$ = arithmetic mean of natural log of the $\lambda$'s}
 \begin{align*}
-	\ln \left( \left(\prod_{t=1}^T \lambda_t \right)^{1/T}\right) &= \frac{1}{T} \cdot \ln(\lambda_1 \cdot \lambda_2 \dots \lambda_T ) \\\\
-	\text{Since...} \ln(ab) = \ln(a)+\ln(b)\\
+	\text{Since...} \ln(b^a) = a\ln(b)  \Rightarrow \quad
+	\ln \left( \left(\prod_{t=1}^T \lambda_t \right)^{1/T}\right) &= \frac{1}{T} \cdot \ln(\lambda_1 \cdot \lambda_2 \dots \lambda_T ) \\
+	\text{Since...} \ln(ab) = \ln(a)+\ln(b)  \Rightarrow \quad \quad \quad \quad \quad \quad \quad \quad \quad
 	&= \frac{1}{T} \left( \ln(\lambda_1) + \ln(\lambda_2) + \dots+ \ln(\lambda_T) \right) \\	
 	&=\frac{1}{T} \cdot T \cdot \overline{\ln(\lambda}) \\
 	&=\overline{\ln(\lambda)}
@@ -115,6 +134,9 @@ An alternative approximation (provided in Case, pg. 35):
 	(\emph{Note effects of $\sigma_{\lambda}$ and of $\bar{\lambda}$.})
 \end{center}
 \rule[0.5ex]{\linewidth}{1pt}
+
+\pagebreak
+
 \note{Class R exercise} - random vector draws - compare geometric and arithmetic means 
 \begin{itemize}
 	\item Effect of $\sigma = 0$, and increasing $\sigma$ values:
@@ -123,15 +145,15 @@ An alternative approximation (provided in Case, pg. 35):
 	\item	Effect of sample size, $n$:
 		 \subitem	Little effect.  very low $n$ might have more variation in depression amount 
 	\item	Effect of $\bar{\lambda}$:
-		\subitem Raises and lowers, but not that at $\bar{\lambda}\approx 1$, geometric mean $\lambda < 1$  (declining population)!!
+		\subitem Raises and lowers, but note that at $\bar{\lambda}\approx 1$, geometric mean $\lambda < 1$  (declining population)!!
 \end{itemize}
 
 \textbf{What does this mean for the dynamics of a given focal population}?
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
-\hline \rule[-2ex]{0pt}{5.5ex} \emph{Population change} &  Deterministic $\lambda$ & Deterministic $\ln(\lambda$) &  Environmental noise $\ln(\lambda \pm \text{noise}]$\\ 
+\hline \rule[-2ex]{0pt}{5.5ex} \emph{Population change} &  Deterministic $\lambda$ & Deterministic $\ln(\lambda$) &  Environmental noise $\ln(\lambda \pm \text{noise})$\\ 
 \hline \rule[-2ex]{0pt}{5.5ex} No change & 1 & 0 & NA \\
-\hline \rule[-2ex]{0pt}{5.5ex} Growth  & $>1$ & $>0$  & $\ln(\bar{\lambda})-\frac{\sigma_\lambda^2}{2\bar{\lambda}^2}>0$  \\ 
+\hline \rule[-2ex]{0pt}{5.5ex} Growth  & $>1$ & $>0$  & $\frac{\sigma_\lambda^2}{2\bar{\lambda}^2} <  \ln(\bar{\lambda})>0$  \\ 
 \hline \rule[-2ex]{0pt}{5.5ex} Decline & $<1$ & $<0$  & $\ln(\bar{\lambda})-\frac{\sigma_\lambda^2}{2\bar{\lambda}^2}<0$  \\ 
 \hline 
 \end{tabular}
@@ -169,7 +191,8 @@ when there is only \emph{demographic variation}:
     \end{cases}
  \end{equation*}
 
- 
+\pagebreak
+
 \textbf{How to get $E[N_T]$?}\\
 Let $\lambda$ be a random variable from a normal distribution.\\
 Any given $\lambda$ from this distribution is denoted by $\lambda_t$.
@@ -182,7 +205,7 @@ Any given $\lambda$ from this distribution is denoted by $\lambda_t$.
 \end{align*}
 
 \textbf{How to get variance?}\\
-Transform by taking the log..\\
+Transform by taking the log...\\
 \begin{equation*}
 	\ln(N_T)=\ln(N_0)+\ln\left(\prod_{t=1}^T \lambda_t\right) =\ln(N_0)+ \boxed{ \sum_{t=1}^T \ln(\lambda_t)}
 \end{equation*}
@@ -194,8 +217,8 @@ Allows us to apply Central Limit Theorem (pg. 41 of Case):
 
 Under a sufficiently large number of independent random variable draws:
 \begin{align*}
-	\boxed{\sum_{i=1}^n x_i} & = \mathcal{N}(n\cdot E[x_i] , \; n\cdot Var[x_i])\\
-	& = \mathcal{N}(n \bar{x_i}, n \sigma_{x_i}^2)
+	\boxed{\sum_{i=1}^n x_i} & = \mathcal{N}(n\cdot E[x] , \; n\cdot Var[x])\\
+	& = \mathcal{N}(n \bar{x}, n \sigma_{x}^2)
 \end{align*}
 
 \begin{center}
@@ -208,7 +231,7 @@ Inserting $\ln (\lambda_t)$ for $x_i$, we thus have
 	& = \mathcal{N}(T\cdot \overline{\ln(\lambda_t)},\; T\cdot\sigma_{\ln (\lambda_t)}^2)
 \end{align*}
 
-Therefore,
+Therefore, we have
 \begin{equation*}
 	E[\ln(N_T)]=\ln(N_0)+ T \cdot \overline{\ln(\lambda_t)}
 \end{equation*}
@@ -217,7 +240,8 @@ and
 \sigma_{\ln (N_T)}^2 = T\cdot \sigma_{\ln(\lambda_t)}^2
 \end{equation*}
 \\
-To translate expectation back to arithmetic scale:
+To translate expectation back to arithmetic scale:\\
+Even though the expected value of $N_T$ is $E[N_T]= N_0 \cdot \bar{\lambda}^T$,
 \begin{equation*}
 	N_T \sim log\mathcal{N} \text{ with median = } e^{\ln(N_0)+T\cdot \overline{\ln(\lambda)}}
 \end{equation*}
@@ -227,6 +251,8 @@ Take-home message:\\
 \\
 In Problem Set \#2 you should therefore use $N_{t+1}=N_t (\lambda \pm e^\epsilon)$, where $\epsilon \sim \mathcal{N}(0,\sigma_\epsilon^2)$.\\
 
+\pagebreak
+
 \textbf{Summary}
 \begin{itemize}
 \item The solution to $Var[N_T]$ is sensitive to assumed model-formulation!
@@ -235,7 +261,7 @@ In Problem Set \#2 you should therefore use $N_{t+1}=N_t (\lambda \pm e^\epsilon
 \end{itemize}
 
 \rule[0.5ex]{\linewidth}{1pt}
-\pagebreak
+
 
 \textbf{Demographic stochasticity} - Between-individual variation in per capita growth rate\\
 Analogy of flipping a coin (not perfect, but will do).
@@ -268,7 +294,7 @@ Won't go through derivations, but expectation of $N(t)$ is still:
 \begin{equation*}
 	\overline{N_t}=N_0 e^{\bar{r}t}
 \end{equation*}
-And for
+But for variance:
 \begin{equation*}
   \sigma_{N_T}^2 =
   \begin{cases} 

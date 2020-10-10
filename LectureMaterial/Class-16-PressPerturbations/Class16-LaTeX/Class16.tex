@@ -47,10 +47,11 @@ So far dealing explicitly with pulse perturbations:\\
 \ind \ind Chronic, sustained change in growth rate or abundance\\
 \ind \ind \ind e.g., continuous addition/removal of individuals at a constant rate\\
 \ind \ind \ind e.g., change in parameters contributing to $\frac{dN}{dt}$\\
-\ind \ind Not species removal!\\
+\ind \ind \ind e.g., change in abundance of focal species (held to new abundance)\\
+\ind \ind No complete species removals!\\
 
 \ind Will assume: \\
-\ind \ind (1) Equilibrium coexistence before and after\\
+\ind \ind (1) Fixed point equilibrium coexistence before and after\\
 \ind \ind (2) No species goes extinct\\
 \ind \ind (3) No bifurcations crossed (e.g., no Hopf bifurcation to limit cycles)\\
 \ind  \ind $\Rightarrow$ Sufficiently small perturbations between nearby fixed point equilibria
@@ -70,8 +71,6 @@ For 1-sp.:
  \approx F'(N^*)(N-N^*) = F'(N^*)x_0 = \left.\frac{d\tfrac{dN}{dt}}{dN}\right\vert_{N^*} \cdot x_0 = \lambda x_0
 \end{align*}
 
-\rule[0.5ex]{\linewidth}{1pt}
-
 For 2-spp.:
 \begin{align*}
 	\frac{dN_1}{dt}=F_1(N_1,N_2) \qquad \frac{dN_2}{dt}=F_2(N_1,N_2)
@@ -85,7 +84,7 @@ For 2-spp.:
 \end{align*}
 Similarly for 2nd species:
 \begin{align*}
-F_1(N_1+x,N_2+y)  \approx A_{21}(N_1-N_1^*) + A_{22}(N_2-N_2^*)
+F_2(N_1+x,N_2+y)  \approx A_{21}(N_1-N_1^*) + A_{22}(N_2-N_2^*)
 \end{align*}
 
 Thus in general for $S$ species:
@@ -95,7 +94,7 @@ Thus in general for $S$ species:
 
 And in matrix form:
 \begin{equation*}
-	F(\vec{N}+\vec{n}) \approx \mathbf{A} \vec{n} \qquad \qquad \text{where } \vec{n_i}=N_i-N_i^*
+	F(\vec{N}+\vec{n}) \approx \mathbf{A} \vec{n} \qquad \qquad \text{where } \vec{n}=\vec{N}-\vec{N^*}
 \end{equation*}
 
 Vector $\vec{n}$ = pulse perturbations - one-time additions/subtractions\\
@@ -109,24 +108,24 @@ Assume we're starting at fixed-point coexistence steady state $\vec{N}^*$ and ad
 	\frac{dN_1}{dt}=F_1(\vec{N}^*)+P_1 \qquad \qquad  \frac{dN_2}{dt}=F_2(\vec{N}^*)
 \end{equation*}
 \ind $P_1$ = adding $P$ individuals of $N_1$ \textbf{per time}\\
-\ind \ind (will show later that parameters of $F_1(\vec{N})$ can also be changed)\\
 
 Assume system will come to a new steady state, $N^{**}$\\
 
 $\Rightarrow$ Taylor expand $F_1(\vec{N}^*)$ around $N^{**}$
 \begin{align*}
-	F_1(\vec{N}^{**}+(\vec{N}^*-\vec{N}^{**})) & \approx \cancelto{0}{F_1(N^{**})} +  P_1 + A_{21}(N_1^*-N_1^{**}) + A_{22}(N_2^*-N_2^{**})\\
-	& = 0 \text{ assuming new system is at steady state}\\
-	\text{Therefore, rearranging:}&\\
+	F_1(\vec{N}^{**}+(\vec{N}^*-\vec{N}^{**})) & \approx \cancelto{0}{F_1(N^{**})} +  P_1 + A_{11}(N_1^*-N_1^{**}) + A_{12}(N_2^*-N_2^{**})\\
+	& = 0 \text{ assuming new system is at steady state}
+\end{align*}
+Therefore, rearranging and generalizing to include $S$ species:
+\begin{align*}
 	-P_1 &= \sum_{k=1}^S A_{ik}(N_k^*-N_k^{**})
 \end{align*}
-In matrix form, adding $P_i$ for each $i^{th}$ species:
+In matrix form,
 \begin{align*}
 	-\mathbf{I}\cdot \vec{P}&= \mathbf{A} \cdot \vec{n}^*\\
-	-\begin{bmatrix} P_1 & 0\\0 & P_2 \end{bmatrix}&=\begin{bmatrix} A_{11} & A_{12}\\A_{21} & A_{22} \end{bmatrix} \underbrace{\begin{bmatrix} N_1^* - N_1^{**} \\ N_2^* - N_2^{**}	\end{bmatrix}}_{\text{Our interest}}
+	-\begin{bmatrix} P_1 & 0\\0 & 0 \end{bmatrix}&=\begin{bmatrix} A_{11} & A_{12}\\A_{21} & A_{22} \end{bmatrix} \underbrace{\begin{bmatrix} N_1^* - N_1^{**} \\ N_2^* - N_2^{**}	\end{bmatrix}}_{\text{Our interest}}
 \end{align*}
-
-Want to know how much $i^{th}$ species $N_i^*$ change given a press perturbation $P_j$ to species $j$?
+Want to know how much $i^{th}$ species $N_2$ changes given a press perturbation $P_j$ to species $j=1$?
 
 \rule[0.5ex]{\linewidth}{1pt}
 Can't divide by a matrix.  Use \textbf{Matrix inverse}!\\
@@ -143,13 +142,11 @@ Corresponds to 4 equations with 4 unknowns.  $\Rightarrow$ solvable!
 	6 w + 7 y = 0\\
 	6 x + 7 z = 1
 \end{align*}
+In \textbf{R}: \emph{solve}(A) or \emph{ginv}(A) from MASS package\\
+In Mathematica: \emph{Inverse}[A] or use \emph{Solve}\\  \note{$\implies Mathematica$}
 \begin{align*}
 	\begin{bmatrix} 7 & 8 \\ 6 & 7 \end{bmatrix} \cdot \begin{bmatrix} 7 & -8 \\ -6 & 7 \end{bmatrix} =\begin{bmatrix} 49-48 & 56-56 \\ 42-42 & -48+49 \end{bmatrix}= \begin{bmatrix}1 & 0\\0 & 1 \end{bmatrix}
 \end{align*}
-
-In \textbf{R}: \emph{solve}(A) or \emph{ginv}(A) from MASS package\\
-In Mathematica: \emph{Inverse}[A] or use \emph{Solve}\\
-
 Thus rewrite:
 \begin{align*}
 	\mathbf{A}\cdot \vec{n}^*&=-\mathbf{I}\cdot \vec{P}\\
@@ -159,13 +156,13 @@ Thus rewrite:
 \begin{equation*}
 	n_i^* = -\sum_{k=1}^S(\mathbf{A}^{-1})_{ik}\cdot P_j
 \end{equation*}
-Or derived in terms of derivatives
+Or, derived in terms of derivatives and a perturbation $p_j$ of any kind:
 \begin{align*}
 	\frac{\partial N_i^*}{\partial p_j}=-\sum_{k=1}^S(\mathbf{A}^{-1})_{ik}\cdot \frac{\partial F_k}{\partial p_j}
 \end{align*}
 Example in 3-spp. system:
 \begin{align*}
-	\frac{\Delta N_1^*}{P_2}=-\underbrace{\begin{bmatrix} A_{11}^{(-1)} & A_{12}^{(-1)} & A_{13}^{(-1)} \\ \cdot & \cdot & \cdot   \\ \cdot & \cdot & \cdot \end{bmatrix}}_{\mathbf{A}^{-1}} \cdot \begin{bmatrix} O \\ P_2 \\ 0 \end{bmatrix} = -\mathbf{A}_{12}^{(-1)} \cdot P_2
+	\frac{\Delta N_1^*}{P_2}=-\underbrace{\begin{bmatrix} A_{11}^{(-1)} & A_{12}^{(-1)} & A_{13}^{(-1)} \\ \cdot & \cdot & \cdot   \\ \cdot & \cdot & \cdot \end{bmatrix}}_{\mathbf{A}^{-1}} \cdot \begin{bmatrix} 0 \\ P_2 \\ 0 \end{bmatrix} = -\mathbf{A}_{12}^{(-1)} \cdot P_2
 \end{align*}
 Elements of $-(\mathbf{A}^{-1})$ specify the \textbf{Net effect} resulting from all direct and indirect effect pathways.\\
 \ind Net effect of column $j$ on row $i$. \note{Contrast to Jacobian.}
@@ -176,11 +173,9 @@ Multiple perturbations at once:  Add columns...
 \end{align*}
 
 \rule[0.5ex]{\linewidth}{1pt}
-\textbf{Trophic Cascade}\\
-\ind Build some intuition for what's going on.\\
-
+\textbf{Trophic Cascade} -  Build some intuition for what's going on.\\
 \emph{\textbf{Self-limitation in all species}}\\
-\ind \includegraphics[width=1.5cm]{figs/TC_full.pdf}
+\includegraphics[width=1.25cm]{figs/TC_full.pdf}
 \ind Predict perturbation to $\Rightarrow$ will cause:
 \begin{align*}
 \begin{matrix}
@@ -190,18 +185,18 @@ Multiple perturbations at once:  Add columns...
 	C & \phantom{\Rightarrow} \uparrow & \phantom{\Rightarrow} \uparrow & \Rightarrow \uparrow
 \end{matrix}
 \end{align*}
- $\Rightarrow$ Mathematica
+ \note{$\Rightarrow$ Mathematica}
 \begin{align*}
 	\mathbf{A}=\begin{bmatrix} -1 & -1 & 0 \\ 1 & -1 & -1 \\ 0 & 1 & -1 \end{bmatrix} \qquad \Rightarrow \qquad \mathbf{-A^{-1}}=\begin{bmatrix} 2/3 & -1/3 & 1/3 \\ 1/3 & 1/3 & -1/3 \\ 1/3 & 1/3 & 2/3 \end{bmatrix} \qquad \text{matches all predictions!}
 \end{align*}
 
 But what did we observe in class last time as a function of $K$?
 \begin{center}
-\includegraphics[width=4cm]{figs/TC_R.png}\ind \includegraphics[width=4cm]{figs/TC_C.png}\ind \includegraphics[width=4cm]{figs/TC_P.png}
+\includegraphics[width=4.5cm]{figs/TC_R.png}\ind \includegraphics[width=4.5cm]{figs/TC_C.png}\ind \includegraphics[width=4.5cm]{figs/TC_P.png}
 \end{center}
 \emph{\textbf{Self-limitation in basal species only}}\\
-\ind \includegraphics[width=1.5cm]{figs/TC_basal.pdf}
- $\Rightarrow$ Mathematica
+\ind \includegraphics[width=1.25cm]{figs/TC_basal.pdf}
+ \note{$\Rightarrow$ Mathematica}
 \begin{align*}
 	\mathbf{A}=\begin{bmatrix} -1 & -1 & 0 \\ 1 & 0 & -1 \\ 0 & 1 & 0 \end{bmatrix} \qquad \Rightarrow \qquad \mathbf{-A^{-1}}=\begin{bmatrix} 1 & 0 & 1 \\ 0 & 0 & -1 \\ 1 & 1 & 1 \end{bmatrix} \qquad \text{matches all predictions!}
 \end{align*}
@@ -211,8 +206,8 @@ But what did we observe in class last time as a function of $K$?
 \textbf{Symbolic Inverse of Trophic chain}\\
 \ind Look at how net effects emerge from pairwise direct effects\\
 \emph{\textbf{Self-limitation in all species}}\\
-\includegraphics[width=1.5cm]{figs/IGP_full.pdf}
- $\Rightarrow$ Mathematica
+\includegraphics[width=1cm]{figs/TC_full.pdf}
+\note{$\Rightarrow$ Mathematica}
 \begin{align*}
 	\mathbf{A}&=\begin{bmatrix} -A_{11} & -A_{12} & 0 \\ \phantom{-}A_{21} & -A_{22} & -A_{23} \\ 0 & \phantom{-}A_{32} & -A_{33} \end{bmatrix} \qquad \Rightarrow \qquad \\
 	\mathbf{A^{-1}}&=
@@ -225,22 +220,23 @@ But what did we observe in class last time as a function of $K$?
 \end{align*}
 Thus
 \begin{align*}
-	-\mathbf{A}^{-1}=\frac{adj(\mathbf{A})}{-det(\mathbf{A})}
+	-\mathbf{A}^{-1}=-\frac{adj(\mathbf{A})}{det(\mathbf{A})}
 \end{align*}
 Things to notice:\\
-\ind - \textbf{Determinant} is common to all elements of $\mathbf{A}^{-1}$ $\Rightarrow$ measure of community sensitivity\\
-\ind - \textbf{Classical adjoint matrix} reflects \emph{magnitude and direction} of species-specific responses.\\
-\ind - Species responses depend on both \emph{inter-} and \emph{intra-} specific direct effects.\\
+\textbf{Determinant} is common to all elements of $\mathbf{A}^{-1}$ $\Rightarrow$ measure of community sensitivity\\
+\textbf{Classical adjoint matrix} reflects \emph{magnitude and direction} of species-specific responses.\\
+Species responses depend on both \emph{inter-} and \emph{intra-} specific direct effects.\\
 
-\ind e.g., How Resource responds to Intermediate consumer depends on  $A_{12}$ \emph{times} $A_{33}$.\\
-\ind \ind \ind Sp2 will affect Sp1 only if Sp3 doesn't increase in abundance and eat more of Sp2!\\
-\ind e.g., How Resource responds to positive press of itself is affected by self-limitation of both consumers.
+e.g., How Resource responds to Intermediate Consumer depends on  $A_{12} \times A_{33}$.\\
+Resource will affect Consumer only if Top Predator doesn't increase in abundance and eat more Consumers!\\
+e.g., How Resource responds to positive press of itself is affected by self-limitation of both predators!
+
 
 \rule[0.5ex]{\linewidth}{1pt}
 
 \textbf{Symbolic Inverse of IGP}\\
 \emph{\textbf{Self-limitation basal species}}\\
-\includegraphics[width=1.5cm]{figs/IGP_basal.pdf}
+\includegraphics[width=1.25cm]{figs/IGP_basal.pdf}
  $\Rightarrow$ Mathematica
 \begin{align*}
 	\mathbf{A}&=\begin{bmatrix}
@@ -254,7 +250,7 @@ Things to notice:\\
 \end{align*}
 
 Things to notice:\\
-\ind - Responses of Omnivore to IGPrey, and of IGPrey to Omnivore are \textbf{qualitatively indeterminate}.\\
+Responses of Omnivore to IConsumer, and of IConsumer to Omnivore are \textbf{qualitatively indeterminate}.\\
 \ind \ind  ...depend on quantitative interaction strength values.\\
 \ind \ind \ind ...in particular the strength of \emph{intraspecific self-limitation in the \textbf{Resource}!}
 
@@ -281,7 +277,7 @@ Using LV-pred prey model as example
 	b-aC^* & -aR^*\\eaC^* & eaR^* - d
 	\end{bmatrix}\\
 	=&\begin{bmatrix}
-		0 & -aR^*\\eaC^* & 0
+		0 & -\frac{d}{e}\\eb & 0
 		\end{bmatrix}
 \end{align*}
 Use this for stability analysis.\\
@@ -313,15 +309,15 @@ $-\mathbf{A}^{-1} \Rightarrow$  perturb of per capita growth rates.
 
 \rule[0.5ex]{\linewidth}{1pt}
 
-Press perturbation (Perturbation of per capita growth rate):\\
+Press perturbation of \emph{per capita} growth rate starts with:\\
 \begin{equation*}
 	\frac{1}{N_1}\frac{dN_1}{dt}=f_1(\vec{N}^*)+p_1 \qquad \qquad  \frac{1}{N_2}\frac{dN_2}{dt}=f_2(\vec{N}^*)
 \end{equation*}
 
 \rule[0.5ex]{\linewidth}{1pt}
 
-Press perturbation of population sizes!\\
-$\Rightarrow$ \emph{Normalized Net Effects matrix}
+Press perturbation of population sizes:\\
+\ind $\Rightarrow$ \emph{Normalized Net Effects matrix}
 \begin{align*}
 \hat{\mathbf{A}}^{-1}=\frac{A_{ij}^{(-1)}}{A_{ii}^{(-1})}=\frac{\frac{\partial N_i^*}{\partial p_j}}{\frac{\partial N_j^*}{\partial p_j}}=\frac{\partial N_i^*}{\partial N_j^*}
 \end{align*}

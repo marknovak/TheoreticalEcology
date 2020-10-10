@@ -18,8 +18,8 @@
 
 \rule[0.5ex]{\linewidth}{1pt}
 \textbf{Announcements}:\\
-Finish up MSY first ($\sim$ 50 min.)\\
-Next time: Maximum Likelihood, AIC, Paper discussion \& start PS3
+Finish up MSY first ($\sim$ 20 min.) \& collect Q2\\
+Next time: Maximum Likelihood, AIC, \& Paper discussion
 
 \textbf{Concepts}: \\
 Process vs. Observation error
@@ -29,7 +29,7 @@ Process vs. Observation error
 \emph{Process error}\\
 \ind Environmental stochasticity\\
 \ind Demographic stochasticity\\
-\ind \ind ...both include biotic (intra \& interspecific intxns.) an abiotic effects on vital rates.\\
+\ind \ind ...both include biotic (intra \& interspecific intxns.) and abiotic effects on vital rates.\\
 \emph{Observation error} (aka Measurement error)\\
 \ind Variation due to observers (e.g., bias: experienced vs. novice observer)\\
 \ind Sample estimation (only subset of total observed)\\
@@ -50,7 +50,7 @@ Calculate standard deviations of ``expected'' trajectory given hypothesized mode
 
 Estimate ``best'' model parameters using:\\
 \ind - Least-squares regression (Type I or Type II) if $\epsilon \sim \mathcal{N}(\mu, \sigma)$\\
-\ind - Maximum likelihood \emph{will explain later} (in non-Normal residuals)\\
+\ind - Maximum likelihood \emph{will explain later}\\
 \ind \ind \ind (equivalent to least-squares if $\epsilon \sim \mathcal{N}(\mu, \sigma)$)\\
 
 E.g., Type I regression:\\
@@ -62,15 +62,15 @@ E.g., Type I regression:\\
 	\epsilon &\sim iid \mathcal{N}(\mu,\sigma)
 \end{align*}
 
-Residual at point $t$: $\quad \epsilon_t = N_{obs,t} - N_{pred,t}$\\
+Residual at point $t$: $\quad \epsilon_t = \log N_{obs,t} - \log N_{pred,t}$\\
 
 ``Best'' least-squares parameter estimates (i.e.\emph{``most likely given the data.''})\\
 \ind are at $\mu = 0$ and $\sum\epsilon^2 = \min{\sum\epsilon^2}$ (i.e. \emph{least} squares).\\
 
 MLE's for slope and intercept (using $\hat{x}$ to indicate estimate):
 \begin{align*}
-	\hat{b} &= \rho_{xy}\frac{\sigma^2_y}{\sigma^2_x} \quad \text{where } \rho_{xy} \text{ is the Pearson correlation coefficient.} \quad &\Rightarrow \hat{r} = \rho_{N_t,t}\frac{ \sigma^2_{N_t}}{\sigma^2_t}\\
-	\hat{a} &= \bar{y}-\hat{b}\bar{x} &\Rightarrow \widehat{log(N_0)} = \bar{N_t} - \hat{r} \bar{t}
+	\hat{b} &= \rho_{xy}\frac{\sigma^2_y}{\sigma^2_x} \quad \text{where } \rho_{xy} \text{ is the Pearson correlation coefficient} \quad &\Rightarrow \hat{r} = \rho_{\log N_t,t}\frac{ \sigma^2_{\log N_t}}{\sigma^2_t}\\
+	\hat{a} &= \bar{y}-\hat{b}\bar{x} &\Rightarrow \widehat{log(N_0)} = \bar{\log N_t} - \hat{r} \bar{t}
 \end{align*}
 
 Note, for series of $n$ observations of $N$:
@@ -82,7 +82,8 @@ Note, for series of $n$ observations of $N$:
 
 \textbf{Estimating Process Error}
 \begin{center}
-	\includegraphics[width=15cm]{figs/image2.pdf}
+	\includegraphics[width=5cm]{figs/image2a.pdf}
+	\includegraphics[width=5cm]{figs/image2b.pdf}
 \end{center}
 ``One step-ahead'' prediction\\
 \ind Estimating error of process at each time-step.\\
@@ -90,7 +91,7 @@ Note, for series of $n$ observations of $N$:
 
 Step 1: Calculate log-transformed growth rates from data:\\
 \begin{equation*}
-	\frac{\ln\left(\frac{N_{t+\Delta t}}{N_t}\right)}{\Delta t} \quad \quad \text{or} \quad \quad \ln \left(\frac{N_{t+1}}{N_t}\right)
+	\ln \left(\frac{N_{t+1}}{N_t}\right) \quad \quad \text{or} \quad \quad 	\ln\left(\frac{N_{t+\Delta t}}{N_t}\right) \bigg / \Delta t
 \end{equation*}
 
 Step 2: Specify hypothesized process model, and rearrange to solve for $\ln \left(\frac{N_{t+1}}{N_t}\right)$\\
@@ -112,11 +113,11 @@ Estimated process error:
 \rule[0.5ex]{\linewidth}{1pt}
 
 \pagebreak
-\note{R exercise} - Load \emph{Class-6.R} and data (Grizzlies, SAFseal1, Redsword)\\
+\note{R exercise} - Load \emph{Class-6.R} and data (SAFseal1, Grizzlies, Redsword)\\
 \ind \note{Walk through code}\\
 \ind \ind - observation error\\
 \ind \ind - process error\\
-\ind \ind - prediction w/ process error\\
+\ind \ind - forecast w/ process error vs. observation error\\
 
 Observation error:
 \begin{align*}
@@ -129,7 +130,7 @@ Process error:
 	\ln\left(\frac{N_{t+1}}{N_t}\right) = r + \epsilon_t \quad \quad = \beta_0 + \cancelto{0}{\beta_1} N_t + \epsilon_t \quad \text{for density-independence}\\
 	\note{ in R: $lm(y\sim 1)$ or just $mean$()!}
 \end{align*}
-\ind In words, the best estimate for $\hat{r}$ is the mean of all $\ln\left(\frac{N_{t+1}}{N_t}\right)_t$
+\ind In words, the best estimate for $\hat{r}$ is the mean of all $\log \left(\frac{N_{t+1}}{N_t}\right)_t$
 
 \rule[0.5ex]{\linewidth}{1pt}
 \textbf{What if both types!?!}\\

@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{setspace}
+\usepackage[text={6.5in,8.5in},centering]{geometry}
+\geometry{verbose,a4paper,tmargin=2.4cm,bmargin=2.4cm,lmargin=2.4cm,rmargin=2.4cm}
+\usepackage{graphicx,amsmath,cases,multirow,appendix,graphicx,xcolor}
+
+\setlength\parindent{0pt}
+
+\newcommand{\note}[1]{\colorbox{gray!30}{#1}}
+\newcommand{\ind}{\-\hspace{1cm}}
+\newcommand*{\blanks}[1][4em]{\rule{#1}{.4pt}}
+
+
+\begin{document}
+
+\noindent\makebox[\textwidth][c]{\Large\bfseries Quiz 3 - Process vs. Observation Error}
+
+\rule[0.5ex]{\linewidth}{1pt}
+\begin{center}
+	\textbf{My name is:} \blanks[150pt]
+\end{center}
+\rule[0.5ex]{\linewidth}{1pt}
+
+\begin{enumerate}
+\item If you have a time-series of population counts to which you’d like to fit a geometric growth model, and the primary source of variation from the expected growth rate on any given year is observer error, then you can fit a regression of: 
+\begin{enumerate}
+	\item $log \left( N_t / N_{t+1} \right)$ vs. $N$
+	\item $N_t$ vs. $\lambda$
+	\item \text{It is impossible to estimate the growth rate with observer error.}
+	\item $log (N_t)$ vs. time
+	\item $\lambda$ vs. $log (N_t)$
+\end{enumerate}
+
+\item If you have a data set of annual growth estimates for a population where there is substantial process error, then a good estimate for the variance due to process error would be?
+\begin{enumerate}
+	\item Residual variance from a model fit of $log(N_{t+1}/N_t)$ vs. $N_t$
+	\item The standard deviation of $N_t$
+	\item The standard deviation of $N_{t+1}-N_t$
+	\item Residual variance from a model fit of $log(N_t)$ vs. time
+	\item $\frac{1}{T}\sum_{t=1}^T\left( N_{t+1}-N_t \right)$
+\end{enumerate}
+
+\end{enumerate}
+\vspace{1cm}
+
+
+\end{document}

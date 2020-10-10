@@ -74,6 +74,7 @@ for (f in 1:3){
 # Calculate delta AIC and AIC-weights
 delta_AICc<-MLE_results[,4]-min(MLE_results[,4])
 
+# Calculate AIC weights, etc.  (could use AICtab from 'bbmle' package instead)
 for (f in 1:3){
 	AIC_wt<-exp(-0.5*delta_AICc[f])/sum(exp(-0.5*delta_AICc))
 	MLE_results[f,5]<-delta_AICc[f]

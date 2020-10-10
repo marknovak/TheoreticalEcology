@@ -71,8 +71,7 @@ legend('topright',legend='TypeII\nFunctional\nResponse',bty='n')
 
 # MacArthur-Rosenzweig w/ Refuge
 G<-0.2
-isoR<-function(x){(x^3*a*ai*b*h - (G*a*ai*b*h + a*b*h - ai*b)*x^2 + (G*a*b*h -
-b)*x)/(G*a - x*a)}
+isoR<-function(x){(x^3*a*ai*b*h - (G*a*ai*b*h + a*b*h - ai*b)*x^2 + (G*a*b*h -b)*x)/(G*a - x*a)}
 
 curve(isoR,lwd=2,xlim=xlims,ylim=ylims,xlab='Resource',ylab='Consumer')
 box(lwd=4)

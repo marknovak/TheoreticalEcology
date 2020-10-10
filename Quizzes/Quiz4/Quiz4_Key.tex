@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage{setspace}
+\usepackage[text={6.5in,8.5in},centering]{geometry}
+\geometry{verbose,a4paper,tmargin=2.4cm,bmargin=2.4cm,lmargin=2.4cm,rmargin=2.4cm}
+\usepackage{graphicx,amsmath,cases,multirow,appendix,graphicx,xcolor}
+
+\setlength\parindent{0pt}
+
+\newcommand{\note}[1]{\colorbox{gray!30}{#1}}
+\newcommand{\ind}{\-\hspace{1cm}}
+\newcommand*{\blanks}[1][4em]{\rule{#1}{.4pt}}
+
+
+\begin{document}
+
+\noindent\makebox[\textwidth][c]{\Large\bfseries Quiz 4 - Lotka-Volterra Competition}
+
+\rule[0.5ex]{\linewidth}{1pt}
+\begin{center}
+	\textbf{My name is:} \blanks[150pt]
+\end{center}
+\rule[0.5ex]{\linewidth}{1pt}
+
+Two species ($N_1$ and $N_2$) are locked in a deadly battle over a set of shared resources.   They thereby compete with one another such that an individual of species $N_2$ utilizes $\alpha_{12}$ amount of the resources utilized by an individual of species $N_1$, and an individual of species $N_1$ utilizes $\alpha_{21}$ amount of the resources utilized by an individual of species $N_2$.  By a simple extension of the single-species logistic model, we can include such competition between two species by writing
+\begin{equation*}
+	\frac{dN_1}{dt}=r_1 N_1 \left( 1-\frac{N_1}{K_1}-\frac{\alpha_{12}N_2}{K_1} \right )
+\end{equation*}
+to describe the population growth rate of species $N_1$, and
+\begin{equation*}
+	\frac{dN_2}{dt}=r_2 N_2 \left( 1-\frac{\alpha_{21}N_1}{K_2}-\frac{N_2}{K_2} \right )
+\end{equation*}
+to describe the population growth rate of species $N_2$.
+
+\vspace{1cm}
+
+(a) How many equilibria does this model have?  Describe each of them qualitatively in terms of the population sizes of $N_1$ and $N_2$.\\
+%\vspace{4cm}
+\textcolor{red}{
+\begin{equation*}
+	\text{4 equilibria:  } (N_1^*,N_2^*)=\begin{cases}
+	N_1=0,N_2=0\\
+	N_1>0,N_2=0\\
+	N_1=0,N_2>0\\
+	N_1>0,N_2>0
+	\end{cases}
+\end{equation*}
+}
+
+(b) Use the above equations to show that species $N_1$ will reach its equilibrium carrying capacity $K_1$ in the absence of species $N_2$.\\
+%\vspace{4cm}
+\textcolor{red}{
+Since $N_2=0$ we have $\frac{dN_1}{dt}=r_1 N_1 \left( 1-\frac{N_1}{K_1}\right )$.  Solving this for the equilibria gives:
+\begin{align*}
+	\frac{dN_1}{dt}=r_1 N_1 \left( 1-\frac{N_1}{K_1}\right ) &= 0\\
+	r_1 N_1 - r_1 N_1 \frac{N_1}{K_1} & = 0\\
+	r_1 N_1 &=r_1 N_1 \frac{N_1}{K_1}\\
+	N_1^* &= K_1
+\end{align*}
+}
+(c) What is the equilibrium population size of $N_2$ in the absence of $N_1$?\\
+%\vspace{3cm}
+\textcolor{red}{By the same logic as in (b), $N_2^* = K_2$}
+\vspace{0.5cm}
+
+(d) Use the equations to solve for the equilibrium population size of $N_1$ in the presence of $N_2$. 
+\textcolor{red}{
+\begin{align*}
+	r_1 N_1 & = r_1 N_1 N_1 - r_1 \alpha_{12} N_1 \frac{N_2}{K_1}\\
+	r_1 N_1 K_1 &= r_1 N_1 N_1 + r_1 \alpha_{12} N_1 N_2\\
+	K_1 &= N_1 - \alpha_{12} N_2\\
+	N_1^* &= K_1 - \alpha_{12} N_2
+\end{align*}
+By the same logic, 	$N_2^* = K_2 - \alpha_{21} N_1$, or by rearranging,
+\begin{align*}
+	K_1 - N_1^* &= \alpha_{12} N_2^*\\
+	N_2^* &= \frac{K_1 - N_1^*}{\alpha_{12}}
+\end{align*}
+and similarly
+\begin{equation*}
+	N_1^* = \frac{K_2 - N_2^*}{\alpha_{21}}
+\end{equation*}
+}
+\end{document}

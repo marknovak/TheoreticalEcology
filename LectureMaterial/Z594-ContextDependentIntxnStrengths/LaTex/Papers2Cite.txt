@@ -1,0 +1,14 @@
+@article{RN5286,
+   author = {Arditi, Roger and Bersier, Louis-Félix and Rohr, Rudolf P.},
+   title = {The perfect mixing paradox and the logistic equation: Verhulst vs. Lotka},
+   journal = {Ecosphere},
+   volume = {7},
+   number = {11},
+   pages = {e01599-n/a},
+   ISSN = {2150-8925},
+   DOI = {10.1002/ecs2.1599},
+   url = {http://dx.doi.org/10.1002/ecs2.1599},
+   year = {2016},
+   type = {Journal Article}
+}
+

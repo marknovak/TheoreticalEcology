@@ -1,0 +1,320 @@
+Transparent<-function(col,alpha=0.2){#
+	col<-as.vector(col2rgb(col)/255)#
+	rgb(col[1],col[2],col[3], alpha )#
+}
+col<-Transparent(black)
+col<-Transparent('black')
+col
+plot(runif,pch=21,bg=col)
+col<-Transparent('red')
+plot(runif,pch=21,type='p',bg=col)
+q<-1:9
+p<-LETTERS()[1:18]
+p<-LETTERS[1:18]
+p
+o<-array(NA,dim=c(18,3))
+for(i in 1:18){o[i,]<-sample(q,3)}
+hist(o)
+hist(o,breaks=9)
+q
+h<-hist(o,breaks=9)
+h<-hist(o,breaks=10)
+h<-hist(o,breaks=seq(0.5,9,0.5))
+h<-hist(o,breaks=seq(0.5,9,1))
+h
+for(i in 1:18){o[i,]<-sort(sample(q,3))}
+O<-o
+sample(q,3)
+?edit
+data.entry(o)
+fix(o)
+O<-fix(o)
+O<-data.entry(o)
+O
+h<-hist(o,breaks=seq(0.5,9.5,1))
+ls()
+for(i in 1:18){for(j in 1:3){o[i,j]<-paste0(p[i],o[i,j])}}
+t(o)
+colnames(o)<-paste(Q,1:3)
+colnames(o)<-paste('Q',1:3)
+colnames(o)<-paste0('Q',1:3)
+rownames(o)<-p
+o<-t(o)
+o
+edit(o)
+sample(o,10)
+sort(sample(o,10))
+sample(1:5,10)
+sample(1:5,10,replace=T)
+sort(sample(1:5,10,replace=T))
+d<-sort(sample(1:5,10,replace=T))
+e<-sort(sample(o,10))
+rbind(d,e)
+cbind(d,e)
+d<-sort(sample(1:6,10,replace=T))
+d
+edit(a)
+E
+e
+sample(e,10)
+a<-cbind(d,e)
+e<-sample(e,10)
+edit(e)
+?skew
+skewness
+kurtosis
+?moments
+moments
+?kurtosis
+library(Lmoments)
+lskewness
+3E7
+0.001/1000
+10000/1420
+10/1420
+X<-dat
+tt
+trans.vector(dat)
+x<-runif(100)
+hist(x)
+Cm <- 10#
+Csd <- 2#
+#
+Nm <- 20#
+Nsd <- 4
+n <- 100#
+#
+Cm <- 10#
+Csd <- 2#
+#
+Nm <- 20#
+Nsd <- 4#
+#
+C <- rnorm(n, Cm, Csd)
+C
+hist(C)
+n <- 1000#
+#
+Cm <- 10#
+Csd <- 2#
+#
+Nm <- 20#
+Nsd <- 4#
+#
+C <- rnorm(n, Cm, Csd)#
+#
+hist(C)
+mean(C)
+sd(C)
+M <- rnorm(n, Nm, Nsd)
+plot(C,N)
+n <- 1000#
+#
+Cm <- 10#
+Csd <- 2#
+#
+Nm <- 20#
+Nsd <- 4#
+#
+C <- rnorm(n, Cm, Csd)#
+N <- rnorm(n, Nm, Nsd)#
+hist(C)#
+#
+mean(C)#
+sd(C)#
+#
+plot(C,N)
+n <- 10000#
+#
+Cm <- 10#
+Csd <- 2#
+#
+Nm <- 20#
+Nsd <- 4#
+#
+C <- rnorm(n, Cm, Csd)#
+N <- rnorm(n, Nm, Nsd)#
+hist(C)#
+#
+mean(C)#
+sd(C)#
+#
+plot(C,N)
+contour(C,N)
+mvnorm
+library(mvnorm)
+library(mvtnorm)
+?mvnorm
+cov<-0
+Sigma <- matrix( c( Csd, cov, cov, Nsd))
+s
+Sigma <- matrix( c( Csd, cov, cov, Nsd), nrow=2)
+Sigma
+data <- rmvnorm(n, c(Cm, Nm), Sigma)
+plot(data[,1],data[,2])
+cov<-4#
+#
+Sigma <- matrix( c( Csd, cov, cov, Nsd), nrow=2)#
+data <- rmvnorm(n, c(Cm, Nm), Sigma)#
+#
+plot(data[,1],data[,2])
+cov<-1#
+#
+Sigma <- matrix( c( Csd, cov, cov, Nsd), nrow=2)#
+data <- rmvnorm(n, c(Cm, Nm), Sigma)#
+#
+plot(data[,1],data[,2])
+cov<- -1#
+#
+Sigma <- matrix( c( Csd, cov, cov, Nsd), nrow=2)#
+data <- rmvnorm(n, c(Cm, Nm), Sigma)#
+#
+plot(data[,1],data[,2])
+data
+h2d
+?filled.contour
+?contour
+?ellipsoidhull
+r
+ch
+plot(dat)
+Mean.obs
+Means.obs
+eHull
+eHull$area
+names(eHull)
+volume(eHull)
+volume(cHull)
+rows
+n=2
+n
+?sample
+Quant.Area
+?volume
+volume
+volume.ellipsoid
+pi()
+Pi()
+pi
+myEllipsoidVolume(dat)
+?predict
+exy
+ellipse(dat)
+plot(el)
+?ellipse
+CorMat.Obs
+cov(dat)
+sqrt(CorMat)
+sqrt(CorMat.obs)
+CorMat.obs^2
+cov2cor(cov(dat))^2
+?rmvnorm
+CorMat.obs
+CorMat
+CovMat.obs
+standard.ellipse()
+?standard.ellipse
+??standard.ellipse
+library(siar)
+standard.ellipse(dat[,1],dat[,2],confs=0.95)
+dat
+standard.ellipse(dat)
+standard.ellipse(dat[,1],dat[,2])
+standard.ellipse(dat[,1],dat[,2])->z
+plot(z)
+standard.ellipse
+x<-dat[,1]
+y<-dat[,2]
+steps=5
+confs=NULL
+CEA
+confs=c(0.05,0.95)
+confs=c(0.95)
+CI
+Means
+CovMat
+el
+points(el,lwd=2,col='red')
+ellipsoidhull(el)
+myEllipsoidArea(dat,0.95)
+TrueArea.95
+TrueArea.Full
+TrueArea.99
+TrueArea.1
+?qmvnorm
+qmvnorm(0.95,sigma=CovMat,tail='both')
+qmvnorm(1,sigma=CovMat,tail='both')
+qmvnorm(0.9999,sigma=CovMat,tail='both')
+?smooth.spline
+?optim
+?wait
+?sleep
+?Sys.sleep
+lambda.obs
+mean(lambda.obs)
+(mean(lambda.obs)^30)*9575
+(mean(lambda.obs)^30)
+length(lambda.obs)
+6/29
+N
+head(N)
+range(N[,32])
+out
+head(out)
+1E6
+1E-6
+(1E-6)^3
+.libPaths("/Library/Frameworks/R.framework/Packages/")
+.libPaths()
+update.packages()
+?update.packages
+x<-array(NA,c(9,2))
+x<-edit(x)
+edit(x)
+x
+library(matrix)
+library(Rcpp)
+library(lme4)
+library(Matrix)
+library(MASS)
+foo<-function(x){1-exp(-(x^2)/xmax)}
+xmax=4
+curve(foo,0,10)
+curve(foo,0,5)
+abline(v=5
+abline(v=4)
+abline(h=1)
+vector(NA,4)
+as.vector(NA,4)
+array(NA,4
+)
+array(NA,4)
+X<-array(NA,5)
+X[1]<-2
+for(i in 1:4){ X[i+1] <- X[i]^2 }
+X
+foo(1
+foo<-function(x){(1+1/x)^x}
+foo(1)
+foo(2)
+1.25^2
+1.5^2
+foo(3)
+log(2)
+exp(1)
+Nt.c
+800/(10^-18)
+80/(2*10^-18)
+800/(2*10^-18)
+(800/(2*10^-18))/ln(2)
+(800/(2*10^-18))/log(2)
+ln(800/(2*10^-18))/log(2)
+log(800/(2*10^-18))/log(2)
+log(80/(2*10^-18))/log(2)
+log(80/(2*10^-18))
+log(800/(2*10^-18))
+log(80/(2*10^-18))/(log(2)/20)
+log(800/(2*10^-18))/(log(2)/20)
+log(800/(2*10^-18))/(log(2)/20)/24
+log(800/(2*10^-18))/(log(2)/20)/60
+source("/Users/marknovak/Dropbox/Research/R-Codes/Sent2R.txt",echo=TRUE)

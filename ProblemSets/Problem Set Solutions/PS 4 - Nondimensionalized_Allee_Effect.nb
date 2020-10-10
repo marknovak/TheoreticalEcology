@@ -1,0 +1,417 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12481,        408]
+NotebookOptionsPosition[     11438,        368]
+NotebookOutlinePosition[     11825,        385]
+CellTagsIndexPosition[     11782,        382]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[" "], "Input",
+ CellChangeTimes->{3.6562820329838257`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Define", " ", "model", " ", "of", " ", "logistic", " ", "growth", " ", 
+    "with", " ", "Allee", " ", "effect"}], " ", "*)"}], 
+  RowBox[{"dNdt", "=", 
+   RowBox[{"r", " ", "N", " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"N", "/", "K"}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"N", "/", "K"}], "-", 
+      RowBox[{"A", "/", "K"}]}], ")"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.655663788789216*^9, 3.655663806609252*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", " ", 
+  RowBox[{"(", 
+   RowBox[{"1", "-", 
+    FractionBox["N", "K"]}], ")"}], " ", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox["A", "K"]}], "+", 
+    FractionBox["N", "K"]}], ")"}], " ", "r"}]], "Output",
+ CellChangeTimes->{3.655663809400391*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Determine", " ", "steady", " ", "states"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"eq", "=", 
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{"dNdt", "\[Equal]", "0"}], ",", "N"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"TableForm", "[", "eq", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6556638164017878`*^9, 3.655663852397807*^9}, {
+  3.65566389872466*^9, 3.655663899106221*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     RowBox[{"N", "\[Rule]", "0"}]},
+    {
+     RowBox[{"N", "\[Rule]", "A"}]},
+    {
+     RowBox[{"N", "\[Rule]", "K"}]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.655663838123767*^9, 3.655663852975851*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Determine", " ", "first", " ", "derivate"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"DdNdt", "=", 
+   RowBox[{
+    RowBox[{"D", "[", 
+     RowBox[{"dNdt", ",", "N"}], "]"}], "//", "FullSimplify"}]}]}]], "Input",
+ CellChangeTimes->{{3.655663857515749*^9, 3.6556638789639587`*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "A"}], " ", "K"}], "+", 
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{"A", "+", "K"}], ")"}], " ", "N"}], "-", 
+     RowBox[{"3", " ", 
+      SuperscriptBox["N", "2"]}]}], ")"}], " ", "r"}], 
+  SuperscriptBox["K", "2"]]], "Output",
+ CellChangeTimes->{{3.655663872075376*^9, 3.6556638792827263`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Evaluate", " ", "1", "st", " ", "derivative", " ", "at", " ", "each", " ",
+     "steady", " ", "state"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"DdNdt", "/.", "eq"}], "//", "Simplify"}], "//", 
+   "TableForm"}]}]], "Input",
+ CellChangeTimes->{{3.655663888891843*^9, 3.6556639453617077`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"A", " ", "r"}], "K"]}]},
+     {
+      FractionBox[
+       RowBox[{"A", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "A"}], "+", "K"}], ")"}], " ", "r"}], 
+       SuperscriptBox["K", "2"]]},
+     {
+      FractionBox[
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"A", "-", "K"}], ")"}], " ", "r"}], "K"]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.655663924240746*^9, 3.655663945728902*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"conclusion", ":", " ", 
+      RowBox[{
+      "Since", " ", "the", " ", "first", " ", "derivative", " ", "of", " ", 
+       "dNdt", " ", "is", " ", "less", " ", "than", " ", "0", " ", "when", 
+       " ", "evaluated", " ", "at", " ", "the", " ", "N"}]}], "=", 
+     RowBox[{"0", " ", "equilibrium"}]}], ",", 
+    RowBox[{
+     RowBox[{"as", " ", "long", " ", "as", " ", "r"}], ">", 
+     RowBox[{"0", " ", "and", " ", "A"}], ">", 
+     RowBox[{"0", " ", "and", " ", "A"}], "<", "K"}], ",", 
+    RowBox[{"this", " ", "equilibrium", " ", "is", " ", 
+     RowBox[{"stable", ".", "Similarly"}]}], ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"since", " ", "it", " ", "is"}], "<", 
+      RowBox[{
+      "0", " ", "when", " ", "evaluated", " ", "at", " ", "the", " ", "N"}]}],
+      "=", 
+     RowBox[{"K", " ", "equilibrium"}]}], ",", 
+    RowBox[{"this", " ", "equilibrium", " ", "is", " ", 
+     RowBox[{"stable", ".", "Finally"}]}], ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"since", " ", "it", " ", "is"}], ">", 
+      RowBox[{
+      "0", " ", "when", " ", "evaluated", " ", "at", " ", "the", " ", "N"}]}],
+      "=", 
+     RowBox[{"A", " ", "equilibrium"}]}], ",", 
+    RowBox[{"this", " ", "equilibrium", " ", "is", " ", 
+     RowBox[{"unstable", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "The", " ", "population", " ", "declines", " ", "to", " ", "extinction", 
+     " ", "if", " ", "N"}], " ", "<", 
+    RowBox[{
+    "A", " ", "because", " ", "its", " ", "per", " ", "capita", " ", "growth",
+      " ", "rate", " ", "is", " ", "negative", " ", "below", " ", "this", " ",
+      "Allee", " ", 
+     RowBox[{"threshold", "."}]}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.655663958812251*^9, 3.655663976167384*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Define", " ", "and", " ", "determine", " ", "equilibria", " ", "of", " ",
+      "non"}], "-", 
+    RowBox[{
+    "dimensionalized", " ", "logistic", " ", "with", " ", "Allee", " ", 
+     "effect"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"dxdtau", "=", 
+    RowBox[{"x", "*", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", "x"}], ")"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"x", "-", "\[Beta]"}], ")"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"eq", "=", 
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{"dxdtau", "\[Equal]", "0"}], ",", "x"}], "]"}]}], ";", 
+    RowBox[{"TableForm", "[", "eq", "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"Ddxdtau", "=", 
+    RowBox[{
+     RowBox[{"D", "[", 
+      RowBox[{"dxdtau", ",", "x"}], "]"}], "//", "FullSimplify"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Ddxdtau", "/.", "eq"}], "//", "Simplify"}], "//", 
+    "TableForm"}]}]}]], "Input",
+ CellChangeTimes->{{3.655663995497718*^9, 3.655664109128162*^9}, 
+   3.655738317440773*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"1", "-", "x"}], ")"}], " ", "x", " ", 
+  RowBox[{"(", 
+   RowBox[{"x", "-", "\[Beta]"}], ")"}]}]], "Output",
+ CellChangeTimes->{{3.6556640668128366`*^9, 3.65566410967459*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     RowBox[{"x", "\[Rule]", "0"}]},
+    {
+     RowBox[{"x", "\[Rule]", "1"}]},
+    {
+     RowBox[{"x", "\[Rule]", "\[Beta]"}]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.6556640668128366`*^9, 3.655664109677073*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", "\[Beta]"}], "+", 
+  RowBox[{"x", " ", 
+   RowBox[{"(", 
+    RowBox[{"2", "-", 
+     RowBox[{"3", " ", "x"}], "+", 
+     RowBox[{"2", " ", "\[Beta]"}]}], ")"}]}]}]], "Output",
+ CellChangeTimes->{{3.6556640668128366`*^9, 3.6556641096858673`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      RowBox[{"-", "\[Beta]"}]},
+     {
+      RowBox[{
+       RowBox[{"-", "1"}], "+", "\[Beta]"}]},
+     {
+      RowBox[{
+       RowBox[{"-", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", "\[Beta]"}], ")"}]}], " ", "\[Beta]"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.6556640668128366`*^9, 3.6556641096873713`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Concl", ":", " ", 
+     RowBox[{
+     "Since", " ", "the", " ", "first", " ", "derivative", " ", "of", " ", 
+      "dxdt", " ", "is", " ", "less", " ", "than", " ", "0", " ", "when", " ",
+       "evaluated", " ", "at", " ", "the", " ", "x"}]}], "=", 
+    RowBox[{"0", " ", "equilibrium"}]}], ",", 
+   RowBox[{
+    RowBox[{"as", " ", "long", " ", "as", " ", "0"}], "<", "beta", "<", "1"}],
+    ",", 
+   RowBox[{"this", " ", "equilibrium", " ", "is", " ", 
+    RowBox[{"stable", ".", "Similarly"}]}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"since", " ", "it", " ", "is"}], "<", 
+     RowBox[{
+     "0", " ", "when", " ", "evaluated", " ", "at", " ", "the", " ", "x"}]}], 
+    "=", 
+    RowBox[{"1", " ", "equilibrium"}]}], ",", 
+   RowBox[{"this", " ", "equilibrium", " ", "is", " ", 
+    RowBox[{"stable", ".", "Finally"}]}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"since", " ", "it", " ", "is"}], ">", 
+     RowBox[{
+     "0", " ", "when", " ", "evaluated", " ", "at", " ", "the", " ", "x"}]}], 
+    "=", 
+    RowBox[{"beta", " ", "equilibrium"}]}], ",", 
+   RowBox[{"this", " ", "equilibrium", " ", "is", " ", 
+    RowBox[{"unstable", "."}]}]}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.6556641180626917`*^9, 3.655664122265642*^9}}]
+},
+WindowSize->{1471, 1006},
+WindowMargins->{{4, Automatic}, {Automatic, 0}},
+Magnification:>2. Inherited,
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (September 9, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 71, 1, 56, "Input"],
+Cell[CellGroupData[{
+Cell[654, 25, 525, 15, 90, "Input"],
+Cell[1182, 42, 296, 10, 80, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1515, 57, 501, 14, 123, "Input"],
+Cell[2019, 73, 697, 21, 120, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2753, 99, 348, 9, 90, "Input"],
+Cell[3104, 110, 415, 13, 95, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3556, 128, 387, 10, 90, "Input"],
+Cell[3946, 140, 1002, 33, 160, "Output"]
+}, Open  ]],
+Cell[4963, 176, 1896, 46, 354, "Input"],
+Cell[CellGroupData[{
+Cell[6884, 226, 1118, 33, 222, "Input"],
+Cell[8005, 261, 227, 6, 56, "Output"],
+Cell[8235, 269, 705, 21, 122, "Output"],
+Cell[8943, 292, 284, 8, 56, "Output"],
+Cell[9230, 302, 871, 28, 122, "Output"]
+}, Open  ]],
+Cell[10116, 333, 1318, 33, 255, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,316 @@
+rm(list=ls()) # clears workspace#
+Dlogis<-function(N0,T,r,a){#
+	N<-numeric();N[1]<-N0#
+	for (t in 1:T){ 	N[t+1] <- N[t]+r*(1-(a*N[t]))*N[t] }#
+	N#
+}#
+#
+##########################
+# N(t) vs. t#
+quartz(width=12,height=3.5)#
+par(mfrow=c(1,3));par(mar=c(4,4,1.5,1),lwd=2,cex.lab=2,mgp=c(2,0.5,0),tcl=-0.3)#
+#
+N<-Dlogis(1,20,0.5,0)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='b')#
+legend('bottomright',legend='Density-independent',bty='n',cex=1.7)#
+#
+N<-Dlogis(1,20,0.5,0.01)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='b')#
+legend('bottomright',legend='Negative\ndensity-dependence',xjust=1,bty='n',cex=1.7)#
+#
+N<-Dlogis(1,20,0.5,-0.2)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='b')#
+legend('bottomright',legend='Positive\ndensity-dependence',xjust=1,bty='n',cex=1.7)
+N<-Dlogis(1,20,0.5,0.01)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='b')#
+legend('bottomright',legend='Negative\ndensity-dependence',xjust=1,bty='n',cex=1.7)
+Na<-Dlogis(1,20,0.5,0.02)#
+Nb<-Dlogis(1,20,0.5,0.02)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b')#
+point(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.01)#
+Nb<-Dlogis(1,20,0.5,0.02)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b')#
+points(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.015)#
+Nb<-Dlogis(119,20,0.5,0.015)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b')#
+points(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.015)#
+Nb<-Dlogis(80,20,0.5,0.015)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b')#
+points(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.015)#
+Nb<-Dlogis(85,20,0.5,0.015)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b')#
+points(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.015)#
+Nb<-Dlogis(95,20,0.5,0.015)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b')#
+points(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.015)#
+Nb<-Dlogis(95,20,0.3,0.015)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b')#
+points(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.015)#
+Nb<-Dlogis(95,20,0.1,0.015)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b')#
+points(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.015)#
+Nb<-Dlogis(95,20,0.2,0.015)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b')#
+points(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.015)#
+Nb<-Dlogis(95,20,0.2,0.015)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b',ylab=N(t))#
+points(Time,Nb,type='b')
+Na<-Dlogis(1,20,0.5,0.015)#
+Nb<-Dlogis(95,20,0.2,0.015)#
+Time<-1:(length(Na))#
+plot(Na~Time,xlab='Time',ylim=c(0,120),type='b',ylab="N(t)")#
+points(Time,Nb,type='b')
+library(deSolve)#
+#
+# Then define the function for the continuous logistic#
+# Notice that this function has three inputs:  the starting population size'N0', #
+# the total time 'T', and a third input variable 'p' representing the two parameters #
+# of our equation: r and a.#
+#
+ClogisK<-function(t,y,p){#
+	N<-y[1]#
+	with(as.list(p),{#
+		dNdt<-r*N*(1-N/K)#
+		return(list(dNdt))#
+	})#
+}#
+#
+# We therefore have to include both r and a in the params variable:#
+params<-c(r=0.1, K=100)#
+#
+# Then specify the starting abundance and the time over which we want to simulate dynamics:#
+N0<-c(N=1)#
+t<-1:100#
+#
+# Now run your simulation using the ode function of deSolve#
+out<-ode(y=N0,times=t,func=ClogisK,parms=params)#
+#
+# Convert this output to a data.frame to ease plotting and data extraction#
+out<-data.frame(out)#
+plot(out$time,out$N)
+library(deSolve)#
+#
+# Then define the function for the continuous logistic#
+# Notice that this function has three inputs:  the starting population size'N0', #
+# the total time 'T', and a third input variable 'p' representing the two parameters #
+# of our equation: r and a.#
+#
+ClogisK<-function(t,y,p){#
+	N<-y[1]#
+	with(as.list(p),{#
+		dNdt<-r*N*(1-N/K)#
+		return(list(dNdt))#
+	})#
+}#
+#
+# We therefore have to include both r and a in the params variable:#
+params<-c(r=0.1, K=100)#
+#
+# Then specify the starting abundance and the time over which we want to simulate dynamics:#
+N0<-c(N=1)#
+t<-1:100#
+#
+# Now run your simulation using the ode function of deSolve#
+out<-ode(y=N0,times=t,func=ClogisK,parms=params)#
+#
+# Convert this output to a data.frame to ease plotting and data extraction#
+out<-data.frame(out)#
+plot(out$time,out$N)#
+#
+# Plot the change in N between time t and t+1 as a function N(t) #
+# To do this we must exclude the last observed N#
+N<- out$N#
+dNdt<- N[-1]-N[-length(N)]#
+plot(dNdt~N[-length(N)])#
+#
+# Put these last two plots side-by-side#
+par(mfrow=c(1,2))#
+plot(out$time,out$N,type='l',lwd=4)#
+plot(dNdt~N[-length(N)],type='l',lwd=4,xlab='N')
+par(mfrow=c(1,2))#
+plot(out$time,out$N,type='l',lwd=4,axes=F); box(lwd=2)#
+plot(dNdt~N[-length(N)],type='l',lwd=4,xlab='N',axes=F);box(lwd=2)
+par(mfrow=c(1,2))#
+plot(out$time,out$N,type='l',lwd=4,axes=F,xlab='',ylab=''); box(lwd=2)#
+plot(dNdt~N[-length(N)],type='l',lwd=4,xlab='',ylab='',axes=F);box(lwd=2)
+temp<-DAllee(rd=rd)
+temp
+N<-Dlogis(1,20,0.5,0)#
+y<-(N[-1]-N[-length(N)])/N[-length(N)]#
+plot(y~N[-length(N)],ylab=expression((N[t+1]-N[t])/N[t]),xlab=expression(N[t]),type='b', ylim=c(0,1),xlim=c(0,110))
+rm(list=ls()) # clears workspace#
+Dlogis<-function(N0,T,r,a){#
+	N<-numeric();N[1]<-N0#
+	for (t in 1:T){ 	N[t+1] <- N[t]+r*(1-(a*N[t]))*N[t] }#
+	N#
+}#
+DAllee<-function(N0,T,K,A,r){#
+    N<-numeric();N[1]<-N0#
+    for (t in 1:T){     N[t+1] <- N[t]+rd*(1-N[t]/K)*(N[t]/A-1)*N[t]	 }#
+    N#
+}
+N(t+1)-N(t) / N(t)#
+quartz(width=12,height=4)#
+par(mfrow=c(1,3));par(mar=c(4,4,1.5,1),lwd=2,cex.lab=2,mgp=c(2,0.5,0),tcl=-0.3,pty='s')
+N<-Dlogis(1,20,0.5,0)#
+y<-(N[-1]-N[-length(N)])/N[-length(N)]#
+plot(y~N[-length(N)],ylab=expression((N[t+1]-N[t])/N[t]),xlab=expression(N[t]),type='b', ylim=c(0,1),xlim=c(0,110))#
+legend('bottomright',legend='Density-independent',bty='n',cex=1.7)
+N<-Dlogis(1,20,0.5,-0.2)#
+Time<-1:(length(N))#
+y<-(N[-1]-N[-length(N)])/N[-length(N)]#
+plot(y~N[-length(N)],ylab=expression((N[t+1]-N[t])/N[t]),xlab=expression(N[t]),type='b', ylim=c(0,10),xlim=c(0,110))#
+legend('bottomright',legend='Positive\ndensity-dependence',xjust=1,bty='n',cex=1.7)
+par(mfrow=c(1,2),mar=c(4,4,1.5,1),cex.axis=1.2,lwd=2,cex.lab=2,mgp=c(2,0.5,0),tcl=-0.3)#
+#
+N<-Dlogis(1,20,0.5,0.01)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='l',lwd=4,axes=F);box(lwd=2)#
+axis(2,at=c(0,100),labels=c(0,'K'),las=1)#
+#
+y<-(N[-1]-N[-length(N)])#
+plot(y~N[-length(N)],ylab=expression(Delta*N[Delta*t]),xlab=expression(N[t]),type='l',xlim=c(0,110), lwd=4,axes=F);box(lwd=2)#
+axis(1,at=c(0,100),labels=c(0,'K'),las=1)
+N<-DAllee(1,20,100,0.5,10)
+DAllee<-function(N0,T,K,A,r){#
+    N<-numeric();N[1]<-N0#
+    for (t in 1:T){     N[t+1] <- N[t]+r*(1-N[t]/K)*(N[t]/A-1)*N[t]	 }#
+    N#
+}
+N<-DAllee(1,20,100,0.5,10)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='l',lwd=4,axes=F);box(lwd=2)#
+axis(2,at=c(0,100),labels=c(0,'K'),las=1)
+N<-DAllee(1,20,100,0.1,10)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='l',lwd=4,axes=F);box(lwd=2)#
+axis(2,at=c(0,100),labels=c(0,'K'),las=1)
+N<-DAllee(1,20,100,10,0.5)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='l',lwd=4,axes=F);box(lwd=2)#
+axis(2,at=c(0,100),labels=c(0,'K'),las=1)#
+#
+y<-(N[-1]-N[-length(N)])#
+plot(y~N[-length(N)],ylab=expression(Delta*N[Delta*t]),xlab=expression(N[t]),type='l',xlim=c(0,110), lwd=4,axes=F);box(lwd=2)#
+axis(1,at=c(0,100),labels=c(0,'K'),las=1)
+N<-DAllee(11,20,100,10,0.5)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='l',lwd=4,axes=F);box(lwd=2)#
+axis(2,at=c(0,100),labels=c(0,'K'),las=1)#
+#
+y<-(N[-1]-N[-length(N)])#
+plot(y~N[-length(N)],ylab=expression(Delta*N[Delta*t]),xlab=expression(N[t]),type='l',xlim=c(0,110), lwd=4,axes=F);box(lwd=2)#
+axis(1,at=c(0,100),labels=c(0,'K'),las=1)
+N<-DAllee(11,20,100,0,0.5)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='l',lwd=4,axes=F);box(lwd=2)#
+axis(2,at=c(0,100),labels=c(0,'K'),las=1)#
+#
+y<-(N[-1]-N[-length(N)])#
+plot(y~N[-length(N)],ylab=expression(Delta*N[Delta*t]),xlab=expression(N[t]),type='l',xlim=c(0,110), lwd=4,axes=F);box(lwd=2)#
+axis(1,at=c(0,100),labels=c(0,'K'),las=1)
+N<-DAllee(1,20,100,0,0.5)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='l',lwd=4,axes=F);box(lwd=2)#
+axis(2,at=c(0,100),labels=c(0,'K'),las=1)#
+#
+y<-(N[-1]-N[-length(N)])#
+plot(y~N[-length(N)],ylab=expression(Delta*N[Delta*t]),xlab=expression(N[t]),type='l',xlim=c(0,110), lwd=4,axes=F);box(lwd=2)#
+axis(1,at=c(0,100),labels=c(0,'K'),las=1)
+N<-DAllee(1,20,100,0.001,0.5)#
+Time<-1:(length(N))#
+plot(N~Time,xlab='Time',ylim=c(0,120),type='l',lwd=4,axes=F);box(lwd=2)#
+axis(2,at=c(0,100),labels=c(0,'K'),las=1)#
+#
+y<-(N[-1]-N[-length(N)])#
+plot(y~N[-length(N)],ylab=expression(Delta*N[Delta*t]),xlab=expression(N[t]),type='l',xlim=c(0,110), lwd=4,axes=F);box(lwd=2)#
+axis(1,at=c(0,100),labels=c(0,'K'),las=1)
+library(deSolve)#
+#
+# Then define the function for the continuous logistic#
+# Notice that this function has three inputs:  the starting population size'N0', #
+# the total time 'T', and a third input variable 'p' representing the two parameters #
+# of our equation: r and a.#
+#
+ClogisK<-function(t,y,p){#
+	N<-y[1]#
+	with(as.list(p),{#
+		dNdt<-r*N*(1-N/K)#
+		return(list(dNdt))#
+	})#
+}
+params<-c(r=0.1, K=100)#
+#
+# Then specify the starting abundance and the time over which we want to simulate dynamics:#
+N0<-c(N=1)#
+t<-1:100#
+#
+# Now run your simulation using the ode function of deSolve#
+out<-ode(y=N0,times=t,func=ClogisK,parms=params)#
+#
+# Convert this output to a data.frame to ease plotting and data extraction#
+out<-data.frame(out)#
+plot(out$time,out$N)
+library(deSolve)#
+#
+# Then define the function for the continuous logistic#
+# Notice that this function has three inputs:  the starting population size'N0', #
+# the total time 'T', and a third input variable 'p' representing the two parameters #
+# of our equation: r and a.#
+#
+ClogisK<-function(t,y,p){#
+	N<-y[1]#
+	with(as.list(p),{#
+		dNdt<-r*N*(1-N/K)*(N/A-1)#
+		return(list(dNdt))#
+	})#
+}#
+#
+# We therefore have to include both r and a in the params variable:#
+params<-c(r=0.1, K=100, A=10)#
+#
+# Then specify the starting abundance and the time over which we want to simulate dynamics:#
+N0<-c(N=1)#
+t<-1:100#
+#
+# Now run your simulation using the ode function of deSolve#
+out<-ode(y=N0,times=t,func=ClogisK,parms=params)#
+#
+# Convert this output to a data.frame to ease plotting and data extraction#
+out<-data.frame(out)#
+plot(out$time,out$N)#
+#
+# Plot the change in N between time t and t+1 as a function N(t) #
+# To do this we must exclude the last observed N#
+N<- out$N#
+dNdt<- N[-1]-N[-length(N)]#
+plot(dNdt~N[-length(N)])#
+#
+# Put these last two plots side-by-side#
+par(mfrow=c(1,2))#
+plot(out$time,out$N,type='l',lwd=4)#
+plot(dNdt~N[-length(N)],type='l',lwd=4,xlab='N')
+source("/Users/marknovak/Dropbox/Research/R-Codes/Sent2R.txt",echo=TRUE)

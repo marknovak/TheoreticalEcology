@@ -1,0 +1,106 @@
+\documentclass{article}
+
+
+\usepackage{setspace}
+\usepackage[text={6.5in,8.5in},centering]{geometry}
+\geometry{verbose,a4paper,tmargin=2.4cm,bmargin=2.4cm,lmargin=2.4cm,rmargin=2.4cm}
+\usepackage{graphicx,amsmath,cases,multirow,appendix}
+
+
+\linespread{1}
+
+\usepackage{graphicx}
+
+\usepackage{amsbsy}
+	\setlength\parindent{0.25in}
+	\setlength{\parskip}{2ex}
+\usepackage{lineno}
+\usepackage{enumitem} % to permit cross-section enumeration
+
+  %MAKE amsmath and lineno like each other
+\newcommand*\patchAmsMathEnvironmentForLineno[1]{
+  \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
+  \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
+  \renewenvironment{#1}
+     {\linenomath\csname old#1\endcsname}
+     {\csname oldend#1\endcsname\endlinenomath}}
+\newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{
+  \patchAmsMathEnvironmentForLineno{#1}
+  \patchAmsMathEnvironmentForLineno{#1*}}
+\AtBeginDocument{
+\patchBothAmsMathEnvironmentsForLineno{equation}
+\patchBothAmsMathEnvironmentsForLineno{align}
+\patchBothAmsMathEnvironmentsForLineno{flalign}
+\patchBothAmsMathEnvironmentsForLineno{alignat}
+\patchBothAmsMathEnvironmentsForLineno{gather}
+\patchBothAmsMathEnvironmentsForLineno{multline}
+}
+
+\newcommand{\comment}[1]{}
+
+
+\author{Mark Novak}
+\title{Indices of `interaction strength' when zeros are present - for Jon.}
+
+
+\begin{document}
+
+A correction and an answer regarding yesterday's lecture:
+
+In class I wrote down the following equation for the negative log-likelihood of the normal distribution:
+
+\begin{equation}
+\label{eqn:wrong}
+	-\ln \ell (\beta \mid Y) = \frac{n}{2} \ln (2 \pi \sigma^2)  + \frac{1}{2 \sigma^2}  SSE
+\end{equation}
+
+where I stated that:
+\begin{itemize}
+	\item $n$ is the number of data points
+	\item the variance $\sigma^2 = \frac{1}{n-1} \text{SSE}$
+	\item SSE =$ \sum_i^n (obs_i- pred_i)^2$
+	\item and, in the context of assuming only process-error,  $obs_i$ and $pred_i$ are the observed and predicted $ln \frac{N_{t+1}}{N_t}$ of each time-step.
+\end{itemize}
+First, a correction:  As Liz correctly pointed out, this makes little sense since the SSE's of eqn \ref{eqn:wrong} would cancel.  I checked back at my original notes and realized that, in trying to simply things when writing out my 2nd draft, I hadn't thought things through very well.  The second bullet point is incorrect.  The full correction is as follows (see Morris \& Doak, Chp. 4, eqn. 4.5):
+
+\begin{equation}
+	\label{eqn:right}
+	-\ln \ell (\beta \mid Y)=  \frac{n}{2} \ln (2 \pi \sigma_y^2)  + \frac{1}{2 \sigma_y^2}  \sum_i^n (obs_i- pred_i)^2
+\end{equation}
+The difference is that the variance $\sigma^2$ in the above equation is \emph{not} the variance or "average of the squared residuals" between the \emph{ observed and the predicted} as I indicated in class (2nd bullet point), but rather the \emph{variance of the observed growth rates ($y_i=\ln \frac{N_{t+1}}{N_t}$) themselves}! (which is why I have now used an explicit subscript $y$ for $\sigma_y^2$).  That is,
+\begin{equation}
+	\sigma_y^2  = \frac{1}{n-1} \sum_i^n (y_i - \bar{y})^2,
+\end{equation}
+where the $n-1$ is the small-sample correction (which is apparently not always used) and $\bar{y}$ is simply the mean of the log growth rates, 
+\begin{equation}
+	\bar{y}=\frac{1}{n}\sum_i^n y_i.
+\end{equation}
+
+
+
+Second, an answer:  Allie asked me whether the equal sign in eqn \ref{eqn:wrong} (and correspondingly eqn \ref{eqn:right}) was correct given that I had previously stated that the likelihood is only \emph{proportional} to the probability, as in
+
+\begin{equation}
+	\ell(\beta \mid Y) \propto P(Y  \mid \beta),
+\end{equation}
+instead of being \emph{equal} to it, as in
+\begin{equation}
+	\ell(\beta \mid Y)= P(Y  \mid \beta).
+\end{equation}
+It turns out that all these equations are in some ways correct!  There are two relevant distinctions:
+
+Distinction 1: $\ell(\beta \mid Y) \propto P(Y  \mid \beta)$ is correct for \emph{continuous} distributions while $\ell(\beta \mid Y)= P(Y  \mid \beta)$ is correct for \emph{discrete} distributions.  The reason is that, unlike for a discrete distribution, the probability of any specific value on a continuous distribution is zero!  (It's only over some interval of values that we can speak of a continuous distribution having some probability.)
+
+Distinction 2: However, the equality in eqn \ref{eqn:right} is still correct because its right hand side is technically not actually a \emph{probability distribution}, $P(Y \mid \beta)$, but rather a \emph{probability density function}, $f(Y \mid \beta)$.  These differ even though $\int f(Y \mid \beta) d\beta= \sum P(Y \mid \beta) = 1$ (i.e the total area under both equals 1).  In class  I was loosely (but technically incorrectly) using these two terms interchangeably. 
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

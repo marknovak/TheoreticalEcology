@@ -1,0 +1,266 @@
+\documentclass{article}
+\usepackage{setspace,tikz,wrapfig}
+\usepackage[text={6.5in,8.5in},centering]{geometry}
+\geometry{verbose,a4paper,tmargin=2.4cm,bmargin=2.4cm,lmargin=2.4cm,rmargin=2.4cm}
+\usepackage{graphicx,amsmath,cases,multirow,appendix,graphicx,xcolor}
+
+\setlength\parindent{0pt}
+
+\newcommand{\note}[1]{\colorbox{gray!30}{#1}}
+\newcommand{\ind}{\-\hspace{1cm}}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace} 
+
+\renewcommand\floatpagefraction{.9}
+\renewcommand\topfraction{.9}
+\renewcommand\bottomfraction{.9}           
+
+\begin{document}
+
+\noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 11 -- 2-D Stability Analysis -- Competition Part 2}
+\rule[0.5ex]{\linewidth}{1pt}
+\textbf{Today:} 
+\ind Go over graphical analysis LV-competition \\
+\ind \ind ...then proceed to do formal stability analysis of equilibria\\
+\textbf{Next class} move on to Consumer-Resource \& nonlinear intxns.
+
+\rule[0.5ex]{\linewidth}{1pt}
+
+2-spp. competition Main questions:\\
+\ind When can both spp. coexist?\\
+\ind When can sp 1 out-compete sp 2?\\
+\ind When can sp 1 invade sp 2?
+
+\textbf{Naive simulations}\\
+\ind \note{R-demonstration - (Vector field section.)}\\
+\ind \note{Walk through first set of parameter values. ``Naive simulations''}\\
+\ind \ind \note{Then show full table before showing results with R code for other parameters.}\\
+
+\ind With $r_1 = r_2 = K_1 = K_2 = 1$ and $N_1(0) = N_2(0)=0.01$
+
+\begin{table*}[h]
+\centering
+\begin{tabular}{cccc}
+$\alpha_{21}$ & $\alpha_{12}$ & Outcome \\ 
+\hline
+0.5 & 0.7 & coexist & \\
+1.5 & 0.5 & sp1 & \\
+0.5 & 1.5 & sp2 & $N_1(0)=N_2(0)$\\
+1.5 & 1.7 & sp2 & \\
+\hline
+1.5 & 1.7 & sp1 & $N_1(0)>N_2(0)$\\
+ \hline
+\end{tabular} 
+\end{table*}
+\ind \ind \ind \ind \ind \ind $\Rightarrow$ Priority effect\\
+\ind \ind \ind \ind \ind \ind  $\Rightarrow$ Alternative stable states
+
+\vspace{0.5cm}
+
+\textbf{Graphical Analysis}\\
+Earlier we showed that from $\frac{dN_i}{dt}=0$ that:
+\begin{align*}
+	N_i^* = & K_i - \alpha_{ij} N_j \quad \text{and}\quad N_j^* = K_j - \alpha_{ji} N_i\\
+	\Rightarrow N_j = & \frac{K_j-N_i^*}{\alpha_{ij}}\\
+	\text{Thus isocline interesects x-axis at}\\
+  N_j = & \frac{K_j-0}{\alpha_{ij}}=\frac{K_j}{\alpha_{ij}}
+	\end{align*}
+
+Same goes for 2nd species.
+\begin{center}
+\includegraphics[width=10cm]{figs/LV_comp_isoclines.pdf}
+\end{center}
+\note{Work through all other cases on board}\\
+\note{R-code: Work through other parameter values}
+
+\pagebreak
+
+\textbf{Inferences/Conclusions:}
+
+\begin{table*}[h]
+\centering
+\begin{tabular}{ll}
+Coexistence: & intra $>$ inter for both species  \\
+& \ind \ind (i.e. $\dfrac{K_j}{\alpha_{jj}}=\dfrac{K_j}{1} < \dfrac{K_j}{\alpha_{ji}} \Rightarrow \alpha_{jj}>\alpha_{ji}$)\\
+Sp $i$ dominance: & intra $>$ inter for $i$ \& intra $<$ inter for $j$\\
+Priority effect: & intra $<$ inter for both\\
+& \ind \ind (i.e. $\dfrac{K_j}{\alpha_{jj}}=\dfrac{K_j}{1} > \dfrac{K_j}{\alpha_{ji}} \Rightarrow \alpha_{jj}<\alpha_{ji}$)
+\end{tabular} 
+\end{table*}
+
+\rule[0.5ex]{\linewidth}{1pt}
+
+
+\textbf{Evaluate stability of equilibria} \\
+Just as for 1 species model:\\
+\ind Step \#1: Solve for $N^*$ steady state equilibria\\
+\ind Step \#2: Find $f'$ and evaluate at $N^*$
+
+Let's use non-dimensionalized version of the LV-competition model!\\
+Let:
+\begin{align*}
+	u_1 = \frac{N_1}{K_1} \quad & \quad u_2 = \frac{N_2}{K_2} \quad  \quad \quad \quad \tau = r_1 t\\
+	\rho = \frac{r_2}{r_1} \quad & \quad a_{12}=\alpha_{12}\frac{K_2}{K_1} \quad \quad a_{21}=\alpha_{21}\frac{K_1}{K_2} 
+\end{align*}
+\ind $u_i$ - \% of carrying capacity\\
+\ind $\tau$ - `growth time'\\
+\ind $\rho$ - relative growth rates\\
+\ind $a_{ij}$ - relative resource requirements\\
+
+
+New model becomes:
+\begin{equation*}
+	\frac{d u_1}{d\tau}=u_1(1-u_1 - a_{12}u_2) \quad \quad \frac{d u_2}{d\tau}=\rho u_2(1-u_2 - a_{21}u_1)
+\end{equation*}
+
+\note{$\Rightarrow$ Mathematica \emph{`Class10-LVcompetition-nonDim'}}
+\vspace{0.5cm}
+
+Isoclines:
+\begin{equation*}
+	u_1^*=\frac{1-u_2}{a_{21}} \quad \quad u_2^*=\frac{1-u_1}{a_{12}}
+\end{equation*}
+
+\
+\textbf{Step \#1}: Solve for $u^*$ steady state equilibria
+\begin{align*}
+(u_1^*,u_2^*)& =
+\begin{cases}
+	 0 , & 0  \\
+	0, & 1  \\
+	1, & 0\\
+	\frac{1-a_{12}}{1- a_{12} a_{21} }, & \frac{1-a_{21}}{1- a_{12} a_{21} }
+\end{cases}
+\end{align*}
+
+
+\textbf{Step \#2:} Evaluate $f'(N^*)$ \\
+\ind \ind \ind \ind ...but now in two dimensions:  $f_1'(N_1^*,N_2^*)$ and $f_2'(N_1^*,N_2^*)$\\
+
+$\Rightarrow$ \textbf{Stability analysis in two dimensions} $\Leftarrow$\\
+Perturbation to both $u_1^*$ and $u_2^*$ by amounts $x$ and $y$.
+\begin{align*}
+	u_1 & = u_1^* + x \quad \quad u_2  = u_2^* + y\\
+	\Rightarrow \quad x & =u_1^* - u_1 \quad \quad y  = u_2^* - u_2
+\end{align*}
+
+\begin{center}
+	\includegraphics[width=4cm]{figs/2Dperturb.pdf}
+\end{center}
+
+Thus:
+\begin{align*}
+	&\frac{du_1}{d\tau}=\frac{d (u_1^* + x)}{d\tau}=f_1(u_1^*+x,u_2^*+y)\\
+	\text{ and} &\\
+	&\frac{du_2}{d\tau}=\frac{d (u_2^* + y)}{d\tau}=f_2(u_1^*+x,u_2^*+y)	
+\end{align*}
+Because $u_1^*$ and $u_2^*$ are constants w.r.t $\tau$...
+\begin{align*}
+	&\frac{dx}{d\tau} = \frac{du_1}{d\tau}\\
+	\text{and}&\\
+	&\frac{dy}{d\tau}= \frac{du_2}{d\tau}
+\end{align*}
+
+Recall that we approximated response of single-sp. perturbation using a Taylor expansion:\\
+\begin{equation*}
+	f(N^*+n_t)\approx f(N^*)+f'(N^*) \cdot n_t + h.o.t.
+\end{equation*}
+
+Do same thing in two dimensions (note use of \emph{partial} derivatives):\\
+
+To simplify syntax, let's denote $f_i(u_1^*,u_2^*) = f_i$\\
+\ind (i.e. $f_i$ is implicitly evaluated at steady state abundances)
+\begin{align*}
+	f_1(u_1^* + x, u_2^* + y) = & f_1(u_1^*,u_2^*) + \frac{\partial f_1}{1! \phantom{.}\partial u_1} \cdot x + \frac{\partial^2 f_1}{2! \phantom{.} \partial u_1^2} \cdot x^2 + ...\\
+	&\quad \quad \quad \quad ...  + \frac{\partial f_1}{1!\phantom{.} \partial u_2} \cdot y + \frac{\partial^2 f_1}{2!\phantom{.} \partial u_2^2} \cdot y^2 + h.o.t.\\
+	 \approx & f_1(u_1^*, u_2^*) + \left. \frac{\partial f_1}{\partial u_1}\right|_{u_1^*, u_2^*} \cdot x + \left. \frac{\partial f_1}{\partial u_2}\right|_{u_1^*, u_2^*} \cdot y
+\end{align*}
+Since at steady-state (by definition)..
+\begin{equation*}
+	f_1(u_1^*,u_2^*)=0
+\end{equation*}
+...we can simplify further to:
+\begin{equation*}
+	f_1(u_1^* + x, u_2^* + y)\approx \underbrace{\left. \frac{\partial f_1}{\partial u_1}\right|_{u_1^*, u_2^*}}_{A_{11}} \cdot x + \underbrace{\left. \frac{\partial f_1}{\partial u_2}\right|_{u_1^*, u_2^*}}_{A_{12}} \cdot y
+\end{equation*}
+
+Similarly
+\begin{equation*}
+	f_2(u_1^* + x, u_2^* + y)\approx \underbrace{\left. \frac{\partial f_2}{\partial u_1}\right|_{u_1^*, u_2^*}}_{A_{21}} \cdot x + \underbrace{\left. \frac{\partial f_2}{\partial u_2}\right|_{u_1^*, u_2^*}}_{A_{22}} \cdot y
+\end{equation*}
+
+Organize these elements into a \emph{\textbf{Jacobian matrix}}:
+\begin{equation*}
+\mathbf{A}=
+	\begin{bmatrix}
+	A_{11} & A_{12}\\
+	A_{21} & A_{22}
+	\end{bmatrix}.
+\end{equation*}
+
+Jacobian contains the partial derivatives of each $i^{th}$ variable's function $f_i$ w.r.t $j$.\\
+
+\textbf{A} is referred to as the \emph{\textbf{Community matrix}} when $f_i$'s reflect population growth rates (i.e. $f_i=\tfrac{dN_i}{dt}$).\\
+
+\emph{Interpretation of elements:}\\
+\ind How a small perturbation to $j$ affects the population growth rate of $i$\\
+\ind \ind \ind \ind \ind \ind  \ind \ind \ind \emph{with other species held constant}\\
+
+\rule[0.5ex]{\linewidth}{1pt}
+
+\pagebreak
+
+The Jacobian's eigenvalues provide insight into the stability of the steady state(s).\\
+We will return to this in more detail next time.\\
+\ind For now note that eigenvalues can have both `Real' and `Imaginary' parts...
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+\textbf{Eigenvalues ($\lambda_i$)} & \textbf{Interpretation} \\ 
+\hline
+ All parts $< 0$ & Stable point attractor \\ 
+ Some real parts $< 0$ & Saddle equilibrium (repellor-attractor) \\ 
+ No real parts $<0$ & Unstable point repellor  \\ 
+ Real parts $=0$ & Neutral stability \\ 
+ \hline
+ No imaginary parts & No oscillations \\ 
+ With imaginary parts & Oscillations \\ 
+ \hline
+\end{tabular} 
+\end{center}
+
+\rule[0.5ex]{\linewidth}{1pt}
+
+\textbf{Evaluate eigenvalues of LV-competition equilibria}\\
+\ind \note{$\Rightarrow$ Mathematica \emph{`Class11-LVcompetition-nonDim'}}\\
+
+When $\alpha_{ii}>\alpha_{ij}$ \\
+\ind (intra- is stronger than inter-specific competition)...
+\begin{center}
+	\includegraphics[width=6cm]{figs/LVcomp-Case1.pdf}
+\end{center}
+\ind \circled{1} Both $\lambda's <0 \Rightarrow$ Stable coexistence\\
+\ind \circled{2} Both $\lambda's > 0 \Rightarrow$ Unstable\\
+\ind \circled{3} $\lambda_1>0$ \& $\lambda_2 <0 \Rightarrow$ unstable (attractor-repellor)\\
+\ind \circled{4} $\lambda_1<0$ \& $\lambda_2 >0 \Rightarrow$ unstable (attractor-repellor)
+\ind \ind \circled{3} and \circled{4} are mutually invasible\\
+
+When $\alpha_{ii}>\alpha_{ij}$  \& $\alpha_{jj}<\alpha_{ji}$\\
+\ind (inter- is stronger than intra-specific competition for one species but not the other)...
+\begin{center}
+	\includegraphics[width=6cm]{figs/LVcomp-Case2.pdf}
+\end{center}
+\ind \circled{1} $\lambda_1<0$ \& $\lambda_2 > 0 \Rightarrow$ unstable (attractor-repellor)\\
+\ind \circled{2} Both $\lambda's > 0 \Rightarrow$ Unstable\\
+\ind \circled{3} Both $\lambda's < 0 \Rightarrow$ Stable\\
+\ind \ind ...could do for third and fourth scenarios too.
+
+\rule[0.5ex]{\linewidth}{1pt}
+\rule[0.5ex]{\linewidth}{1pt}
+
+
+\end{document}

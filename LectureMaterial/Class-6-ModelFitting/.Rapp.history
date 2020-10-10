@@ -1,0 +1,299 @@
+S.g(100,params)
+S.g(10,params)
+siler.hx(10)
+siler.Sx.Curve(10)
+m.g(11,params)
+P
+?m.g
+m.g
+idth
+modm[idm,1]
+model
+S.g
+m.g(10,P)
+modm
+idm=2
+modm[idm,1]*modm[idm,2]
+idm
+idm=3
+S.g(10,P)
+library(vegan)
+?dist
+x <- matrix(rnorm(100), nrow=5)#
+dist(x)#
+dist(x, diag = TRUE)#
+dist(x, upper = TRUE)#
+m <- as.matrix(dist(x))#
+d <- as.dist(m)
+dist(d,diag=TRUE)
+D
+?as.dist
+print(d)
+library(reshape)
+library(reshape2)
+melt(d)
+melt(as.matrix(d))
+d
+diag(y)=1
+upper.tri(y)<-NA
+??upper.tri
+melth(y)
+subset(y,is.na(y)==FALSE)
+subset(y,value!=NA)
+y=data.frame(y)
+melt(y)
+y<-as.matrix(d)
+y[upper.tri(y)]<-NA
+yy<-melt(y)
+as.data.frame(yy)
+yy<-data.frame(yy)
+yy
+subset(yy,value!=NA)
+subset(yy,is.na(value)==F)
+M(1)
+model='exp'
+H(2)
+?pext
+a=1
+pexp(a,l)
+pexp(a,0.2)
+pexp(a,0.3)
+pexp(a,1)
+pexp(1,l)
+pexp(2,l)
+pexp(3,l)
+depx(1,1)
+dexp(1,1)
+dexp(1,2)
+H(1)
+Bmx
+Bones
+apply(Bns[,1],A)
+apply(Bns[,1],1,A)
+Bns[1,]
+Bns[,1]
+M(Bns[1,])
+S
+apply(Bns[1,],1,A)
+tapply(Bns[1,],1,A)
+x<-rep(0,4)
+tapply(Bns,1,A)
+A(c(1,2,3)
+A(Bns[,1])
+Bns[,1]<-1:20
+Bns[,2]<-0
+a=NA
+H(NA)
+Bns[,1]<-1
+x<-c(1,0)
+x<-c(NA,NA)
+Bns[1,1]<-NA
+Bns[2,1]<-NA
+Bns[,2]<-2
+Bns[,2]<-1
+dim(Bns
+MB
+MB(0)
+?tapply
+A
+T=4
+t
+t=1
+Bns
+a=2
+W<-function(x){k/l*(l*x)^(k-1)}
+W<-function(x){1/(k/l*(l*x)^(k-1))}
+l=0.4
+W<-function(x){(l/k)*(l*x)^(k-1)}
+l=2
+curve(W,0,1)
+W<-function(x){(k/l)*(l*x)^(k-1)}
+W<-function(x){(l/k)*(a/l)^(k-1)}
+W(3)
+W(5)
+a
+W(1)
+W
+W<-function(x){(k/l)*(x/l)^(k-1)}
+curve(W,0,2)
+?pweibull
+curve(pweib,0,2)
+curve(pweib,0,0.54)
+curve(pweib,0,10)
+curve(pweib,0,1)
+pexp<-function(x){pexp(x,l)}
+curve(pexp,0,1,add=T)
+?pexp
+pexpo<-function(x){pexp(x,l)}
+curve(pexpo,0,1,add=T)
+pexp(1,1)
+pexp(1,rate=l)
+pweib<-function(x){pweibull(x,k,l)}
+curve(pex,0,1)
+curve(pex,0,2)
+curve(pex,0,4)
+k=1
+l=1
+curve(pweib,0,4)
+pweib<-function(x){dweibull(x,k,l)}
+curve(pweib,0,4,add=TRUE,col='blue')
+k
+?rexp
+pex<-function(x){qexp(x)}
+pex<-function(x){pexp(x)}
+curve(pex,0,4,col='red')
+pweib<-function(x){(k*l)*(x*l)^(k-1)}
+l
+l=0.5
+k=2
+curve(pweib,0,4,col='red')
+x <- seq(-10, 10, length.out = 50)  #
+y <- x  #
+rotsinc <- function(x,y) {#
+    sinc <- function(x) { y <- sin(x)/x ; y[is.na(y)] <- 1; y }  #
+    10 * sinc( sqrt(x^2+y^2) )  #
+}#
+#
+z <- outer(x, y, rotsinc)  #
+persp(x, y, z)
+h2d$counts
+dim(h2d$x)
+h2d
+h2d$x
+as.vector(h2d$x))
+as.vector(h2d$x)
+x<-runif(10
+)
+length(h2d$x)
+h2d$y
+rotsinc
+dim(h2d$counts)
+z<-as.matrix(h2d$counts)
+z
+dim(z)
+x<-1:20
+y<-1:20
+x<-runif(100,0,300)
+n=10;x<-as.matrix(runif(n^2,0,300),nrow=n)
+n=10;x<-as.matrix(runif(n^2,0,300),ncol=n)
+n
+n=10;x<-matrix(runif(n^2,0,300),ncol=n)
+apply(x,2,sort)
+n=10;x<-apply(matrix(runif(n^2,0,300),ncol=n),1,sort)
+n=10;x<-round(apply(matrix(runif(n^2,0,300),ncol=n),1,sort))
+write.csv('RandomNumbers.csv',row.names=FALSE)
+n=20;x<-round(apply(matrix(runif(n^2,0,300),ncol=n),1,sort))
+x
+write.csv(x,'RandomNumbers.csv',row.names=FALSE)
+library(devtools)#
+install_github("earlywarning", "cboettig")
+beta_m1
+rfit
+tfit
+?lsoda
+source("/Users/marknovak/Dropbox/Research/Projects/NCEAS-kelp_climate_2013/datasets/Estes_NPRB/temporal_processing_Estes_NPRB.R",echo=TRUE)
+x<-runif(100,0,1)
+y<-runif(100,0,1)
+plot(x,y)
+plot(x,y,x)
+plot(x/y,x)
+plot(x,x/y)
+plot(y/x,x)
+y<-runif(100,0,100)
+x<-runif(100,0,100)
+plot(x,y/x)
+?fileChoose
+?filechoose
+?FileChooser
+?fileChooser
+?file.choose
+lambda
+abline(fit)
+head(dat)
+log_lam
+length(log_lam)
+T
+N_obs
+length(N_obs)
+log_L_obs
+b
+print(b)
+pi
+loglam
+y
+plot(y)
+SSE(x,p,y)
+Var(x,p,y)
+?optim
+FIT
+summary(fit)
+fit.AIC
+p
+Logistic(x,p)
+plot(Logistic(x,p),x)
+plot(x,Logistic(x,p))
+fit.sigma
+fit.sigma^2
+fit.NLL
+fit.nLL
+fit.V
+source("/Users/marknovak/Dropbox/Research/R-Codes/Sent2R.txt",echo=TRUE)
+rm(list=ls()) # clears workspace#
+par(mfrow=c(1,4))#
+#
+####################################################################
+# Observation Error only#
+#########################
+# Load data for South African fur seals ('safseal1.csv') or Grizzlies ('grizzlies.csv')#
+dat<-read.csv(file.choose())#
+# or use: dat<-read.csv('~/Desktop/safseal1.csv')
+dat
+Year<-dat[,1]; Nobs<-dat[,2];#
+T = length(Year);
+plot(Nobs~Year)#
+plot(log(Nobs)~Year)
+fit<-lm(log(Nobs)~Year)#
+abline(fit)
+# lambda= e^r, thus corresponds to the exponentiatd 'b' coefficient of 'y=a+b*x'#
+r_obs<-coef(fit)[2]
+fit
+coef(fit)
+r_obs
+resids<-resid(fit)
+v_est = sum(resids^2)/(T-1) # c
+sd_obs = sqrt(v_est)
+r_obs#
+sd_obs
+log_lambda_obs<-log(Nobs[-1]/Nobs[-T])
+plot(Nobs[-T],log_lambda_obs,ylab='log(Nt+1/Nt)',xlab='N')
+fit1<-lm(log_lambda_obs~Nobs[-T])#
+summary(fit1)
+r_proc<-mean(log_lambda_obs)
+r_proc<-mean(log_lambda_obs)#
+# ...or with zero-slope model#
+fit2<-lm(log_lambda_obs~1)#
+summary(fit2)
+r_proc
+v_proc<-var(log_lambda_obs)
+sd_proc<-sqrt(v_proc)
+r_obs; r_proc#
+sd_obs; sd_proc
+library(sfsmisc) # for eaxis function - log-scale tick-marks
+reps<-100#
+FutureTime<-100 # Number of time-steps into future#
+N<-array(NA,dim=c(reps,FutureTime+1))#
+N[,1]<-Nobs[T] # Starting population size is last observed population size#
+#
+for (i in 1:reps){#
+    for (t in 1:FutureTime){#
+        N[i,t+1]<- N[i,t]*exp(r_proc+rnorm(1,0,sd_proc))#
+}}#
+#
+quartz()#
+plot(Nobs~Year,xlim=c(min(Year),max(Year)+FutureTime), ylim=c(min(Nobs),max(N)),type='l',log='y',axes=FALSE)#
+#
+xt<-seq(max(Year)+1,max(Year)+(t+1),1)#
+axis(1); axis(2); box(lwd=1);#
+for (i in 1:reps){#
+    lines(xt,N[i,])#
+}

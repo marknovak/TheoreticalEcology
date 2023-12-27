@@ -1,0 +1,10 @@
+The following won't succeed, so anticipate running it through own laptop.
+
+https://oregonstate.teamdynamix.com/TDClient/1935/Portal/Requests/ServiceDet?ID=51017
+
+
+Hello,
+I am writing to request the installation of Mathematica (https://www.wolfram.com/mathematica/) on the computer of Bexell 416 for my Fall course (IB 592, Theoretical Ecology).  I am aware that this software is accessible via Citrix, but this interface has never proven reliable and fast enough for my teaching needs for this course.  Someone from Cosine has thus always kindly installed it for me in years past (along with R; in this case for the simple convenience).
+Thanks in advance.
+-mark
+

@@ -25,9 +25,9 @@
 \noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 13 -- Eigenvalues}
 
 \textbf{Concepts:}\\
-\ind - n-spp. stability\\
-\ind - eigenvalues \& complex numbers\\
+\ind - Eigenvalues\\
 \ind - Matrix determinant
+\ind - Complex numbers\\
 
 \rule[0.5ex]{\linewidth}{1pt}
 
@@ -96,7 +96,7 @@ Matrix multiplication:
 \end{equation*}
 
 \note{In \emph{\textbf{R}} use \textbf{A \% * \% B} for matrix multiplication (i.e. dot product).}\\
-\ind \note{The default is element-wise multiplication (Hadmard product).}
+\ind \note{The default is element-wise multiplication (Hadamard product).}
 
 \rule[0.5ex]{\linewidth}{1pt}
 
@@ -117,9 +117,10 @@ Represent dynamics of perturbation is same way.\\
 	\vec{n}_t = \vec{n}_0 \; e^{\mathbf{A}t}
 \end{equation*}
 
-But $e^\mathbf{A}$ is $e^{matrix}$ which is not possible!\\
+But $e^\mathbf{A}$ is $e^{matrix}$ for which usual definition of exponential function doesn't work!\\
+How do we make it work? \\
 
-But what if we could replace matrix $\mathbf{A}$ with some constant -- call it $\lambda$.\\
+What if we could replace matrix $\mathbf{A}$ with some constants -- call it/them $\lambda$.\\
 That would require that:
 \begin{equation*}
 	\boxed{\mathbf{A} \vec{w} = \lambda \vec{w}}
@@ -127,7 +128,7 @@ That would require that:
 Vector $\vec{w}$ the \textbf{right eigenvector} of $\mathbf{A}$.\\
 \ind $\vec{w}$ is a column vector.\\
 
-
+\rule[0.5ex]{\linewidth}{1pt}
 \textbf{Side-note} (we won't actually use this fact)\\
 \ind The \textbf{left eigenvector} comes from:
 \begin{equation*}
@@ -139,7 +140,7 @@ Vector $\vec{w}$ the \textbf{right eigenvector} of $\mathbf{A}$.\\
 \pagebreak
 
 \textbf{What is an eigenvalue?}\\
-Can think of any square matrix $A$ and its associated eigenvalues $\lambda$ as equivalent transformation operations,\\
+Can think of any square matrix $\mathbf{A}$ and its associated eigenvalues $\lambda$ as equivalent transformation operations,\\
 \ind ...like a multiplication by a `slope' or `direction'.\\
 
 For example,  if we let $\mathbf{A}  = \begin{bmatrix} a_1 & a_2 \\ a_3 & a_4 \end{bmatrix}$ and $\vec{w} = \begin{bmatrix}b \\ c \end{bmatrix}$.\\
@@ -254,8 +255,7 @@ The two solutions to $\lambda$ are called a \textbf{complex conjugate pair}, or 
 \textbf{Compare to single-sp. model}\\
 For 1-sp. model we used the sign of the slope $\frac{d \; f(N)}{dN}$ to infer stability:
 \begin{equation*}
-	\frac{d \; f(N)}{dN} < 0 \quad \Rightarrow \quad \text{stable} \qquad \qquad \text{vs.}\qquad \qquad
-	\frac{d \; f(N)}{dN} > 0 \quad \Rightarrow \quad \text{unstable}
+	\frac{d \; f(N)}{dN} < 0 \quad \Rightarrow \quad \text{stable}
 \end{equation*}
 
 Now we're saying that it's the eigenvalues of $\mathbf{A}$ that matter, not the slopes themselves.\\
@@ -280,8 +280,8 @@ But how do we take the $\sqrt{\phantom{x}}$ of a negative number?\\
 	\boxed{\text{Define }i^2 = -1}
 \end{equation*}
 \begin{align*}
-	\sqrt{-\#} \quad = \quad \sqrt{-1 \cdot \#} \quad = \quad \sqrt{i^2\#} \quad = \quad i \sqrt{\#}\\
-	\text{e.g.,} \quad	\sqrt{-4} \quad = \quad \sqrt{-1 \cdot 4} \quad = \quad \sqrt{i^2 4} \quad = \quad i \sqrt{4} \quad = \quad 2i
+	\sqrt{-\#} \quad = \quad \sqrt{-1 \cdot \#} \quad = \quad \sqrt{i^2\#} \quad = \quad \sqrt{i^2} \sqrt{\#} = \quad i \sqrt{\#}\\
+	\text{e.g.,} \quad	\sqrt{-4} \quad = \quad \sqrt{-1 \cdot 4} \quad = \quad \sqrt{i^2 4} \quad = \quad i \sqrt{4} \quad = \quad i2
 \end{align*}
 \begin{equation*}
 	\lambda = \tfrac{1}{2}\text{A}_1 \pm \tfrac{1}{2}\sqrt{(-\text{A}_1)^2 - 4\text{A}_2} \; i
@@ -297,11 +297,14 @@ There is nothing `imaginary' about imaginary numbers!  They're as `real' as nega
 
 \emph{In order to solve... we invented...}
 \begin{align*}
-	x-5 = 0 \qquad &\Rightarrow \qquad \text{Integers (Real numbers)}\\
-	x+5 = 0 \qquad &\Rightarrow \qquad \text{Negative integers (Real numbers)}\\
-	2x = 1 \qquad &\Rightarrow \qquad \text{Rational numbers (fractions, quotients of integers)}\\
-	x^2 = 2 \qquad &\Rightarrow \qquad \text{Irrational numbers (can't be expressed as fractions, e.g., }\sqrt{2}, \pi, e)\\
-	x^2= -1 \qquad &\Rightarrow \qquad \text{Imaginary numbers.}
+	&\begin{rcases}
+	x-5 = 0 \qquad &\Rightarrow \qquad \text{Integers}\\
+	x+5 = 0 \qquad &\Rightarrow \qquad \text{Negative integers}\\
+	\end{rcases}
+	\quad\text{(Real numbers)}\\
+	&2x = 1 \qquad \Rightarrow \qquad \text{Rational numbers (fractions, quotients of integers)}\\
+	&x^2 = 2 \qquad \Rightarrow \qquad \text{Irrational numbers (can't be expressed as fractions, e.g., }\sqrt{2}, \pi, e)\\
+	&x^2= -1 \qquad \Rightarrow \qquad \text{Imaginary numbers.}
 \end{align*}
 Think about imaginary numbers as representing a different number dimension:
  \begin{center}
@@ -322,8 +325,7 @@ With a complex part:
 
 From the theory of complex numbers:
 \begin{align*}
-	e^{i \Theta} &= \cos \Theta + i \sin \Theta \\ 
-	e^{-i \Theta} &= \cos \Theta - i \sin \Theta
+	e^{i \Theta} &= \cos \Theta + i \sin \Theta
 \end{align*}
 Thinking  of $bt$ as $\Theta$ gives:
 \begin{equation*}
@@ -342,6 +344,10 @@ Therefore, $a$ controls stability
 \end{align*}
 And $b$ controls the \emph{frequency} of the oscillations.
 
+ \rule[0.5ex]{\linewidth}{1pt}
+\textbf{n-spp. stability}\\
+ Note that we can determine the eigenvalues of an arbitrary-sized square matrix (not just 2-by-2).\\
+ We can therefore use eigenvalues to evaluate the local stability of any system of equations for any number of interacting species!
  
 \rule[0.5ex]{\linewidth}{1pt}
 \rule[0.5ex]{\linewidth}{1pt}

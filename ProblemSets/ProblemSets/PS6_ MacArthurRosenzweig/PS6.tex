@@ -1,0 +1,54 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref} % enable links within pdf
+\hypersetup{colorlinks = true, linkcolor = black, urlcolor = blue}
+
+\setcounter{secnumdepth}{0}  % don't number sections (stars not needed)
+
+\title{\textbf{Problem Set 6}\\Extensions to Rosenzweig-MacArthur Model\vspace{-3em}}
+\date{}
+\author{}
+
+\begin{document}
+	\maketitle
+	
+	\section{Part A}
+	
+	In class we studied the classic Rosenzweig-MacArthur model of a consumer-resource interaction,
+	\begin{align}
+		\frac{dR}{dt} & = b R (1- \alpha R) - \frac{ a R C}{1 + a h R} \\
+		\frac{dC}{dt} & = \frac{e a R C}{1 + a h R} - d C
+	\end{align}
+	where the resource $R$ has intrinsic birth rate $b$, and self-limitation rate $\alpha$ (i.e.~it experiences logistic-growth in the absence of predation), and the consumer $C$ feeds with a type II functional response with attack rate $a$ and handling time $h$, converts eaten resources into consumers with efficiency $e$, and dies at a density-independent rate of $d$.
+	
+	\begin{enumerate}
+	\item Use \textit{Mathematica} to determine the zero-growth isoclines of this classic Rosenzweig-MacArthur model.
+	
+	\item Now switch to \texttt{R} and plot these isoclines (using the \texttt{curve()} function) on phase portraits for the following two cases, choosing parameter values accordingly:
+		\begin{enumerate}
+		\item Dynamics converge to a point equilibrium
+		\item Dynamics converge to a stable limit cycle
+		\end{enumerate}
+	Note that after plotting the isocline of species 2 as a function of species 1, you will have to rearrange the equation for the isocline of species 1 in order to add it on the same plot.
+	
+	\item Using an ODE solver (package \textit{deSolve}), simulate the dynamics of the model and overlay them on your phase portraits.  
+	Overlay the isocline plots and dynamics on vector-fields by first using the \texttt{plotVectorField()} function of the \textit{VectorField.R} script (that is posted on our class website).
+	
+	\end{enumerate}
+	
+	\section{Part B}
+	The type III functional response, $f(R) = \frac{a R^\theta}{1 + a h R^\theta}$, is often utilized as a means of describing a ``switching'' consumer (i.e.~a consumer that switches to a different, un-modeled alternative resources when the abundance of the focal resource is low).  	
+	Extend the classic Rosenzweig-MacArthur model to include such a type III response (assume $\theta = 2$) and determine and plot its isoclines on a phase portrait.
+	
+	Now do the same after extending the classic Rosenzweig-MacArthur model to include either 
+	\begin{itemize} 
+		\item a physical refuge from predation for the resources in which a fixed number of resources can avoid the consumer, or 
+		\item a density-independent immigration term for the resources population
+	\end{itemize}
+	to show that one obtains a similar shaped resources-isocline in all three cases.  Describe the mechanism that is common to all three extensions that leads to this similarity.
+		
+\end{document}

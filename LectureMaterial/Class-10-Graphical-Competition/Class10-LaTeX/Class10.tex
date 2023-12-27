@@ -110,24 +110,27 @@ A: Solve for one as function of the other:\\
 	r_i N_i - \frac{r_i N_i N_i}{K_i} - \frac{ r_i \alpha_{ij} N_i N_j}{K_i} & =0\\
 	r_i N_i K_i & = r_i N_i N_i + r_i \alpha_{ij} N_i N_j   \quad \quad \text{(move and  multiply by }K_i)\\
 	K_i & = N_i + \alpha_{ij}N_j  \quad \quad (\text{divide by } r_i \text{  and } N_i)\\[1em]
-	N_i^* & = K_i - \alpha_{ij} N_j  \quad \text{ and similarly }	N_j^* = K_j - \alpha_{ji} N_i\\[1em]
-	\text{ or, rearranging differently} \\
-	K_i - N_i^* & = \alpha_{ij} N_j\\
-	N_j & = \frac{K_i - N_i^*}{\alpha_{ij}} \quad \text{ and } N_i  = \frac{K_j - N_j^*}{\alpha_{ji}}
+	N_i^* & = K_i - \alpha_{ij} N_j  \quad \text{ and similarly }	N_j^* = K_j - \alpha_{ji} N_i
+%	\\
+%	[1em]
+%	\text{ or, rearranging differently} \\
+%	K_i - N_i^* & = \alpha_{ij} N_j\\
+%	N_j & = \frac{K_i - N_i^*}{\alpha_{ij}} \quad \text{ and } N_i  = \frac{K_j - N_j^*}{\alpha_{ji}}
  \end{align*}
  
 Note intuitive meaning of $\alpha_{ij}$!\\
 Note also that we can't solve for one species without knowing the other.\\
 \ind $\Rightarrow$ need to solve for $N_i^*$ and $N_j^*$ jointly.\\
-\ind Plug solution to $N_j^*$ into solution for $N_i^*$ and vice versa.\\
-
-Solution:\\
-\begin{equation*}
-	N_i^* = \frac{K_j \alpha_{ij} - K_i}{\alpha_{ij} \alpha_{ji}-1} = \frac{K_i - K_j \alpha_{ij}}{1-\alpha_{ij}\alpha_{ji}}
-\end{equation*}
-\begin{center}
-	...where 2nd equation is as given in Case.  Multiply top and bottom by $-1$.
-\end{center}
+\ind Plug solution of $N_j^*$ into solution for $N_i^*$ and vice versa.
+\begin{align*}
+	N_i^*  & = K_i - \alpha_{ij} N_j^* \\
+				& = K_i - \alpha_{ij} \left ( K_j  - \alpha_{ji} N_i^* \right )\\
+				& = K_i - \alpha_{ij} K_j + \alpha_{ij}\alpha_{ji} N_i^* \\
+	N_i^* + \alpha_{ij} K_j - \alpha_{ij} \alpha_{ji} N_i^* & = K_i \\
+	N_i^* - \alpha_{ij} \alpha_{ji} N_i^* & = K_i - \alpha_{ij} K_j \\
+	N_i^* \left (1 - \alpha_{ij} \alpha_{ji} \right)  & = K_i - \alpha_{ij} K_j \\
+	N_i^* & = \frac{ K_i - \alpha_{ij} K_j  } {1-\alpha_{ij} \alpha_{ji} }
+\end{align*}
 
 \rule[0.5ex]{\linewidth}{1pt}
 

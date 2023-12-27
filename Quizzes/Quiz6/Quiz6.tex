@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{setspace}
+\usepackage[text={6.5in,8.5in},centering]{geometry}
+\geometry{verbose,a4paper,tmargin=2.4cm,bmargin=2.4cm,lmargin=2.4cm,rmargin=2.4cm}
+\usepackage{graphicx,amsmath,cases,multirow,appendix,graphicx,xcolor}
+
+\setlength\parindent{0pt}
+
+\newcommand{\note}[1]{\colorbox{gray!30}{#1}}
+\newcommand{\ind}{\-\hspace{1cm}}
+\newcommand*{\blanks}[1][4em]{\rule{#1}{.4pt}}
+
+
+\begin{document}
+
+\noindent\makebox[\textwidth][c]{\Large\bfseries Quiz 6 - Interaction Strengths}
+
+\rule[0.5ex]{\linewidth}{1pt}
+\begin{center}
+	\textbf{My name is:} \blanks[150pt]
+\end{center}
+\rule[0.5ex]{\linewidth}{1pt}
+
+One of the simplest non-pathological models of a predator-prey interactions adds only logistic prey growth to the classic (pathological) Lotka-Volterra model:
+\begin{equation*}
+	\frac{dR}{dt} = b R \left ( 1 - \frac{R}{K} \right ) - a R C 
+	\quad \quad \quad
+	\frac{dC}{dt} = e a R C - d C \, .	
+\end{equation*}
+An empirical ecologist measuring the effect of a predator on a prey species might measure values reflecting any of the following terms: $a$, $a R$, $a C$, and $aRC$.  Indeed, all four terms could be (and have been) called measures of the ``interaction strength'' between the two species (i.e. the top-down effect of the predator on the prey).  But clearly tthey are not equivalent.
+
+
+1) \textit{Why} aren't these measures equivalent?  Answer by interpreting each  for an empiricist and by defining it in terms of its units.
+
+\vspace{0.1 cm}
+
+$a$ -- 
+\vspace{1.5 cm}
+%	\textcolor{red}{
+%		per capita attack rate; encounter rate; effect of one predator individual on one prey individual.\\
+%		Units: number of prey (eaten) per predator per prey (available) per time.
+%	}
+%	\vspace{0.1 cm}
+
+$aR$ --
+\vspace{1.5 cm}
+%	\textcolor{red}{
+%		rate at which individual predators feed on prey population; functional response; effect of prey population on one predator individual.\\
+%		Units: number of prey (eaten) per predator per time.
+%}
+%\vspace{0.1 cm}
+
+$aC$ --
+\vspace{1.5 cm}
+%	\textcolor{red}{
+%		rate at which individual prey are consumed by predator population; individual prey vulnerability.\\
+%		Units: number of prey (eaten) per prey (available) per time.
+%}
+%\vspace{0.1 cm}
+
+$aRC$ --
+\vspace{1.5 cm}
+%	\textcolor{red}{
+%		rate at which prey are consumed by predator population.\\
+%		Units: total number of prey (eaten) per time.
+%}
+%\vspace{1 cm}
+
+
+%\vspace{1 cm}
+2) Which measure(s) would an empirical ecologist prefer to measure if they want to compare the ``interaction strength'' that different predator species have on one common prey species?  Why?
+
+\vspace{3 cm}
+%\vspace{0.1 cm}
+%\textcolor{red}{
+%	Could use either $a$ or $aR$, since $R$ would be constant across all comparisons. Either measure standardizes by predator population size, allowing the effects of different predator species with different population sizes be contrasted on a common basis. 
+%}
+%\vspace{1 cm}
+
+
+3) Which measure(s) would they best measure if they want to compare different pairs of predator-prey species across an entire food web?  Why?
+
+\vspace{3 cm}
+%\vspace{0.1 cm}
+%\textcolor{red}{
+%	Use $a$, since it standardizes the effect-measure by both prey and predator population size, allowing the effects between different predator-prey pairs with different populations sizes to be contrasted on a common basis.
+%}
+%\vspace{1 cm}
+
+
+3) Which measures(s) would a theoretical ecologist hoping to parameterize their mathematical models with empirical data prefer to have the empiricist estimate?  Why?
+
+\vspace{3 cm}
+%\vspace{0.1 cm}
+%\textcolor{red}{
+%	Would prefer $a$.  Both $R$ and $C$ are dynamic state variables, whereas $a$ is a fixed-valued parameter.  Measures of $a R$, $a C$, or $a C R$ would not allow them to parameterize their simulations (as easily). 
+%}
+
+
+\end{document}

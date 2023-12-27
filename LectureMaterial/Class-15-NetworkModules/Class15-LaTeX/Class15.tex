@@ -23,37 +23,40 @@
 
 \begin{document}
 
-\noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 15 -- Graphical Analysis of Network modules (3-spp.)}
+\noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 15 -- Network modules (3-spp.)}
 
 \textbf{Today:}\\
-\ind Paper discussion, then...\\
-\ind \ind - Competition for explicit resources\\
-\ind \ind - Trophic chain\\
-\ind \ind - Intraguild predation
+\ind - Competition for explicit resources\\
+\ind - Trophic chain\\
+\ind - Intraguild predation
 
 \textbf{Concepts:}\\
-\ind - Competitive exclusion principle (niche partitioning)\\
-\ind - Determining invasibility and coexistence criteria\\
+\ind - Competitive exclusion principle\\
+\ind - Bottom-up and top-down effects\\
 \ind - Temporal niche partitioning (Armstrong-McGehee effects)
 
+\textbf{Method:}\\
+\ind - Graphical analysis\\
+\ind - Invasibility analysis
+
 \rule[0.5ex]{\linewidth}{1pt}
-\begin{center}
-	\textbf{Exploitative Competition for Explicit Resource}
-\end{center}
 
 \textbf{Recall}:\\
 2-spp. LV competition with implicit resource\\
 \ind \ind $\Rightarrow$ Intra $>$ Inter-specific competition for coexistence\\
-\ind Same general insight from $n$-spp. community matrix analysis.
+Same general insight from $n$-spp. community matrix analysis:
 \begin{equation*}
 	\lambda^2 - \underbrace{(A_{11}+A_{22})}_{\text{Trace}}\lambda + \underbrace{A_{11}A_{22} - A_{12}A_{21}}_{\text{Determinant}}
 \end{equation*}
 \ind $\implies$More zero off-diagonals (lower connectance), the more likely $Det(A)>0 \implies $ more stable.\\
 
-\textbf{Today}:\\
-Start with 2 species competing for explicit resource.\\
+\begin{center}
+	\textbf{Exploitative Competition for Explicit Resource}
+\end{center}
+
+Start with 2 consumer species competing for explicit resource.\\
 \ind Include self-limitation in resource\\
-\ind  (Know that strong self-limitation on some species is needed for stable coexistence to be possible).
+\ind  (Know that strong self-limitation on some species is needed for stable coexistence to be possible)
 \begin{align*}
 	\frac{dO}{dt}&=\overbrace{e_{RO}a_{RO}R O}^{\text{linear intxn}} - \overbrace{m_o O}^{\text{exponential}}\\
 	\frac{dC}{dt}&=e_{RC}a_{RC}RC - m_c C\\
@@ -70,7 +73,7 @@ Questions for each module:
 	\item When can each species invade? ($\implies$ When are equilibria stable?)
 \end{enumerate}
 
-In other words: \textbf{How can both species coexists on a single resource?}\\
+In other words: \textbf{How can two consumers coexist on a single resource?}\\
 
 Method: Graphical analysis of isoclines\\
 
@@ -78,7 +81,7 @@ Hint:  Best to start analyzing $\frac{dO}{dt}$ and $\frac{dC}{dt}$ rather than $
 
 \dotfill
 
-\note{Let groups work for ~20 min.(?) before volunteer group explains to rest, or work through it together.}
+\note{Let groups work for ~20-30 min.~before volunteer group explains to rest, or work through it together.}
 
 \dotfill
 
@@ -95,8 +98,8 @@ Predator isoclines: (Not really \emph{isoclines}, but rather \emph{isoplanes}.)
 Prey isocline(s):
 \begin{align*}
 	\frac{dR}{dt}=rR\left(1-\frac{R}{K}\right) = a_{RC}RC + a_{RO}RO = 0  & \qquad =  \qquad r-\frac{rR}{K}-a_{RC}C - a_{RO}O\\
-	& \qquad \Rightarrow  \qquad O_R^* = \frac{r-\tfrac{rR}{K}-a_{RC}C}{a_{RO}}\\
-	& \qquad \Rightarrow  \qquad C_R^* = \frac{r-\tfrac{rR}{K}-a_{RO}O}{a_{RC}}\\
+	& \qquad \Rightarrow  \qquad O_R^* = \frac{r-\tfrac{r}{K}R-a_{RC}C}{a_{RO}}\\
+	& \qquad \Rightarrow  \qquad C_R^* = \frac{r-\tfrac{r}{K}R-a_{RO}O}{a_{RC}}\\
 \end{align*}
 Note that $O_R^*$ and $C_R^*$ are linearly declining functions of both $R$ and $C$ or $O$.
 
@@ -107,7 +110,7 @@ Look at marginal view of phase portrait (i.e. 3D in 2D):
 
 \textbf{Conclusions:}
 \begin{enumerate}
-\item $K_C$ and $K_O$ are minimum carrying capacities needed for coexistence of either consumer with $R$.
+\item $K_C$ and $K_O$ are minimum carrying capacities needed for coexistence of \textit{either} (i.e.~one or the other) consumer with $R$.
 \item Whichever species has the lower $R^*$ out-competes the other!
 \item $R^*$ is a metric for competitive superiority.\\
 \ind $C$ out-competes $O$ if $R_C^* < R_O^*$ ...which means that $m_C < m_O$ and/or $e_{RC} a_{RC} > e_{RO} a_{RO}$.
@@ -121,19 +124,19 @@ Look at marginal view of phase portrait (i.e. 3D in 2D):
 \pagebreak
 \begin{center}	\textbf{Trophic Chain} \end{center}
 \begin{align*}
-		\frac{dO}{dt}&=e_{CO}a_{CO}C O - m_o O\\
+		\frac{dO}{dt}&=e_{CO}a_{CO}C O - m_O O\\
 		\frac{dC}{dt}&=e_{RC}a_{RC}R C -a_{CO}CO- m_c C\\
 		\frac{dR}{dt}&=r R \left(1-\frac{R}{K}\right) - a_{RC}RC
 \end{align*}
 
 Intuition from previous (exploitative competition) model:\\
 \ind Need some minimum amount of energy/productivity to support higher trophic levels.\\
-\ind Since middle-school probably know that $\sim$90\% of energy is lost at each trophic transfer.\\
+\ind Empirically, $\sim$90\% of energy is lost at each trophic transfer.\\
 
 \note{Questions:}
 \begin{enumerate}
 	\item How many equilibria and what are they (\emph{qualitatively})?
-	\item What level of productivity ($K_i$) allows each consumer to invade (\emph{symbolically})?
+	\item What level of productivity ($K$) is needed for each consumer to invade (\emph{symbolically})?
 \end{enumerate}
 
 \dotfill
@@ -150,10 +153,10 @@ Intuition from previous (exploitative competition) model:\\
 \end{align*}
 \ind Resource isocline:
 \begin{align*}
-	\frac{dR}{dt}=rR-\frac{rR^2}{K}-a_{RC}RC = 0 \qquad \Rightarrow \qquad C_R^* = \frac{r-\frac{rR}{K}}{a_{RC}} = \tfrac{r}{a_{RC}}-\tfrac{r}{K}R
+	\frac{1}{R}\frac{dR}{dt}=r-\frac{rR}{K}-a_{RC}C = 0 \qquad \Rightarrow \qquad C_R^* = \frac{r-\frac{r}{K}R}{a_{RC}} = \frac{r}{a_{RC}}-\frac{r}{K a_{RC}}R
 \end{align*}
 \ind Conclusion:\\
-\ind \ind $C$ can invade when $K\geq R_C^*$.\\
+\ind \ind $C$ can invade when $K > R_C^*$.\\
 \ind \ind The $R$-only system becomes \emph{unstable} when $K\geq R_C^*$.
 \begin{center}
  	\includegraphics[width=3cm]{figs/TC.pdf}
@@ -162,9 +165,9 @@ Intuition from previous (exploitative competition) model:\\
 \circled{4} $O$ can't invade $R$-only system.  When can $O$ invade an RC-system at equilibrium?\\
 \ind RC equilibria:\\
 \begin{align*}
-	R_{eq}^*&=\frac{m_C}{a_{RC}e_{RC}}\\
+	R_{eq}^*&=\frac{m_C}{e_{RC}a_{RC}}\\
 	\\
-	C_{eq}^*&= \frac{r-\frac{rR^*}{K}}{a_{RC}} = \frac{r-\frac{r\frac{m_C}{a_{RC}e_{RC}}}{K}}{a_{RC}} = \frac{r}{a_{RC}}-\frac{r m_C}{a_{RC}^2 e_{RC} K} = \frac{r(a_{RC}e_{RC}K-m_C)}{a_{RC}^2 e_{RC} K}
+	C_{eq}^*&= \frac{r-\frac{r}{K}R^*}{a_{RC}} = \frac{r-\frac{r}{K}\frac{m_C}{a_{RC}e_{RC}}}{a_{RC}} = \frac{r}{a_{RC}}-\frac{r m_C}{a_{RC}^2 e_{RC} K} = \frac{r(a_{RC}e_{RC}K-m_C)}{a_{RC}^2 e_{RC} K}
 \end{align*}
 \ind Invasion threshold $C_O^*$:
 \begin{align*}
@@ -281,8 +284,8 @@ Add Type II functional response to one of the two consumers.
 	\frac{dR}{dt}&=r R \left(1-\frac{R}{K}\right) - a_{RC}RC - \frac{a_{RO}R O}{1+a_{RO}h_{RO}R}RO
 \end{align*}
 \note{$\Rightarrow$ Mathematica}
-Handling time induces a lag, which induces cycles.\\
-Cycles of $RO$ system induces cycles in $C$\\
+Handling time induces positive density-dependence in prey, which induces cycles.\\
+Cycles of $RO$-system induces cycles in $C$\\
 \ind $C$ utilize resource when $O$ is at low abundance and $R$ is high. 
 
 Armstrong \& McGehee 1980 also showed that $n \geq 4$ consumers can coexist on 4 resources.

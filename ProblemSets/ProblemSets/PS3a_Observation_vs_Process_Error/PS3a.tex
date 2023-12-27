@@ -1,0 +1,86 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref} % enable links within pdf
+\hypersetup{colorlinks = true, linkcolor = black, urlcolor = blue}
+
+\newcommand{\R}[1]{{\texttt{#1}}}
+
+\setcounter{secnumdepth}{0}  % don't number sections (stars not needed)
+
+\title{\textbf{Problem Set 3a}\\Observation Noise, Process Error, and Parameter Estimation\vspace{-3em}}
+\date{}
+\author{}
+
+\begin{document}
+	\maketitle
+
+When we look at real-world survey data, we rarely see the smooth lines that we might expect from constant growth rates; 
+instead, we generally see quite a bit of year to year variance. 
+As we will discuss in class and in the readings, we must take different approaches to analyzing population time-series depending on whether we believe most of the variance in the recorded time series represents observer error or process error.  
+To investigate this further, you will be generating some simulated data sets (for which you know the underlying population parameters) and seeing how well you can do at estimating these parameters under each scenario (i.e.~either with process error assumed to be much greater than observer error or with observer error assumed to be much greater than process error).  
+This exercise will require you to use most of the programming skills you have developed in the preceding weeks.
+(There's some hints and suggestions on the next page too.)
+
+\section{Part A}
+Simulate discrete density-independent growth over a 100-year period for a population that reproduces annually, has a starting population size of 10, and where $\lambda=1.01$. 
+Conduct 50 replications of two types of simulations: 
+\begin{itemize}
+\item Growth with process error but no observation error, such that temporal variation in $\lambda$ is log-normal with $\sigma_p = 0.1$.  [HINT: This should sound familiar; it's the same as the last problem set.] 
+\item Growth with no process error, but where our annual estimates of $N$ include sampling error.  
+That is, assume that variance in the estimated values of $N$ (which we'll refer to as $N_{est}$) is also log-normal or, put another way, that $\log(N_{est}$) is normally distributed, with standard deviation $\sigma_o = 0.1$.
+\end{itemize}	
+
+\section{Part B}
+For both sets of simulations, make a plot of $\log$ population size (or $\log$ estimated population size) versus time, with each replication shown as a separate line.  
+Overlay these with a line showing the expected population growth with the specified ``true" value of $\lambda$.  
+How do the two lines differ? 
+Make an additional plot of $\log(N_t+1) / N_t$ versus $N_t$ for the process error simulations and overlay a line showing the expected growth rate.
+
+\section{Part C}
+Use the methods we discussed in class (and in the readings) to estimate $\lambda$ and $\sigma_p$ (for the first set of simulations performed above), and $N(0)$ and $\sigma_o$ (for the second set of simulations) from their respective simulated time-series data.  
+How close are your estimates to the actual values you used to generate the data?  
+Do you think we would we have done this well if we had used the inappropriate methods (i.e.~assumed observer error with the process error data set and vice versa)?
+
+\pagebreak
+
+\section{Hints, equations and commands you might find useful}
+
+\begin{itemize}
+	\item With process error: $N_{t+1}=\lambda e^\epsilon_t N_t$, where $\epsilon_t$ is a normally-distributed random variable with mean 0, and standard deviation $\sigma_p$.
+	
+	\item With observer error: $N_{t+1} = \lambda N_t$ and $\log(N_{t, est})=\log(N_t)+\epsilon_t$, where $\epsilon_t$ is a normally-distributed random variable with mean 0, and standard deviation $\sigma_o$.
+	
+	\item Remember to include observer error in your estimated population size at $t = 0$.  
+	
+	\item The function for creating a normally-distributed random variable is \R{rnorm()}.
+	
+	\item Remember to use the appropriate method for estimating variance depending on whether it is observer error (use trajectory matching) or process error (use growth rate per time step fitting).
+	
+	\item You may want to define some functions of your own to conduct your calculations, just like in the last problem set. You create a function like this:  
+	\begin{verbatim}
+		f2 < -function(x){ log(N0) + log(lambda) * x} 
+	\end{verbatim}
+	[Note: It is conventional to use the symbol x as the independent variable.]
+	
+	\item Having created a function, you can call it up anywhere in the script by using it as an ``argument'' in other functions. For example, to plot your new function over the interval \R{1:T} you can use \R{curve(f1, 1, T)}. 
+	
+	\item You may have noticed that function \R{f1} requires two parameters: \R{N0} and \R{lambda}.  What if we did not know $N(0)$ and $\lambda$, but instead wanted to estimate them by fitting our function to a data set of observed $x$ (= time) and $y$  (= $\log(N_{est})$)?  We would have to create a new function:
+		\begin{verbatim}
+			f2 <- function(b, x){ log( b[1] ) + log( b[2] ) * x } 
+		\end{verbatim}
+	
+	\item Function \R{f2} can be called as an argument by an appropriate fitting function to estimate the two values of \R{b}, where \R{b[1]} represents $N(0)$ and \R{b[2]} represents $\lambda$. Code to fit a function using least squares regression is:
+	\begin{verbatim}
+	fit <- nls(as.vector(y) ~ log(b1) + log(b2) * as.vector(x), 
+	                            start = list(b1 = 1, b2 = 1)) 
+	b <- coef(fit) 
+	\end{verbatim}
+	Note that we specify the function we are trying to fit as an argument within the \R{nls} function and provide some starting values of \R{b} for the search routine. The second line extracts the two parameters from the fitted model.
+	\end{itemize}
+
+
+\end{document}

@@ -2,7 +2,8 @@
 \usepackage{setspace,tikz}
 \usepackage[text={6.5in,8.5in},centering]{geometry}
 \geometry{verbose,a4paper,tmargin=2.4cm,bmargin=2.4cm,lmargin=2.4cm,rmargin=2.4cm}
-\usepackage{graphicx,amsmath,cases,multirow,appendix,graphicx,xcolor}
+\usepackage{graphicx,amsmath,amssymb,cases,multirow,appendix,graphicx,xcolor}
+
 
 \setlength\parindent{0pt}
 
@@ -10,6 +11,7 @@
 \newcommand{\ind}{\-\hspace{1cm}}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand{\enlargeMath}[1]{\scalebox{1.2}{#1}}
 
 \begin{document}
 
@@ -22,7 +24,7 @@ Hand back Q1\\
 Bring laptops next class
 
 \textbf{Today's concepts}: \\
-Stochasticity (Environmental vs. Demographic)\\
+Stochasticity (Environmental vs. Demographic) (\textit{Won't get to considering demographic})\\
 Expectation vs. Variance (uncertainty)\\
 Geometric vs. Arithmetic expectation
 
@@ -60,13 +62,12 @@ E.g., 4 years of stochastic growth
 If we wanted to determine:\\
 Expectation (mean) of $N_T$ ($\bar{N}_T$) and variance of $N_T$ ($\sigma_{N_T}^2$) \underline{over all time points}:
 \begin{align*}
-	\bar{N}_T &= E[N_T] = \frac{1}{T}\sum_t^T N_t = \frac{1+2+2+6+12}{5} = 4.6\\
+	\bar{N}_T &= \mathbb{E}_t[N_T] = \frac{1}{T}\sum_t^T N_t = \frac{1+2+2+6+12}{5} = 4.6\\
 	\sigma_{N_T}^2 & = Var[N_T] =  \frac{1}{T}\sum_t^T (N_t - \bar{N}_T)^2\\
 	& = \frac{(1-4.6)^2 + (2-4.6)^2 + (2-4.6)^2 + (6-4.6)^2 + (12-4.6)^2}{5} = 83.2/5 = 16.64
 \end{align*}
 
 Note that $\sigma$ = standard deviation\\
-\ind and that $CV$ (coefficient of variation) = $\sigma^2/\bar{N}$
 
 \rule[0.5ex]{\linewidth}{1pt}
 
@@ -111,7 +112,7 @@ Two numbers (expressed relative to $x$):
 	a-x & = x-b & & \frac{a}{x} = \frac{x}{b}\\
 	a+b&=2x & & a \cdot b = x \cdot x\\
 	\frac{a+b}{2}&=x & & a \cdot b = x^2\\
-	&&& \sqrt[2]{a+b} = x
+	&&& \sqrt[2]{a \cdot b} = x
 \end{align*}
 \begin{center}\rule[0.1ex]{0.6\linewidth}{1pt}\end{center}
 
@@ -121,17 +122,17 @@ Will show that: 	\emph{Natural log of geometric mean $\lambda$ = arithmetic mean
 	\ln \left( \left(\prod_{t=1}^T \lambda_t \right)^{1/T}\right) &= \frac{1}{T} \cdot \ln(\lambda_1 \cdot \lambda_2 \dots \lambda_T ) \\
 	\text{Since...} \ln(ab) = \ln(a)+\ln(b)  \Rightarrow \quad \quad \quad \quad \quad \quad \quad \quad \quad
 	&= \frac{1}{T} \left( \ln(\lambda_1) + \ln(\lambda_2) + \dots+ \ln(\lambda_T) \right) \\	
-	&=\frac{1}{T} \cdot T \cdot \overline{\ln(\lambda}) \\
 	&=\overline{\ln(\lambda)}
 \end{align*}
 Thus, could also calculate as:
 \begin{center}
 	Geometric mean $\lambda = e^{\overline{\ln(\lambda)}}$
 \end{center}
-An alternative approximation (provided in Case, pg. 35):
+An insightful approximation (provided in Case, pg. 35):
 \begin{center}
-	Geometric mean $\lambda = e^{\overline{\ln(\lambda)}} \approx e^{\ln(\bar{\lambda})-\frac{\sigma_\lambda^2}{2\bar{\lambda}^2}}$\\
-	(\emph{Note effects of $\sigma_{\lambda}$ and of $\bar{\lambda}$.})
+	Geometric mean \enlargeMath{$\lambda = e^{\overline{\ln(\lambda)}} \approx e^{\ln(\bar{\lambda})-\frac{\sigma_\lambda^2}{2\bar{\lambda}^2}} = \bar{\lambda} \cdot e^{-\frac{\sigma_\lambda^2}{2 \bar{\lambda}^2}}$}\\
+	Note: $0 < e^{-\frac{\sigma_\lambda^2}{2 \bar{\lambda}^2}} < 1$\\
+	(Note effects of $\sigma_{\lambda}$ and of $\bar{\lambda}$.)
 \end{center}
 \rule[0.5ex]{\linewidth}{1pt}
 
@@ -152,8 +153,9 @@ An alternative approximation (provided in Case, pg. 35):
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline \rule[-2ex]{0pt}{5.5ex} \emph{Population change} &  Deterministic $\lambda$ & Deterministic $\ln(\lambda$) &  Environmental noise $\ln(\lambda \pm \text{noise})$\\ 
-\hline \rule[-2ex]{0pt}{5.5ex} No change & 1 & 0 & NA \\
-\hline \rule[-2ex]{0pt}{5.5ex} Growth  & $>1$ & $>0$  & $\frac{\sigma_\lambda^2}{2\bar{\lambda}^2} <  \ln(\bar{\lambda})>0$  \\ 
+\hline \rule[-2ex]{0pt}{5.5ex} No change & 1 & 0 & 
+$\ln(\bar{\lambda})-\frac{\sigma_\lambda^2}{2\bar{\lambda}^2} = 0 \text{ or NA}$ \\
+\hline \rule[-2ex]{0pt}{5.5ex} Growth  & $>1$ & $>0$  & $\ln(\bar{\lambda})-\frac{\sigma_\lambda^2}{2\bar{\lambda}^2} > 0$  \\ 
 \hline \rule[-2ex]{0pt}{5.5ex} Decline & $<1$ & $<0$  & $\ln(\bar{\lambda})-\frac{\sigma_\lambda^2}{2\bar{\lambda}^2}<0$  \\ 
 \hline 
 \end{tabular}
@@ -193,14 +195,14 @@ when there is only \emph{demographic variation}:
 
 \pagebreak
 
-\textbf{How to get $E[N_T]$?}\\
+\textbf{How to get $\mathbb{E}_n[N_T]$?}\\
 Let $\lambda$ be a random variable from a normal distribution.\\
 Any given $\lambda$ from this distribution is denoted by $\lambda_t$.
 \begin{align*}
 	N_T &= N_0 \prod_{t=1}^T \lambda_t = N_0 \cdot (\lambda_1 \lambda_2 \dots \lambda_T)\\
-	E[N_T] &= N_0 \cdot E[\prod_{t=1}^T \lambda_t] \qquad \text{(since } N_0 \text{ is a constant)}\\
-		& = N_0 \cdot \prod_{t=1}^TE[\lambda]\\
-		& = N_0 \cdot E[\lambda]^T\\
+	\mathbb{E}_n[N_T] &= N_0 \cdot \mathbb{E}_n\left[\prod_{t=1}^T \lambda_t \right] \qquad \text{(since } N_0 \text{ is a constant)}\\
+		& = N_0 \cdot \prod_{t=1}^T \mathbb{E}_n[\lambda]\\
+		& = N_0 \cdot \mathbb{E}_n[\lambda]^T\\
 		& = N_0 \cdot \bar{\lambda}^T
 \end{align*}
 
@@ -217,7 +219,7 @@ Allows us to apply Central Limit Theorem (pg. 41 of Case):
 
 Under a sufficiently large number of independent random variable draws:
 \begin{align*}
-	\boxed{\sum_{i=1}^n x_i} & = \mathcal{N}(n\cdot E[x] , \; n\cdot Var[x])\\
+	\boxed{\sum_{i=1}^n x_i} & = \mathcal{N}(n\cdot \mathbb{E}_n[x] , \; n\cdot Var[x])\\
 	& = \mathcal{N}(n \bar{x}, n \sigma_{x}^2)
 \end{align*}
 
@@ -227,26 +229,28 @@ Under a sufficiently large number of independent random variable draws:
 \end{center}
 Inserting $\ln (\lambda_t)$ for $x_i$, we thus have
 \begin{align*}
-	\sum_{t=1}^T \ln (\lambda_t) & =  \mathcal{N}(T\cdot E[\ln(\lambda_t)] , \; T\cdot Var[\ln(\lambda_t)])\\
-	& = \mathcal{N}(T\cdot \overline{\ln(\lambda_t)},\; T\cdot\sigma_{\ln (\lambda_t)}^2)
+	\sum_{t=1}^T \ln (\lambda_t) & =  \mathcal{N}(T\cdot \mathbb{E}_n[\ln(\lambda_t)] , \; T\cdot Var[\ln(\lambda_t)])\\
+	& = \mathcal{N}(T\cdot \overline{\ln(\lambda_t)},\; T\cdot\sigma_{\ln (\bar{\lambda})}^2)
 \end{align*}
 
 Therefore, we have
 \begin{equation*}
-	E[\ln(N_T)]=\ln(N_0)+ T \cdot \overline{\ln(\lambda_t)}
+	\mathbb{E}_n[\ln(N_T)]=\ln(N_0)+ T \cdot \overline{\ln(\lambda_t)}
 \end{equation*}
 and
 \begin{equation*}
-\sigma_{\ln (N_T)}^2 = T\cdot \sigma_{\ln(\lambda_t)}^2
+\sigma_{\ln (N_T)}^2 = T\cdot \sigma_{\ln(\bar{\lambda})}^2
 \end{equation*}
 \\
 To translate expectation back to arithmetic scale:\\
-Even though the expected value of $N_T$ is $E[N_T]= N_0 \cdot \bar{\lambda}^T$,
+Even though the expected value of $N_T$ is $\mathbb{E}_n[N_T]= N_0 \cdot \bar{\lambda}^T$,
 \begin{equation*}
 	N_T \sim log\mathcal{N} \text{ with median = } e^{\ln(N_0)+T\cdot \overline{\ln(\lambda)}}
 \end{equation*}
-\\
-Take-home message:\\
+
+\rule[0.5ex]{\linewidth}{1pt}
+
+\textbf{Take-home message:}\\
 \textbf{When modeling $N_{t+1}=\lambda N_t$ with environmental noise in growth rate, error must be $log\mathcal{N}$!}\\
 \\
 In Problem Set \#2 you should therefore use $N_{t+1}=N_t (\lambda \pm e^\epsilon)$, where $\epsilon \sim \mathcal{N}(0,\sigma_\epsilon^2)$.\\
@@ -257,12 +261,13 @@ In Problem Set \#2 you should therefore use $N_{t+1}=N_t (\lambda \pm e^\epsilon
 \begin{itemize}
 \item The solution to $Var[N_T]$ is sensitive to assumed model-formulation!
 \item Dependent on how stochasticity is assumed to affect $\lambda$.
-\item If you assume $N_{T}=N_0 (\lambda \pm \epsilon)^T$ with $\epsilon \sim \mathcal{N}(0,\sigma_\epsilon^2)$ you'll get a different prediction!
+\item If you assume $N_{T}=N_0 (\lambda \pm \epsilon)^T$ with $\epsilon \sim \mathcal{N}(0,\sigma_\epsilon^2)$ you'll get a different prediction\\
+(and possibly negative population sizes)!
 \end{itemize}
 
 \rule[0.5ex]{\linewidth}{1pt}
 
-
+\note{In unlikely event of having extra time...}\\
 \textbf{Demographic stochasticity} - Between-individual variation in per capita growth rate\\
 Analogy of flipping a coin (not perfect, but will do).
 \begin{center}

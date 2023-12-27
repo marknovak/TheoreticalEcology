@@ -1,49 +1,196 @@
 ##################################################
 # Contrast deterministic with stochastic growth
 ##################################################
-rm(list=ls()) # clears workspace
+rm(list = ls()) # clears workspace
+qm <- 2 # quartz size multiplier
 
 TimeSteps <- 500
 t <- c(1:TimeSteps)
 N <- numeric()
 N[1] <- 1
 lambda <- 1.01
-mu<-0
-sigma<-0
-rlambda<-numeric()
+mu <- 0
+sigma <- 0
+rlambda <- numeric()
 
-for (Time in t){ 
-	rlambda[Time]<-lambda*exp(rnorm(1,mu,sigma))
-	N[Time+1] <- N[Time]*rlambda[Time]
+for (Time in t) {
+  rlambda[Time] <- lambda * exp(rnorm(1, mu, sigma))
+  N[Time + 1] <- N[Time] * rlambda[Time]
 }
 
-quartz(width=8,height=4)
-par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
-	tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
-	plot(N,type='l',lwd=3,ylab='N_t',xlab='Time')
-	plot(N,log='y',type='l',lwd=3,ylab='log(N_t)',xlab='Time') 
+quartz(width = 8 * qm, height = 4 * qm)
+par(
+  mfrow = c(1, 2),
+  mar = c(3, 3, 1, 1),
+  mgp = c(1.5, 0.3, 0),
+  tcl = -0.2,
+  lwd = 2,
+  cex.axis = 0.8,
+  cex.lab = 1.2
+)
+plot(
+  N,
+  type = 'l',
+  lwd = 3,
+  ylab = 'N_t',
+  xlab = 'Time'
+)
+plot(
+  N,
+  log = 'y',
+  type = 'l',
+  lwd = 3,
+  ylab = 'log(N_t)',
+  xlab = 'Time'
+)
 
 ##################
 # With stochasticity
 N <- numeric()
 N[1] <- 1
 lambda <- 1.01
-mu<-0
-sigma<-0
-rlambda<-numeric()
+mu <- 0
+sigma <- 0
+rlambda <- numeric()
 
 sigma <- 0.05
 
-for (Time in t){ 
-	rlambda[Time]<-lambda*exp(rnorm(1,mu,sigma))
-	N[Time+1] <- N[Time]*rlambda[Time]
+for (Time in t) {
+  rlambda[Time] <- lambda * exp(rnorm(1, mu, sigma))
+  N[Time + 1] <- N[Time] * rlambda[Time]
 }
 
-quartz(width=8,height=4)
-par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
-	tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
-	plot(N,type='l',lwd=3,ylab='N_t',xlab='Time')
-	plot(N,log='y',type='l',lwd=3,ylab='log(N_t)',xlab='Time') 
+quartz(width = 8 * qm, height = 4 * qm)
+par(
+  mfrow = c(1, 2),
+  mar = c(3, 3, 1, 1),
+  mgp = c(1.5, 0.3, 0),
+  tcl = -0.2,
+  lwd = 2,
+  cex.axis = 0.8,
+  cex.lab = 1.2
+)
+plot(
+  N,
+  type = 'l',
+  lwd = 3,
+  ylab = 'N_t',
+  xlab = 'Time'
+)
+plot(
+  N,
+  log = 'y',
+  type = 'l',
+  lwd = 3,
+  ylab = 'log(N_t)',
+  xlab = 'Time'
+)
+
+
+###################################################################
+###################################################################
+###################################################################
+# Class exercise: Contrast geometric and arithmetic means
+###################################################################
+data <- c(3, 1, 2)
+data <-
+  runif(n = 3, min = 1, max = 4) # draw n random numbers from a uniform distribution
+data <-
+  rnorm(n = 3, mean = 2, sd = 1) # draw n random numbers from a normal distribution
+mean(data)
+
+# Define a new function to calculate the geometric mean
+gmean <- function(x) {
+  exp(mean(log(x)))
+}
+gmean(data)
+
+# Define a function that randomly generates replicate vectors,  calculates and spits out a data frame of arithmetic and geometric means
+calc <- function(reps, n, mu, sigma) {
+  mlambda <- gmlambda <- numeric()
+  for (r in 1:reps) {
+    lambda <- rnorm(n, mu, sigma)
+    mlambda[r] <- mean(lambda)
+    gmlambda[r] <- gmean(lambda)
+  }
+  out <- data.frame(mlambda, gmlambda)
+}
+
+# Run your calculation with the following parameter values
+output <- calc(
+  reps = 100,
+  n = 1000,
+  mu = 1.5,
+  sigma = 0.01
+)
+
+head(output) # take a look at the top few lines of the output
+
+# plot your output
+quartz(width = 5 * qm, height = 5 * qm)
+par(pty = 's', lwd = 2) # ensures that the figure is square
+plot(gmlambda ~ mlambda,
+     data = output,
+     xlab = 'Arithmetic Mean',
+     ylab = 'Geometric Mean')
+abline(0, 1, lty = 2, col = 'grey') # adds a line with intercept = 0 and slope = 1  (i.e.,  the 1:1 line)
+
+
+# Run the calculation again,  with slightly higher variance and add the data to your existing plot:
+output <- calc(
+  reps = 100,
+  n = 1000,
+  mu = 1.5,
+  sigma = 0.03
+)
+points(gmlambda ~ mlambda, data = output, col = 'red')
+
+# Experiment with more levels of sigma
+# You may need to plot your output in a new plot to see it all if your sigma is large
+# What happens when sigma = 0?
+output <- calc(
+  reps = 100,
+  n = 1000,
+  mu = 1.5,
+  sigma = 0.05
+)
+points(gmlambda ~ mlambda, data = output, col = 'green')
+
+# Set sigma back to 0.02
+# Experiment with different amounts of data (i.e.,  vary n)
+# What happens as you vary n?
+output <- calc(
+  reps = 100,
+  n = 1000,
+  mu = 1.5,
+  sigma = 0.02
+)
+plot(gmlambda ~ mlambda,
+     data = output,
+     xlab = 'Arithmetic Mean',
+     ylab = 'Geometric Mean')
+abline(0, 1) # adds a line with intercept = 0 and slope = 1  (i.e.,  the 1:1 line)
+output <- calc(
+  reps = 100,
+  n = 20,
+  mu = 1.5,
+  sigma = 0.02
+)
+points(gmlambda ~ mlambda, data = output, col = 'green')
+
+# Set sigma back to 0.2
+# What happens when mu = 1.01
+output <- calc(
+  reps = 100,
+  n = 1000,
+  mu = 1.01,
+  sigma = 0.2
+)
+plot(gmlambda ~ mlambda,
+     data = output,
+     xlab = 'Arithmetic Mean',
+     ylab = 'Geometric Mean')
+abline(0, 1)
 
 ################################################################
 ################################################################
@@ -52,195 +199,208 @@ par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
 # set stochastic parameters
 TimeSteps <- 1000
 t <- c(1:TimeSteps)
-mu<-0
-sigma<-0.05
-reps<-300
-rlambda<-array(NA,dim=c(reps,length(t)))
-N<-array(NA,dim=c(reps,(length(t)+1)))
-N[,1]<-100
+mu <- 0
+sigma <- 0.05
+reps <- 300
+rlambda <- array(NA, dim = c(reps, length(t)))
+N <- array(NA, dim = c(reps, (length(t) + 1)))
+N[, 1] <- 100
 
-for (r in 1:reps){
-	for (Time in t){ 
-		rlambda[r,Time]<-lambda*exp(rnorm(1,mu,sigma))
-		N[r,Time+1] <- N[r,Time]*rlambda[r,Time]
-	}
+for (r in 1:reps) {
+  for (Time in t) {
+    rlambda[r, Time] <- lambda * exp(rnorm(1, mu, sigma))
+    N[r, Time + 1] <- N[r, Time] * rlambda[r, Time]
+  }
 }
 
 
-quartz(width=8,height=4)
-par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
-	tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
-	plot(N[1,],type='n',lwd=3,ylab='N_t',xlab='Time')
-		for(i in 1:15){lines(N[i,],lwd=2)}
-	plot(N[1,],log='y',type='n',lwd=3,ylab='log(N_t)',xlab='Time')
-		for(i in 1:15){lines(N[i,],lwd=2)}
+quartz(width = 8 * qm, height = 4 * qm)
+par(
+  mfrow = c(1, 2),
+  mar = c(3, 3, 1, 1),
+  mgp = c(1.5, 0.3, 0),
+  tcl = -0.2,
+  lwd = 2,
+  cex.axis = 0.8,
+  cex.lab = 1.2
+)
+plot(
+  N[1,],
+  type = 'n',
+  lwd = 3,
+  ylab = 'N_t',
+  xlab = 'Time'
+)
+for (i in 1:15) {
+  lines(N[i,], lwd = 2)
+}
+plot(
+  N[1,],
+  log = 'y',
+  type = 'n',
+  lwd = 3,
+  ylab = 'log(N_t)',
+  xlab = 'Time'
+)
+for (i in 1:15) {
+  lines(N[i,], lwd = 2)
+}
 
 ###############
-gmean<-function(x){
-	exp(mean(log(x)))
+gmean <- function(x) {
+  exp(mean(log(x)))
 }
 
-mu<-apply(N,2,gmean)
-var<-apply(N,2,var)
-cv<-sqrt(var)/mu
+mu <- apply(N, 2, gmean)
+var <- apply(N, 2, var)
+cv <- sqrt(var) / mu
 
-Col<-as.vector(col2rgb('black')/255)
-Col<-rgb(Col[1],Col[2],Col[3], alpha=0.2)
+Col <- as.vector(col2rgb('black') / 255)
+Col <- rgb(Col[1], Col[2], Col[3],  alpha = 0.2)
 
-quartz(width=8,height=4)
-par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
-	tcl=-0.2,lwd=2,cex.axis=1,cex.lab=1.4)
-	plot(N[1,],log='y',type='n',lwd=3,ylab='log(N_t)',
-		xlab='Time',ylim=c(min(N),max(N)))
-		for(i in 1:nrow(N)){lines(N[i,],lwd=1,col=Col)}
-		legend('topleft',legend=c('Mean'),bty='n',cex=2,inset=0)
-		lines(mu,col='red',lwd=4)
-	plot(var,log='y',ylab='log(Var[N_t])',
-		xlab='Time',lwd=3,type='l')
-	legend('topleft',legend=c('Variance'),
-		bty='n',cex=2,inset=0.)
-			
-			
-#quartz(width=6,height=4)
-#par(mfrow=c(1,1),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),
-#	tcl=-0.2,lwd=2,cex.axis=1,cex.lab=1.4)
-#plot(cv,log='y',ylab='CV',xlab='Time',lwd=3,type='l')
-#	legend('bottomright',legend=c('CV'),bty='n',cex=3)
-
-###################################################################
-###################################################################
-###################################################################
-# Class excercise: Contrast geometric and arithmetic means
-###################################################################
-data<-c(3,1,2)
-data<-runif(n=3,min=1,max=4) # draw n random numbers from a uniform distribution
-data<-rnorm(n=3,mean=2,sd=1) # draw n random numbers from a normal distribution
-mean(data)
-
-# Define a new function to calculate the geometric mean
-gmean<-function(x){ exp(mean(log(x))) }
-gmean(data)
-
-# Define a function that randomly generates replicate vectors, calculates and spits out a data frame of arithmetic and geometric means
-calc<-function(reps,n,mu,sigma){
-    mlambda<-gmlambda<-numeric()
-    for (r in 1:reps){
-        lambda<-rnorm(n,mu,sigma)
-        mlambda[r]<-mean(lambda)
-        gmlambda[r]<-gmean(lambda)
-    }
-    out<-data.frame(mlambda,gmlambda)
+quartz(width = 8 * qm, height = 4 * qm)
+par(
+  mfrow = c(1, 2),
+  mar = c(3, 3, 1, 1),
+  mgp = c(1.5, 0.3, 0),
+  tcl = -0.2,
+  lwd = 2,
+  cex.axis = 1,
+  cex.lab = 1.4
+)
+plot(
+  N[1,],
+  log = 'y',
+  type = 'n',
+  lwd = 3,
+  ylab = 'log(N_t)',
+  xlab = 'Time',
+  ylim = c(min(N), max(N))
+)
+for (i in 1:nrow(N)) {
+  lines(N[i,], lwd = 1, col = Col)
 }
-
-# Run your calculation with the following parameter values
-output<-calc(reps=100,n=1000,mu=1.5,sigma=0.01)
-
-head(output) # take a look at the top few lines of the output
-
-# plot your output
-quartz(width=5,height=5)
-par(pty='s',lwd=2) # ensures that the figure is square
-	plot(gmlambda~mlambda,data=output,
-		xlab='Arithmetic Mean',ylab='Geometric Mean')
-	abline(0,1,lty=2,col='grey') # adds a line with intercept=0 and slope=1  (i.e., the 1:1 line)
-	
-
-# Run the calculation again, with slightly higher variance and add the data to your existing plot:
-output<-calc(reps=100,n=1000,mu=1.5,sigma=0.03)
-	points(gmlambda~mlambda,data=output,col='red')
-
-# Experiment with more levels of sigma
-# You may need to plot your output in a new plot to see it all if your sigma is large
-# What happens when sigma = 0?
-output<-calc(reps=100,n=1000,mu=1.5,sigma=0.05)
-	points(gmlambda~mlambda,data=output,col='green')
-
-# Set sigma back to 0.02
-# Experiment with different amounts of data (i.e., vary n)
-# What happens as you vary n?
-output<-calc(reps=100,n=1000,mu=1.5,sigma=0.02)
-plot(gmlambda~mlambda,data=output,
-	xlab='Arithmetic Mean',ylab='Geometric Mean')
-abline(0,1) # adds a line with intercept=0 and slope=1  (i.e., the 1:1 line)
-output<-calc(reps=100,n=20,mu=1.5,sigma=0.02)
-points(gmlambda~mlambda,data=output,col='green')
-
-# Set sigma back to 0.2
-# What happens when mu = 1.01
-output<-calc(reps=100,n=1000,mu=1.01,sigma=0.2)
-	plot(gmlambda~mlambda,data=output,
-		xlab='Arithmetic Mean',ylab='Geometric Mean')
-	abline(0,1) 
+legend(
+  'topleft',
+  legend = c('Mean'),
+  bty = 'n',
+  cex = 2,
+  inset = 0
+)
+lines(mu, col = 'red', lwd = 4)
+plot(
+  var,
+  log = 'y',
+  ylab = 'log(Var[N_t])',
+  xlab = 'Time',
+  lwd = 3,
+  type = 'l'
+)
+legend(
+  'topleft',
+  legend = c('Variance'),
+  bty = 'n',
+  cex = 2,
+  inset = 0.
+)
 
 ############################################################################
 ############################################################################
 # Demographic stochasticity
 ############################################################################
-# In this exercise we will simulate sequences of births and deaths to demonstrate the concept of demographic stochasticity:  When population are small, extinction can happen just because of an unlucky run of bad years.  Because extinction is forever, they never come back.  Large populations can withstand longer sequences of consecutive bad years.
+# In this exercise we will simulate sequences of births and deaths to demonstrate the concept of demographic stochasticity:  When population are small,  extinction can happen just because of an unlucky run of bad years.  Because extinction is forever,  they never come back.  Large populations can withstand longer sequences of consecutive bad years.
 
 # Function to create sequence of births and deaths
-# This function draws sequence of 1's or 0's from a binomial distribution.  That is, it randomly draws a value of 1 with probability 'pbirth' and a value of 0 with probability '1-pbirth'.  It then converts the zeroes to negative ones, and stores the entire sequence in a vector called 'events'
-BirthDeathSeq<-function(Time,pBirth){
-	events<-rbinom(Time,1,pBirth)
-	events[events==0]<- -1 # convert 0 values to -1 since these are "deaths"
-	events
+# This function draws sequence of 1's or 0's from a binomial distribution.  That is,  it randomly draws a value of 1 with probability 'pbirth' and a value of 0 with probability '1-pbirth'.  It then converts the zeroes to negative ones,  and stores the entire sequence in a vector called 'events'
+BirthDeathSeq <- function(Time, pBirth) {
+  events <- rbinom(Time, 1, pBirth)
+  events[events =  = 0] <-
+    -1 # convert 0 values to -1 since these are "deaths"
+  events
 }
 # print the output of the above function to the screen without storing the values anywhere
-print(BirthDeathSeq(Time=20,pBirth=0.51))
+print(BirthDeathSeq(Time = 20, pBirth = 0.51))
 
 # The sum of this sequence of 1's and -1's is equivalent to the net number of births (if the sum is positive) or deaths (if the sum is negative). (i.e. number of births minus number of deaths). Try it for different sequence lengths:
-sum(BirthDeathSeq(20,0.51))
-sum(BirthDeathSeq(200,0.51))
+sum(BirthDeathSeq(20, 0.51))
+sum(BirthDeathSeq(200, 0.51))
 
 # Now create a vector of starting population sizes from 1 to 1001 in steps of 10
-N0<-seq(1,1001,10)
+N0 <- seq(1, 1001, 10)
 
 # Add the sum of the vector of births and deaths to each starting population size number
 # This is equivalent to calculating the total number of individuals left after a 'Time' number of birth or death events
-N<-N0+sum(BirthDeathSeq(2000,0.51))
-N # show N.  Notice that the populations that started with lower population sizes often have negative abundances.  (i.e, the went extinct!)
+N <- N0 + sum(BirthDeathSeq(2000, 0.51))
+N # show N.  Notice that the populations that started with lower population sizes often have negative abundances.  (i.e,  the went extinct!)
 
 # Repeat this process 'reps' number of times and save into matrix N
-reps<-500
-N<-array(NA,dim=c(reps,length(N0)))
-for (r in 1:reps){	N[r,]<-N0+sum(BirthDeathSeq(2000,0.51)) }
+reps <- 500
+N <- array(NA, dim = c(reps, length(N0)))
+for (r in 1:reps) {
+  N[r,] <- N0 + sum(BirthDeathSeq(2000, 0.51))
+}
 
 # each column of N corresponds to a different starting population size
 # each row of N corresponds to one of our 'reps' replicates
 head(N)
 
-# Using N, calculate the proportion of populations that went extinct for each starting population size
+# Using N,  calculate the proportion of populations that went extinct for each starting population size
 # There are many ways to do this.  One way is as follows:
 # First create an empty matrix having the same dimensions as N
-N.Ext<-array(NA,dim=dim(N)) 
-N.Ext[N<=0]<-1 # values in N less than or equal to 0 are extinct populations and are given a values of 1
-N.Ext[N>0]<-0 # values in N greater than zero are surviving populations and are given a value of 0
+N.Ext <- array(NA, dim = dim(N))
+N.Ext[N < = 0] <-
+  1 # values in N less than or equal to 0 are extinct populations and are given a values of 1
+N.Ext[N > 0] <-
+  0 # values in N greater than zero are surviving populations and are given a value of 0
 
-# apply the sum() function to each column of N.Ext to add up the total number of extinctions for each starting population size. MARGIN=2 indicates we want to apply our summation across the columns.  MARGIN=1 would apply it across the rows.
-CountExt<-apply(N.Ext,MARGIN=2,sum) 
+# apply the sum() function to each column of N.Ext to add up the total number of extinctions for each starting population size. MARGIN = 2 indicates we want to apply our summation across the columns.  MARGIN = 1 would apply it across the rows.
+CountExt <- apply(N.Ext, MARGIN = 2, sum)
 # calculate proportion of replicate populations (rows) that went extinct for each starting population size
-PropExt<-CountExt/reps
+PropExt <- CountExt / reps
 
 # Plot the proportion of extinctions as function of starting population size
-quartz(width=6,height=6) # pre-specify the size of the plotting area to overide R's default size
+quartz(width = 6 * qm, height = 6 * qm) # pre-specify the size of the plotting area to overide R's default size
 # The following 'par' command simply specifies some global graphing parameters to make the plots look nicer.  look at ?par to see what each of them does.
-par(mfrow=c(3,1),mar=c(3,3,1,1),mgp=c(1.5,0.3,0),tcl=-0.2,lwd=2,cex.axis=0.8,cex.lab=1.2)
+par(
+  mfrow = c(3, 1),
+  mar = c(3, 3, 1, 1),
+  mgp = c(1.5, 0.3, 0),
+  tcl = -0.2,
+  lwd = 2,
+  cex.axis = 0.8,
+  cex.lab = 1.2
+)
 # Plot the results on a natural scale
-plot(PropExt~N0,type='l',xlab='N0',ylab='Proportion Extinct')
+plot(PropExt ~ N0,
+     type = 'l',
+     xlab = 'N0',
+     ylab = 'Proportion Extinct')
 # Plot the results on a semi-log scale
-plot(PropExt~N0,type='l',log='x',xlab='log(N0)',ylab='Proportion of Extinct')
+plot(
+  PropExt ~ N0,
+  type = 'l',
+  log = 'x',
+  xlab = 'log(N0)',
+  ylab = 'Proportion of Extinct'
+)
 # Plot the results on a log-log scale
-plot(PropExt~N0,type='l',log='xy',xlab='log(N0)',ylab='Proportion of Extinct')
+plot(
+  PropExt ~ N0,
+  type = 'l',
+  log = 'xy',
+  xlab = 'log(N0)',
+  ylab = 'Proportion of Extinct'
+)
 
-# Observe that populations that have a population size of approximately 100 individuals or more have a significantly lower probability of going extinct.  In fact, above a certain population size, none of the replicates went extinct.  (Because log(0) is negative infinity, R spits out an error warning for the last of the above plots.)
+# Observe that populations that have a population size of approximately 100 individuals or more have a significantly lower probability of going extinct.  In fact,  above a certain population size,  none of the replicates went extinct.  (Because log(0) is negative infinity,  R spits out an error warning for the last of the above plots.)
 
-# Clearly we have made a lot of assumptions in modeling our populations in this way.  Primary among these is that birth and death are binomial processes:  an individual either gives birth or dies.  In reality the process is a multinomial process, with individuals given birth, dying, or doing neither at a given point in time. (That is, unlike flipping a coin with only two possible outcomes, reality is more like a three-sided die.)  
+# Clearly we have made a lot of assumptions in modeling our populations in this way.  Primary among these is that birth and death are binomial processes:  an individual either gives birth or dies.  In reality the process is a multinomial process,  with individuals given birth,  dying,  or doing neither at a given point in time. (That is,  unlike flipping a coin with only two possible outcomes,  reality is more like a three-sided die.)
 
-#The main concept of the exercise- that demographic stochasticity is only important for small populations - still applies to "real" populations though:  When population are small, extinction can happen just because of an unlucky run of bad years.  Because extinction is forever, they never come back.  Large populations can withstand longer sequences of consecutive bad years.  
+#The main concept of the exercise- that demographic stochasticity is only important for small populations - still applies to "real" populations though:  When population are small,  extinction can happen just because of an unlucky run of bad years.  Because extinction is forever,  they never come back.  Large populations can withstand longer sequences of consecutive bad years.
 
-# (Note that this is also something that we have not explicitly accounted for in our simulations:  In our simulations populations could have gone negative somewhere in the middle of our sequence of births and deaths, but because we only looked at the final net result, we will have missed such events.)  
+# (Note that this is also something that we have not explicitly accounted for in our simulations:  In our simulations populations could have gone negative somewhere in the middle of our sequence of births and deaths,  but because we only looked at the final net result,  we will have missed such events.)
 
-# Finally, note that we have not explicitly modeled births and deaths as rates.  We simply specified their probability using 'pBirth' only assuming a binomial chance of births and deaths (i.e. the two processes are directly linked).  Thus the analytical probability of extinction (d/b)^T will give us a different answer than what we have plotted.
+# Finally,  note that we have not explicitly modeled births and deaths as rates.  We simply specified their probability using 'pBirth' only assuming a binomial chance of births and deaths (i.e. the two processes are directly linked).  Thus the analytical probability of extinction (d/b)^T will give us a different answer than what we have plotted.
 
 ############################################################################
 ############################################################################

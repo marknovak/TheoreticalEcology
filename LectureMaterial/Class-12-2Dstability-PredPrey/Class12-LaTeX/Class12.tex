@@ -26,6 +26,22 @@
 \textbf{Overview:} Will use same tools we learned for LV-competition to study LV-predation.  Both describe species interaction strengths as linear functional forms.  Then extend to non-nonlinear species interaction by studying the effects of alternative predator functional responses on dynamics and stability.
 
 \rule[0.5ex]{\linewidth}{1pt}
+\begin{center}
+	\begin{tabular}{ll}
+		\hline
+		\textbf{Eigenvalues ($\lambda_i$)} & \textbf{Interpretation} \\ 
+		\hline
+		$Re(\lambda_i)< 0$  for all $i$& Stable node\\ 
+		$Re(\lambda_i)< 0$ for some $i$ & Saddle node \\ 
+		$Re(\lambda_i)> 0$ for all $i$ & Unstable node \\ 
+		$Re(\lambda_i) = 0$ for all $i$ & Neutrally stable \\ 
+		\hline
+		$Im(\lambda_i) = 0$ for all $i$ & No oscillations \\ 
+		$Im(\lambda_i) \neq 0$ for some $i$  & Oscillations \\ 
+		\hline
+	\end{tabular} 
+\end{center}
+\rule[0.5ex]{\linewidth}{1pt}
 
 \textbf{Lotka-Volterra Predator-Prey model}
 
@@ -38,7 +54,7 @@ Resource is explicit:  $C$ - Consumer \& $R$ - Resource
 	f_C(R,C)=\frac{dC}{dt} &= \underbrace{e \cdot a \cdot R \cdot C}_{\text{conversion of prey to preds}} - \underbrace{d \cdot C}_{\text{death rate}}
 \end{align*}
 
-\textbf{What are the equilibria?}\\
+\textbf{Step 1:} \textbf{What are the equilibria?}\\
 \ind Prey exhibits exponential growth in absence of predators\\
 \ind Predator exhibits exponential decay in absence of prey\\
 \ind \ind Thus only 2:  Trivial and non-trivial (coexistence) steady state.
@@ -46,8 +62,8 @@ Resource is explicit:  $C$ - Consumer \& $R$ - Resource
 \textbf{Isoclines}\\
 Set $f_i=0$.  Solve for $j$...
 \begin{align*}
-	\frac{dR}{dt} & =bR-aRC=0 \quad \Rightarrow \quad bR=aRC \quad \Rightarrow \quad C^*=\frac{b}{a}\\
-	\frac{dC}{dt} & = eaRC-dC=0 \quad \Rightarrow \quad eaRC=dC \quad \Rightarrow \quad R^*=\frac{d}{ea}
+	\frac{dR}{dt} & =bR-aRC=0 \quad \Rightarrow \quad bR=aRC \quad \Rightarrow \quad C^*=\frac{b}{a} \quad \quad &\text{Prey isocline}\\
+	\frac{dC}{dt} & = eaRC-dC=0 \quad \Rightarrow \quad eaRC=dC \quad \Rightarrow \quad R^*=\frac{d}{ea} \quad \quad &\text{Predator isocline}
 \end{align*}
 
 {
@@ -74,15 +90,15 @@ R^* \text{ increases}
 
 }
 \ind \note{R-demonstration varying $R(0)$ and $C(0)$} \\
-\ind \ind $\Rightarrow$ dependence on initial conditions. Locked phase cycle. \note{SLIDE}
+\ind \ind $\Rightarrow$ dependence on initial conditions. Locked phase cycle. 
 
 
 \rule[0.5ex]{\linewidth}{1pt}
 
 \pagebreak
 \textbf{Stability of LV-Pred-Prey model}\\
-Q: Are cycles stable or unstable?\\
-\textbf{Step 1:} Construct Jacobian and evaluate at $(R^*,C^*)$.\\
+Q: Is steady state stable or unstable?\\
+\textbf{Step 2:} \textbf{Construct Jacobian} and evaluate at $(R^*,C^*)$.\\
 \begin{equation*}
 	\mathbf{A}=
 	\begin{bmatrix}
@@ -106,7 +122,7 @@ Thus
 	\end{bmatrix}
 	\right |_{R^*,C^*}
 \end{equation*}
-Then, since $C^*=\frac{b}{a}$ and $R^*=\frac{d}{ae}$...
+Substitute $C^*=\frac{b}{a}$ and $R^*=\frac{d}{ae}$
 \begin{equation*}
 	\mathbf{A}=
 	\begin{bmatrix}
@@ -119,19 +135,24 @@ Then, since $C^*=\frac{b}{a}$ and $R^*=\frac{d}{ae}$...
 	\end{bmatrix}
 \end{equation*}
 
-\textbf{Step 2:} Determine eigenvalues of $\mathbf{A}$\\
+\textbf{Step 3:} \textbf{Evaluate eigenvalues} of $\mathbf{A}$\\
 \ind \note{$\Rightarrow $ R-demonstration}
 
-\ind R-output: In this case $\quad \lambda_i = \underbrace{\text{Real part }= 0}_{\text{neutral stability}} \quad + \quad \underbrace{\text{complex part }\neq 0}_{\text{oscillations}} \quad \quad $ for both $i=1 \text{ and } 2$
+\ind R-output: $\quad \lambda_i = \underbrace{\text{Real part }= 0}_{\text{neutral stability}} \quad + \quad \underbrace{\text{complex part }\neq 0}_{\text{oscillations}} \quad \quad $ for both $i=1 \text{ and } 2$
 
 \vspace{0.3cm}
-\begin{center}
-	$\Rightarrow$ \emph{The LV pred-prey model is `pathalogical'} $\Leftarrow$\\
-	Like a pendulum swinging with no air or joint resistance.\\
-	\note{SLIDE}Applicability to Lynx-Hare dynamics extremely questionable.\\
-	Some Lynx-Hare cycles are clockwise!
-\end{center}
+
+Note absence of self-limitation (positive or negative) in either species.
+
+$\Rightarrow$ \emph{The LV pred-prey model is `pathalogical'}\\
+\ind Like a pendulum swinging with no air or joint resistance.\\
+\ind \note{SLIDE } 
+Applicability to Lynx-Hare dynamics extremely questionable.\\
+\ind \ind \ind Some Lynx-Hare cycles are clockwise!\\
+\ind But remember that matching data is not necessarily the point of a model!
+
 \rule[0.5ex]{\linewidth}{1pt}
+
 \textbf{Assumptions so far include:}
 \begin{itemize}
 \setlength\itemsep{0em}
@@ -168,8 +189,9 @@ Is unlimited feeding rate defensible?  What limits feeding rate?
 \ind \ind - ability to search and find prey item (includes failed capture attempts)\\
 \ind \emph{Handling time} ($h$) - time required to consume a successfully captured prey individual
 
+Assuming attacking (searching) and handling are \emph{mutually-exclusive} activities:
 \begin{equation*}
-	f(R)=\frac{aR}{1+ahR} \quad  \Rightarrow \text{ Type II functional response}
+	f(R)=\frac{aR}{1+ahR} \quad  \Rightarrow \text{ Holling Type II functional response}
 \end{equation*}
 
 
@@ -183,7 +205,7 @@ Multi-species extension:\\
 	f(R_1,R_2)=\frac{a_1 R_1 + a_2 R_2}{1+\sum_{i=1}^2 a_i h_i R_i}
 \end{equation*}
 
-\textbf{Extension to Type III}
+\textbf{Extension to Holling Type III}
 \begin{equation*}
 	f(R)=\frac{aR^m}{1+ahR^m}
 \end{equation*}
@@ -195,10 +217,10 @@ Multi-species extension:\\
 \ind $\Rightarrow$ Reduces to Type II if $m=1$\\
 \ind $\Rightarrow$ Reduces to Type I if $m=1$ \& $h=0$\\
 
-`Phenomenological' model of prey switching where consumer ignores focal prey at low prey densities.\\
-e.g., Let $a = \hat{a}R$ (preference increases with density), then get $f(R)=\frac{aR^2}{1+ahR^2}$.\\
+Phenomenological model of prey switching where consumer ignores focal prey at low prey densities.\\
+\ind e.g., Let $a = \hat{a}R$ (preference increases with density), then get $f(R)=\frac{aR^2}{1+ahR^2}$.\\
 
-\note{NOTE:}  Many more functional response models exist!
+Many more functional response models exist! \note{Slide}
 
 \rule[0.5ex]{\linewidth}{1pt}
 \pagebreak
@@ -214,8 +236,8 @@ e.g., Let $a = \hat{a}R$ (preference increases with density), then get $f(R)=\fr
 \end{center}
 
 \textbf{Type I}: Neutral response\\
-\ind \ind As prey increases, predator feeding rate increases in constant proportion $\Rightarrow$ no net change.\\
-\textbf{Type II}: Prey per capita mortality rate increases as $R$ increases/ decreases as $R$ increases.\\
+\ind \ind As prey increases, predator feeding rate increases in constant proportion \\
+\textbf{Type II}: Prey per capita mortality rate decreases as $R$ increases\\
 \textbf{Type III}: Prey experiences refuge at low $R < x$
 \begin{equation*}
 \frac{a  R}{1+ahR^2}
@@ -250,7 +272,7 @@ For MacArthur-Rosenzweig model:
 \begin{equation*}
 	R^*=\frac{d}{ae-adh} \qquad \qquad C^* = \frac{b}{a} + \frac{bR(ah-\alpha-a \alpha h R)}{a}
 \end{equation*}
-\begin{center} $\Rightarrow$ $C^*$ depends on $R$.\end{center}
+\begin{center} $\Rightarrow$ Prey isocline $C^*$ depends on $R$\end{center}
 
 \begin{center}
 \includegraphics[width=9cm]{figs/MRiso.pdf}
@@ -302,14 +324,17 @@ Sometimes may be given \emph{four} equilibria !?!?!
 \includegraphics[width=5cm]{figs/MRiso3.pdf}
 \end{center}
 
-Type III has same effect as adding Immigration term ($I$) to prey growth...
+Type III has similar refuge-inducing effect as adding prey immigration ($I$):
 \begin{equation*}
 	\frac{dR}{dt}=I+bR(1-\alpha R) - \frac{aRC}{1+ahR}
 \end{equation*}
-...as well as the effect of adding a prey refuge ($R'$)...
+Also similar to the effect of adding an explicit prey refuge ($R'$):
 \begin{equation*}
 	\frac{dR}{dt}=bR(1-\alpha R) - \frac{a(R-R')C}{1+ah(R-R')} \qquad \qquad \frac{dC}{dt}=\frac{ea(R-R')C}{1+ah(R-R')} - dC
 \end{equation*}
+\\
+Note mixed use of lower and upper-case parameters, Latin and Greek parameters.\\
+\ind Such usage is ill-advised!
 
 
 \rule[0.5ex]{\linewidth}{1pt}

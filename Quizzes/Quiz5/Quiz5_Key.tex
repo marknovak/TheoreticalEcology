@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{setspace}
+\usepackage[text={6.5in,8.5in},centering]{geometry}
+\geometry{verbose,a4paper,tmargin=2.4cm,bmargin=2.4cm,lmargin=2.4cm,rmargin=2.4cm}
+\usepackage{graphicx,amsmath,cases,multirow,appendix,graphicx,xcolor}
+
+\setlength\parindent{0pt}
+
+\newcommand{\note}[1]{\colorbox{gray!30}{#1}}
+\newcommand{\ind}{\-\hspace{1cm}}
+\newcommand*{\blanks}[1][4em]{\rule{#1}{.4pt}}
+
+
+\begin{document}
+
+\noindent\makebox[\textwidth][c]{\Large\bfseries Quiz 5 - Two-species Stability Analysis}
+
+\rule[0.5ex]{\linewidth}{1pt}
+\begin{center}
+	\textbf{My name is:} \blanks[150pt]
+\end{center}
+\rule[0.5ex]{\linewidth}{1pt}
+
+1) Determine the elements of the Community Matrix $\textbf{A}$ for the  two-species model
+	\begin{align*}
+		\frac{dX}{dt} = (a-bY) X \\
+		\frac{dY}{dt} = (pbX - q) Y \, ,
+	\end{align*}
+remembering that, generally-speaking, 
+	\begin{equation*}
+		A_{ij} = \left . \frac{ \partial \frac{dx_i}{dt} }{\partial x_j} \right \vert_{\vec{N^*}}.
+	\end{equation*}
+%\vspace{10cm}
+\textcolor{red}{
+We first expand and define
+	\begin{align*}
+		\frac{dX}{dt} = (a-bY)X = aX-bXY = f_X \\
+		\frac{dY}{dt} = (pbX - q)Y = pb XY - qY = f_Y \, .
+	\end{align*}
+We must then determine $\frac{ \partial f_i  }{\partial x_j}$ for all combinations of $i \in \{X, Y\}$ and $j \in \{X, Y\}$ and evaluate each at the equilibrium:
+	\begin{align*}
+		A_{11} = A_{XX} & =  \left . \frac{\partial{f_X}}{\partial X} \right \vert_{X^*, Y^*} = \left . \frac{\partial (a X - b X Y)}{\partial X} \right \vert_{X^*, Y^*}  = a - b Y^*\\
+		A_{12} = A_{XY} & =  \left . \frac{\partial{f_X}}{\partial Y} \right \vert_{X^*, Y^*} = \left . \frac{\partial (a X -  b X Y)}{\partial Y} \right \vert_{X^*, Y^*}  = 0 - b X^* =   -b X^*\\
+		A_{21} = A_{YX} & =  \left . \frac{\partial{f_Y}}{\partial X} \right \vert_{X^*, Y^*}  = \left . \frac{\partial (p b X Y - q Y)}{\partial X} \right \vert_{X^*, Y^*} = p b Y^* - 0 = p b Y^*\\
+		A_{22} = A_{YY} & =  \left . \frac{\partial{f_Y}}{\partial Y} \right \vert_{X^*, Y^*} = \left . \frac{\partial (p b X Y - q Y)}{\partial Y} \right \vert_{X^*, Y^*} = p b X^* - q \, .
+	\end{align*}
+These can be further simplified by substitution of the equilibrium population sizes obtained by solving for the isoclines.  These are
+	\begin{equation*}
+		\frac{dX}{dt}= aX - b X Y = 0  \implies Y^* = \frac{a}{b}
+	\end{equation*}
+for species $X$'s isocline, and
+	\begin{equation*}
+		\frac{dY}{dt} = p b X Y - q Y = 0 \implies X^* = \frac{q}{p b} \, .
+	\end{equation*}
+Therefore we have that 
+	\begin{equation*}
+		\mathbf{A} = 
+		\begin{bmatrix}
+			a - b \tfrac{a}{b} & -b \tfrac{q}{p b} \\
+			p b \tfrac{a}{b} & p b \tfrac{q}{p b} - q \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			0 & - \tfrac{q}{p} \\
+			a p & 0 \\ \, .
+		\end{bmatrix}	
+	\end{equation*}
+}
+
+\pagebreak
+
+2) What is the biological interpretation of elements $A_{12}$ and $A_{21}$?
+%\vspace{3cm}
+\vspace{0.5cm}
+
+\textcolor{red}{
+	By definition, $A_{ij} = \frac{\partial f_i}{\partial x_j} = \lim\limits_{x \to 0} \frac{\Delta f_i}{\Delta x_j}$, thus, the $ij^{th}$ element of $\textbf{A}$ is to interpreted as the effect of (an infinitesimally small) change in the population size of species $j$ on the population growth rate of species $i$. Infinitesimally small may be interpreted empirically as a single individual.  Thus it is the per capita effect of $j$ on the population growth rate of species $i$.  $A_{12}$ and $A_{21}$ are thus the per capita effect of species 2 ($Y$) on the population growth rate of species 1 ($X$), and the per capita effect of species 1 ($X$) on the population growth rate of species 2 ($Y$), respectively.
+}
+\vspace{1 cm}
+
+
+3) How would you determine whether a given equilibrium point (not necessarily the coexistence equilibrium) will exhibit the following dynamics after a pulse perturbation?
+\vspace{0.5cm}
+
+
+
+
+a) locally stable,
+%\vspace{1cm}
+
+\textcolor{red}{
+	$\lambda_i < 0 \; \forall  \;  i \in \{1,2\}$
+}
+\vspace{0.5cm}
+
+
+b) locally unstable (including attractor-repeller dynamics),
+%\vspace{1cm}
+
+\textcolor{red}{
+	$\lambda_i > 0 \; \forall  \;  i \in \{1,2\}$ (unstable) \\
+	$\lambda_1 < 0 \text{ and } \lambda_2 > 0$ (saddle) \\
+	$\lambda_1 > 0 \text{ and } \lambda_2 < 0$ (saddle)
+}
+\vspace{0.5cm}
+
+
+c) or neutrally stable
+%\vspace{1cm}
+
+\textcolor{red}{
+	$\lambda_i = 0 \; \forall  \;  i \in \{1,2\}$
+}
+\vspace{0.5cm}
+
+
+
+
+
+\end{document}

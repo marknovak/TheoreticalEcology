@@ -1,3 +1,18 @@
-Add lab section, do discussions and problem sets then.
+Syllabus: Second 1D stability analysis (? check) is actually "catch-up day", so rename it as such.
 
-Add Smueli to AIC discussion papers
+Drop Quiz 3 & PS 3 (and renumber all others)
+
+Drop Lectures 5 & 6 (process vs. obs. error, and model-fitting) along with associated Paper discussions of AIC.  Replace with material at the end of the course.
+
+Reread PS#2 and try clarify what actually needs to be done vs. what is new information to learn.
+Fix PS2 to be explicit about what expectations are being taken over.
+
+Rearrange Class 10 Competition to have R code demonstrations come after all of graphical analysis and drawing on board
+
+Replace Tanya Rogers (chaos is common) paper for Hassell et al.
+
+Spend longer teaching Mathematica in class.
+
+Anticipate more time (2nd whole class period) for Trophic modules, such that we can in fact do them in class together.
+
+Interaction Strengths (and then Press perturbations) is an okay class to skip.

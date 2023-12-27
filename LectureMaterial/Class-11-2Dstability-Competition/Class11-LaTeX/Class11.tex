@@ -66,7 +66,7 @@ Isoclines:
 	 0 , & 0  \\
 	0, & 1  \\
 	1, & 0\\
-	\frac{1-a_{12}}{1- a_{12} a_{21} }, & \frac{1-a_{21}}{1- a_{12} a_{21} }
+	\frac{1-a_{12}}{1- a_{12} a_{21} }, & \frac{1-a_{21}}{1- a_{12} a_{21} } \quad \text{\note{multiply Mathematica output top by -1, then top and bottom by -1}}
 \end{cases}
 \end{align*}
 
@@ -74,7 +74,10 @@ Isoclines:
 \textbf{Step \#2:} Evaluate $f'(N^*)$ \\
 \ind \ind \ind \ind ...but now in two dimensions:  $f_1'(N_1^*,N_2^*)$ and $f_2'(N_1^*,N_2^*)$\\
 
-$\Rightarrow$ \textbf{Stability analysis in two dimensions} $\Leftarrow$\\
+\begin{center}
+	$\Rightarrow$ \textbf{Stability analysis in two dimensions} $\Leftarrow$\\
+\end{center}
+
 Perturbation to both $u_1^*$ and $u_2^*$ by amounts $x$ and $y$.
 \begin{align*}
 	u_1 & = u_1^* + x \quad \quad u_2  = u_2^* + y\\
@@ -82,7 +85,7 @@ Perturbation to both $u_1^*$ and $u_2^*$ by amounts $x$ and $y$.
 \end{align*}
 
 \begin{center}
-	\includegraphics[width=4cm]{figs/2Dperturb.pdf}
+	\includegraphics[width=6cm]{figs/2Dperturb.pdf}
 \end{center}
 
 Thus:
@@ -98,7 +101,7 @@ Because $u_1^*$ and $u_2^*$ are constants w.r.t $\tau$...
 	&\frac{dy}{d\tau}= \frac{du_2}{d\tau}
 \end{align*}
 
-Recall that we approximated response of single-sp. perturbation using a Taylor expansion:\\
+Recall that we approximated response of single-sp.~perturbation using a Taylor expansion:\\
 \begin{equation*}
 	f(N^*+n_t)\approx f(N^*)+f'(N^*) \cdot n_t + h.o.t.
 \end{equation*}
@@ -108,8 +111,8 @@ Do same thing in two dimensions (note use of \emph{partial} derivatives):\\
 To simplify syntax, let's denote $f_i(u_1^*,u_2^*) = f_i$\\
 \ind (i.e. $f_i$ is implicitly evaluated at steady state abundances)
 \begin{align*}
-	f_1(u_1^* + x, u_2^* + y) = & f_1(u_1^*,u_2^*) + \frac{\partial f_1}{1! \phantom{.}\partial u_1} \cdot x + \frac{\partial^2 f_1}{2! \phantom{.} \partial u_1^2} \cdot x^2 + ...\\
-	&\quad \quad \quad \quad ...  + \frac{\partial f_1}{1!\phantom{.} \partial u_2} \cdot y + \frac{\partial^2 f_1}{2!\phantom{.} \partial u_2^2} \cdot y^2 + h.o.t.\\
+	f_1(u_1^* + x, u_2^* + y) = & f_1(u_1^*,u_2^*) + \frac{\partial f_1}{1! \phantom{.}\partial u_1} \cdot x + \frac{\partial^2 f_1}{2! \phantom{.} \partial u_1^2} \cdot x^2 + h.o.t. + \dots \\
+	&\quad \quad \quad \quad \dots  + \frac{\partial f_1}{1!\phantom{.} \partial u_2} \cdot y + \frac{\partial^2 f_1}{2!\phantom{.} \partial u_2^2} \cdot y^2 +  h.o.t.\\
 	 \approx & f_1(u_1^*, u_2^*) + \left. \frac{\partial f_1}{\partial u_1}\right|_{u_1^*, u_2^*} \cdot x + \left. \frac{\partial f_1}{\partial u_2}\right|_{u_1^*, u_2^*} \cdot y
 \end{align*}
 Since at steady-state (by definition)..
@@ -152,19 +155,19 @@ We will return to this in more detail next time.\\
 \ind For now note that eigenvalues can have both `Real' and `Imaginary' parts...
 
 \begin{center}
-\begin{tabular}{ll}
-\hline
-\textbf{Eigenvalues ($\lambda_i$)} & \textbf{Interpretation} \\ 
-\hline
- All parts $< 0$ & Stable point attractor \\ 
- Some real parts $< 0$ & Saddle equilibrium (repellor-attractor) \\ 
- No real parts $<0$ & Unstable point repellor  \\ 
- Real parts $=0$ & Neutral stability \\ 
- \hline
- No imaginary parts & No oscillations \\ 
- With imaginary parts & Oscillations \\ 
- \hline
-\end{tabular} 
+	\begin{tabular}{ll}
+		\hline
+		\textbf{Eigenvalues ($\lambda_i$)} & \textbf{Interpretation} \\ 
+		\hline
+		$Re(\lambda_i)< 0$  for all $i$& Stable node (point attractor)\\ 
+		$Re(\lambda_i)< 0$ for some $i$ & Saddle node (repellor-attractor) \\ 
+		$Re(\lambda_i)> 0$ for all $i$ & Unstable node (repellor)\\ 
+		$Re(\lambda_i) = 0$ for all $i$ & Neutrally stable \\ 
+		\hline
+		$Im(\lambda_i) = 0$ for all $i$ & No oscillations \\ 
+		$Im(\lambda_i) \neq 0$ for some $i$  & Oscillations \\ 
+		\hline
+	\end{tabular} 
 \end{center}
 
 \rule[0.5ex]{\linewidth}{1pt}
@@ -172,26 +175,30 @@ We will return to this in more detail next time.\\
 \textbf{Evaluate eigenvalues of LV-competition equilibria}\\
 \ind \note{$\Rightarrow$ Mathematica \emph{`Class11-LVcompetition-nonDim'}}\\
 
-When $\alpha_{ii}>\alpha_{ij}$ \\
-\ind (intra- is stronger than inter-specific competition)...
+(Scenario 1) When intra- is stronger than inter-specific competition for both species\\
+ \ind (i.e.~$a_{ij} < a_{ii} = 1$ for both)
 \begin{center}
-	\includegraphics[width=5cm]{figs/LVcomp-Case1.pdf}
+	\includegraphics[width=5.2cm]{figs/LVcomp-Case1.pdf}
 \end{center}
 \ind \circled{1} Both $\lambda's <0 \Rightarrow$ Stable coexistence\\
 \ind \circled{2} Both $\lambda's > 0 \Rightarrow$ Unstable\\
 \ind \circled{3} $\lambda_1>0$ \& $\lambda_2 <0 \Rightarrow$ unstable (attractor-repellor)\\
-\ind \circled{4} $\lambda_1<0$ \& $\lambda_2 >0 \Rightarrow$ unstable (attractor-repellor)
-\ind \ind \circled{3} and \circled{4} are mutually invasible\\
+\ind \circled{4} $\lambda_1<0$ \& $\lambda_2 >0 \Rightarrow$ unstable (attractor-repellor) \\
+\ind $\implies$
+ \circled{3} and \circled{4} are mutually invasible\\
 
-When $\alpha_{ii}>\alpha_{ij}$  \& $\alpha_{jj}<\alpha_{ji}$\\
-\ind (inter- is stronger than intra-specific competition for one species but not the other)...
+(Scenario 2) When inter- is stronger than intra-specific competition for both species\\
+\ind (i.e.~$a_{ij} > a_{ii} = 1$ for both)
 \begin{center}
-	\includegraphics[width=5cm]{figs/LVcomp-Case2.pdf}
+	\includegraphics[width=5.2cm]{figs/LVcomp-Case2.pdf}
 \end{center}
 \ind \circled{1} $\lambda_1<0$ \& $\lambda_2 > 0 \Rightarrow$ unstable (attractor-repellor)\\
 \ind \circled{2} Both $\lambda's > 0 \Rightarrow$ Unstable\\
-\ind \circled{3} Both $\lambda's < 0 \Rightarrow$ Stable\\
-\ind \ind ...could do for third and fourth scenarios too.
+\ind \circled{3} \circled{4} Both $\lambda's < 0 \Rightarrow$ Stable\\
+
+\ind $\implies$
+\circled{3} and \circled{4} are Alternative Stable States
+
 
 \rule[0.5ex]{\linewidth}{1pt}
 \rule[0.5ex]{\linewidth}{1pt}

@@ -26,7 +26,7 @@
 
 \textbf{Concepts:}\\
 \ind - Determinant, Traces \& Routh-Hurwitz criteria\\
-\ind - Touch on Complexity vs. Stability debate
+\ind - Paper discussion
 
 \rule[0.5ex]{\linewidth}{1pt}
 
@@ -37,8 +37,8 @@ For 2x2 system:
 \end{equation*}
 
 \textbf{Routh-Hurwitz stabiliy criteria}\\
-\ind \ind Provide \emph{biological insight} (not possible using just $\lambda$'s)\\
-\ind \ind Unfortunately the following applies only to 2 x 2 systems.\\
+\ind \ind Provide \emph{biological insight} (far more challenging using just $\lambda$'s)\\
+\ind \ind Unfortunately, the simplicity of the following applies only to 2 x 2 systems.\\
 
 \ind Tr$(\mathbf{A})<0 \quad \Rightarrow \quad A_{11}+A_{22}<0$ is necessary for stability\\
 \ind \ind $\Rightarrow$ \emph{At least some species must be strongly self-limiting for stability} $\Leftarrow$ \\
@@ -61,7 +61,7 @@ Each condition by itself is \emph{necessary, but not sufficient}.
 \rule[0.5ex]{\linewidth}{1pt}
 \pagebreak
 
-\textbf{MacArthur-Rosenzweig paradox of enrichment model - revisited}
+\textbf{Rosenzweig-MacArthur paradox of enrichment model - revisited}
 \begin{equation*}
 	\frac{dR}{dt}=rR\left( 1-\frac{R}{K}\right) - \frac{aRC}{1+ahR} \qquad \qquad
 	\frac{dC}{dt}=\frac{eaRC}{1+ahR} - dC
@@ -128,7 +128,8 @@ Note that for this model:\\
 \ind $A_{21}$ will always be positive (look at first matrix) - \emph{prey effect on pred}\\
 \ind $A_{12}$ will always be negative - \emph{pred effect on prey}\\
 \ind $A_{11}$ can be positive or negative depending on $R^*$ and $C^*$\\
-\note{Q:} Why is $A_{22}=0$?  \note{A:} Consumer has no self-limitation (look back at model!)\\
+\note{Q:} How can $A_{11}>0$?  \note{A:} If $R^*$ and $C^*$ are small, or $K$ is large and $a$ is small.\\
+\note{Q:} Why is $A_{22}=0$?  \note{A:} Consumer has no self-limitation (look back at model)\\
 
 \textbf{Step 3:} Assess stability using eigenvalues or Routh-Hurwitz Criteria\\
 \ind $\lambda_i <0 \; \forall i \Rightarrow $ Stable fixed point\\
@@ -138,13 +139,13 @@ Graphical analysis:\\
 \ind Set $Tr(\mathbf{A})$ \& $Det(\mathbf{A})=0$ and plot as functions of $K$ and $h$:\\
 \ind Or plot $Tr(\mathbf{A})$ = $Det(\mathbf{A})$
 \begin{center}
- 	\includegraphics[width=7cm]{figs/h_v_K.pdf}\\
+ 	\includegraphics[width=9cm]{figs/h_v_K.pdf}\\
 \end{center}
 
 \rule[0.5ex]{\linewidth}{1pt}
 \pagebreak
 
-\textbf{Summary}: Two transitions between stability to local `instability' (two bifurcation points)
+\textbf{Summary}: Two transitions between stability to local `instability' (two bifurcation types)
 \begin{equation*}
 	\lambda = \tfrac{1}{2}\text{Tr}(\textbf{A}) \pm \tfrac{1}{2}\sqrt{(-\text{Tr}(\textbf{A}))^2 - 4\cdot\text{Det}(\textbf{A})} 
 \end{equation*}
@@ -175,7 +176,7 @@ Appearance of new (boundary) equilibrium.\\
 \ind \ind $Tr(\mathbf{A})=0$\\
 
 \textbf{Result:}\\
-Transition from damped oscillations\\
+Transition between damped oscillations\\
 \ind to sustained oscillations.\\
 Equilibrium doesn't disappear.\\
 
@@ -183,7 +184,7 @@ Equilibrium doesn't disappear.\\
 \end{minipage}
 
 \begin{center}
-  	\includegraphics[width=12cm]{figs/Tr_v_Det.png}
+  	\includegraphics[width=16cm]{figs/Tr_v_Det.png}
 \end{center}
 
 

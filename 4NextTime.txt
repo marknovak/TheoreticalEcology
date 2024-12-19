@@ -16,3 +16,10 @@ Spend longer teaching Mathematica in class.
 Anticipate more time (2nd whole class period) for Trophic modules, such that we can in fact do them in class together.
 
 Interaction Strengths (and then Press perturbations) is an okay class to skip.
+
+Add:
+[1] B. A. Melbourne and A. Hastings. Extinction risk depends strongly on factors contributing to stochas- ticity. Nature, 454(7200):100–103, 2008.
+[1] F. Clark, B. W. Brook, S. Delean, H. Re ̧sit Ak ̧cakaya, and C. J. A. Bradshaw. The theta-logistic is unreliable for modelling most census data. Methods in Ecology and Evolution, 1(3):253–262, 2010.
+
+
+

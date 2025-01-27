@@ -77,7 +77,7 @@ library(deSolve)
 # the starting population size'N0',
 # the total time 'T', 
 # and a third input variable 'p' representing the two parameters
-# of our equation: r and a.
+# of our equation: r and K.
 
 ClogisK <- function(t, y, p) {
   N <- y[1]
@@ -87,12 +87,13 @@ ClogisK <- function(t, y, p) {
   })
 }
 
-# We therefore have to include both r and a in the params variable:
-params <- c(r = 0.1, K = 100)
+# We therefore have to include both r and K in the params variable:
+params <- c(r = 0.1, 
+            K = 100)
 
 # Then specify the starting abundance and the time over which we want to simulate dynamics:
 N0 <- c(N = 1)
-t <- 1:100
+t <- seq(1, 100)
 
 # Now run your simulation using the ode function of deSolve
 out <- ode(
@@ -124,7 +125,7 @@ plot(dNdt ~ N[-length(N)],
      xlab = 'N')
 
 ################
-# Try out various combinations of N0, T, r, and alpha, saving the results into new variables,
+# Try out various combinations of N0, T, r, and K, saving the results into new variables,
 # out2, N2, and dNdt2, for example, to avoid overwritting your previous simulations.
 
 # Different per capita growth rate

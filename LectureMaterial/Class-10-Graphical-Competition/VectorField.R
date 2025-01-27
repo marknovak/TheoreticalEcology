@@ -58,13 +58,15 @@ plotVectorField <-
       type = "n",
       frame.plot = T
     )
-    arrows(x0,
-           y0,
-           x1,
-           y1,
-           length = arrow.length,
-           angle = 20,
-           code = 2)
+    suppressWarnings(
+      arrows(x0,
+             y0,
+             x1,
+             y1,
+             length = arrow.length,
+             angle = 20,
+             code = 2)
+    )
   }
 
 ##########################################################################

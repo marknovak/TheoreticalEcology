@@ -523,10 +523,10 @@ par(op)
 # source vector field function
 source('VectorField.R')
 
-isoN1 <- function(x) {
+isoN2 <- function(x) {
   -x * a21 + K2
 }
-isoN2 <- function(x) {
+isoN1 <- function(x) {
   (K1 - x) / a12
 }
 

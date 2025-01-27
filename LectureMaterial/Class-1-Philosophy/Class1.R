@@ -10,7 +10,8 @@ x <- dat$Year
 y <- dat$Hare
 z <- dat$Lynx
 
-quartz(width = 16, height = 8)
+qm <- 3
+quartz(width = 3.5 * qm, height = 2 * qm)
 par(
   mar = c(4, 4, 2, 1),
   tcl = -0.2,
@@ -44,7 +45,7 @@ legend(
 
 ####
 # Plot only Hare data w/out connecting lines
-quartz(width = 16, height = 8)
+quartz(width = 3.5 * qm, height = 2 * qm)
 par(
   mar = c(4, 4, 2, 1),
   tcl = -0.2,
@@ -71,7 +72,7 @@ nrow(dat) # years of data
 
 #######
 # Fit Hare data with polynomials
-quartz(width = 16, height = 10)
+quartz(width = 3.5 * qm, height = 2 * qm)
 par(
   mfrow = c(3, 1),
   mar = c(4, 4, 1, 1),
@@ -119,7 +120,7 @@ plot(
 )
 lines(x, predict(lm(y ~ poly(x, p)), data.frame(x = x)))
 
-quartz(width = 16, height = 10)
+quartz(width = 3.5 * qm, height = 2 * qm)
 par(
   mfrow = c(3, 1),
   mar = c(4, 4, 1, 1),
@@ -165,7 +166,7 @@ x <- seq(1, n, 1)
 y <- runif(n)
 
 ########
-quartz(width = 20, height = 10)
+quartz(width = 3.5 * qm, height = 2 * qm)
 par(
   mfrow = c(2, 3),
   mar = c(4, 4, 1, 1),

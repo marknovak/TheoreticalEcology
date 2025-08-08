@@ -71,6 +71,33 @@ nrow(dat) # years of data
 
 
 #######
+# Fit Hare data with GAM
+library(mgcv)
+
+quartz(width = 3.5 * qm, height = 1 * qm)
+par(
+  mar = c(4, 4, 1, 1),
+  tcl = -0.2,
+  cex.lab = 2,
+  cex.axis = 1,
+  mgp = c(2, 0.3, 0),
+  lwd = 2,
+  pch = 21
+)
+
+plot(
+  x,
+  y,
+  xlab = 'Time',
+  ylab = 'Pop. size',
+  bg = 'grey',
+  main = 'GAM',
+  cex = 1.5
+)
+lines(x, predict(gam(y ~ s(x, k = 20)), data.frame(x = x)))
+
+
+#######
 # Fit Hare data with polynomials
 quartz(width = 3.5 * qm, height = 2 * qm)
 par(

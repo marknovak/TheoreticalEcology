@@ -181,7 +181,7 @@ Will show that
 And that...\\
 when there is \emph{environmental variation} only:
 \begin{equation*}
-	\sigma^2_{ln(N_T)}=T \cdot \sigma^2_{ln(\lambda_t)}
+	\sigma^2_{ln(N_T)}=T \cdot \sigma^2_{ln(\bar{\lambda})}
 \end{equation*}
 
 when there is only \emph{demographic variation}:
@@ -265,58 +265,59 @@ In Problem Set \#2 you should therefore use $N_{t+1}=N_t (\lambda \pm e^\epsilon
 (and possibly negative population sizes)!
 \end{itemize}
 
-\rule[0.5ex]{\linewidth}{1pt}
+%\rule[0.5ex]{\linewidth}{1pt}
+%
+%\note{In unlikely event of having extra time...}\\
+%\textbf{Demographic stochasticity} - Between-individual variation in per capita growth rate\\
+%Analogy of flipping a coin (not perfect, but will do).
+%\begin{center}
+%	$H$ = birth and $T$ = death
+%\end{center}
+%\note{Q:} How many $H$ and $T$ in 1000 flips?  How many in 100?  How many in 4?\\
+%For fair coin, $P(H)=P(T)=0.5$ and $P(H)+P(T)=1 \quad \Rightarrow $ Binomial distribution.
 
-\note{In unlikely event of having extra time...}\\
-\textbf{Demographic stochasticity} - Between-individual variation in per capita growth rate\\
-Analogy of flipping a coin (not perfect, but will do).
-\begin{center}
-	$H$ = birth and $T$ = death
-\end{center}
-\note{Q:} How many $H$ and $T$ in 1000 flips?  How many in 100?  How many in 4?\\
-For fair coin, $P(H)=P(T)=0.5$ and $P(H)+P(T)=1 \quad \Rightarrow $ Binomial distribution.
-
-\rule[0.5ex]{\linewidth}{1pt}
-\textbf{Class exercise in R}\\
-Number of extinctions as function of starting population size using binomial.\\
-Going to assume:
-\begin{align*}
-	P(birth)&=\frac{b}{b+d}\\
-	P(death)&=\frac{d}{b+d}
-\end{align*}
-\begin{center}
-	where $b$ and $d$ are per capita birth and death rates, such that $r=b-d$.
-\end{center}
-
-\rule[0.5ex]{\linewidth}{1pt}
-For true population (no longer binomial):
-\begin{align*}
-	P(birth)&=\frac{b}{b+d+o}\\
-	P(death)&=\frac{d}{b+d+o}\\
-	P(other)&=1-[P(b)+P(d)]
-\end{align*}
-Won't go through derivations, but expectation of $N(t)$ is still:
-\begin{equation*}
-	\overline{N_t}=N_0 e^{\bar{r}t}
-\end{equation*}
-But for variance:
-\begin{equation*}
-  \sigma_{N_T}^2 =
-  \begin{cases} 
-        2N_0 \bar{b} T & \text{if } \bar{b}=\bar{d} \\
-        \frac{\bar{b}+\bar{d}}{\bar{b}-\bar{d}} N_0 e^{\bar{r}T}(e^{\bar{r}T}-1) & \text{if } \bar{b} \neq \bar{d}
-    \end{cases}
- \end{equation*}
-
-Side note...Probability of extinction:
-\begin{equation*}
-	P(ext)=\left(\frac{d}{b}\right)^{N_0}
-\end{equation*}
-
-\rule[0.5ex]{\linewidth}{1pt}
-Of course, environmental and demographic stochasticity are not mutually exclusive!\\  
-Temporal variation among individuals will also causes temporal variation in $\lambda$.\\
-See Case for example combining the two.
+%\rule[0.5ex]{\linewidth}{1pt}
+%\textbf{Class exercise in R}\\
+%Number of extinctions as function of starting population size using binomial.\\
+%Going to assume:
+%\begin{align*}
+%	P(birth)&=\frac{b}{b+d}\\
+%	P(death)&=\frac{d}{b+d}
+%\end{align*}
+%\begin{center}
+%	where $b$ and $d$ are per capita birth and death rates, such that $r=b-d$.
+%\end{center}
+%
+%\rule[0.5ex]{\linewidth}{1pt}
+%For true population (no longer binomial):
+%\begin{align*}
+%	P(birth)&=\frac{b}{b+d+o}\\
+%	P(death)&=\frac{d}{b+d+o}\\
+%	P(other)&=1-[P(b)+P(d)]
+%\end{align*}
+%Won't go through derivations, but expectation of $N(t)$ is still:
+%\begin{equation*}
+%	\overline{N_t}=N_0 e^{\bar{r}t}
+%\end{equation*}
+%But for variance:
+%\begin{equation*}
+%  \sigma_{N_T}^2 =
+%  \begin{cases} 
+%        2N_0 \bar{b} T & \text{if } \bar{b}=\bar{d} \\
+%        \frac{\bar{b}+\bar{d}}{\bar{b}-\bar{d}} N_0 e^{\bar{r}T}(e^{\bar{r}T}-1) & \text{if } \bar{b} \neq 
+%\bar{d}
+%    \end{cases}
+% \end{equation*}
+%
+%Side note...Probability of extinction:
+%\begin{equation*}
+%	P(ext)=\left(\frac{d}{b}\right)^{N_0}
+%\end{equation*}
+%
+%\rule[0.5ex]{\linewidth}{1pt}
+%Of course, environmental and demographic stochasticity are not mutually exclusive!\\  
+%Temporal variation among individuals will also causes temporal variation in $\lambda$.\\
+%See Case for example combining the two.
 
 \rule[0.5ex]{\linewidth}{1pt}
 \rule[0.5ex]{\linewidth}{1pt}

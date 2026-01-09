@@ -67,7 +67,7 @@ For discrete logistic:
 
 \begin{center}
 	\note{Project figure in Keynote}\\
-\includegraphics[width=5cm]{figs/RickerSlope.jpg}
+\includegraphics[width=4cm]{figs/RickerSlope.jpg}
 \end{center}
 
 \rule[0.5ex]{\linewidth}{1pt}
@@ -106,6 +106,8 @@ For discrete logistic:
 \textbf{Thus, continuous logistic reaches stable point equilibrium when} $r>0$.
 \end{center}
 
+\note{Class Q:} What about $N^* = 0$?  (Stick in to get $F'(0) = r$ $\implies$ unstable).
+
 \rule[0.5ex]{\linewidth}{1pt}
 
 \textbf{Summary}\\
@@ -119,6 +121,8 @@ Step \#2: Evaluate $f'(N^*)$\\
 \ind \ind \ind \ind (for continuous logistic, stable if $r>0$)\\
 
 \rule[0.5ex]{\linewidth}{1pt}
+
+\clearpage
 
 \textbf{ 1-D Stability analysis - Dig deeper}
 (In discrete time, but same applies to continuous time models)
@@ -191,10 +195,10 @@ First two terms are good approximation when $n_t$ is small.
 Thus:
 \begin{align*}
 	n_{t+1}& =F(N^*+n_t)-N^*\\
-	& \approx F(N^*)+F'(N^*) \cdot n_t - N^*\\
+	& \approx \left [ F(N^*)+ F'(N^*) \cdot n_t \right ] - N^*\\
 	& \approx N^* + F'(N^*) \cdot n_t - N^*\\
 	& \approx F'(N^*) \cdot n_t \\
-	& = \lambda n_t \quad \quad (\lambda \text{ is the ``eigenvalue'' (for single-spp. model))!}
+	& = \lambda n_t \quad \quad (\lambda \text{ is the ``eigenvalue'')}
 \end{align*}
 
 \vspace{1cm}
@@ -265,8 +269,9 @@ The equation
 \end{equation*}
 has 2 parameters (+1 that's implicit!) and 1 variable.\\
 \ind \ind $r : \frac{\#}{\# time}$
-\ind \ind $K : \#$
 \ind \ind $N : \#$
+\ind \ind $K : \#$
+\ind (Remember $K=\frac{r}{\alpha}$ and $\alpha : \frac{\#}{\# \# t}$)
 
 \vspace{1cm}
 

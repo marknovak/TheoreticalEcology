@@ -74,7 +74,8 @@ At what population size does realized per capita growth increment = 0?
 
 Plug into equation for population growth rate by replacing $r_d$ with $r_d-\alpha N_t$
 \begin{align*}
-	N_{t+1}=& N_t+(r_d-\alpha N_t)N_t &\;\;\;\;\text{(\emph{Discrete logistic growth eqn.})}\\
+	N_{t+1}=& N_t+(r_d-\alpha N_t)N_t &\\
+	& \textit{(The quadratic discrete logistic growth eqn.)} \\
 \text{Typically written with $K=\frac{r_d}{\alpha}$ for `carrying capacity':}&\\
 	=  & N_t + \left(r_d-\frac{r_d}{K} N_t \right) N_t &\\
 	=  & N_t + r_d\left(1-\frac{N_t}{K}\right) N_t &

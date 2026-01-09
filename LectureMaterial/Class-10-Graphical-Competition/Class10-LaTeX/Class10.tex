@@ -16,7 +16,7 @@
 \noindent\makebox[\textwidth][c]{\Large\bfseries Lecture 10 -- Two-species competition}
 
 \rule[0.5ex]{\linewidth}{1pt}
-\textbf{Today:} Graphical analysis of two-species competition.\\
+\textbf{Today:} Graphical analysis of two-species competition. \note{Hand out Q3 on pg.2}\\
 \textbf{Next:} 2-D stability analysis\\
 \textbf{Concepts for the road ahead:}\\
 \ind Coexistence, Invasibility, Priority effects, Alternative Stable States\\
@@ -126,7 +126,6 @@ Note also that we can't solve for one species without knowing the other.\\
 	N_i^*  & = K_i - \alpha_{ij} N_j^* \\
 				& = K_i - \alpha_{ij} \left ( K_j  - \alpha_{ji} N_i^* \right )\\
 				& = K_i - \alpha_{ij} K_j + \alpha_{ij}\alpha_{ji} N_i^* \\
-	N_i^* + \alpha_{ij} K_j - \alpha_{ij} \alpha_{ji} N_i^* & = K_i \\
 	N_i^* - \alpha_{ij} \alpha_{ji} N_i^* & = K_i - \alpha_{ij} K_j \\
 	N_i^* \left (1 - \alpha_{ij} \alpha_{ji} \right)  & = K_i - \alpha_{ij} K_j \\
 	N_i^* & = \frac{ K_i - \alpha_{ij} K_j  } {1-\alpha_{ij} \alpha_{ji} }
@@ -145,33 +144,6 @@ Note also that we can't solve for one species without knowing the other.\\
 
 \rule[0.5ex]{\linewidth}{1pt}
 
-Return to main questions:\\
-\ind When can both spp. coexist?\\
-\ind When can sp 1 out-compete sp 2?\\
-\ind When can sp 1 invade sp 2?\\
-
-\textbf{Naive simulations}\\
-\ind \note{R-demonstration - Walk through first set of parameter values. ``Naive simulations''}\\
-\ind \ind \note{Then show full table before showing results with R code for other parameters.}\\
-
-\ind With $r_1 = r_2 = K_1 = K_2 = 1$ and $N_1(0) = N_2(0)=0.01$
-
-\begin{table*}[h]
-\centering
-\begin{tabular}{cccc}
-$\alpha_{21}$ & $\alpha_{12}$ & Outcome \\ 
-\hline
-0.5 & 0.7 & coexist & \\
-1.5 & 0.5 & sp1 & \\
-0.5 & 1.5 & sp2 & $N_1(0)=N_2(0)$\\
-1.5 & 1.7 & sp2 & \\
-\hline
-1.5 & 1.7 & sp1 & $N_1(0)>N_2(0)$\\
- \hline
-\end{tabular} 
-\end{table*}
-\ind \ind \ind \ind \ind \ind $\Rightarrow$ Priority effect\\
-\ind \ind \ind \ind \ind \ind  $\Rightarrow$ Alternative stable states
 
 \textbf{Graphical Analysis}\\
 Earlier we showed that from $\frac{dN_i}{dt}=0$ that:
@@ -179,16 +151,20 @@ Earlier we showed that from $\frac{dN_i}{dt}=0$ that:
 	N_i^* = & K_i - \alpha_{ij} N_j\\
 	\Rightarrow N_j = & \frac{K_i-N_i^*}{\alpha_{ij}}\\
 	\text{Thus isocline interesects x-axis at}\\
-  N_j = & \frac{K_i-0}{\alpha_{ij}}=\frac{K_i}{\alpha_{ij}}
-	\end{align*}
+	N_j = & \frac{K_i-0}{\alpha_{ij}}=\frac{K_i}{\alpha_{ij}}
+\end{align*}
 
 Same goes for 2nd species.
 \begin{center}
-\includegraphics[width=17cm]{figs/LV_comp_isoclines.pdf}
+	\includegraphics[width=16cm]{figs/LV_comp_isoclines.pdf}
 \end{center}
-\note{R-code: Work through other parameter values}\\
 
 \textbf{Inferences/Conclusions:}
+
+\ind When can both spp. coexist?\\
+\ind When can sp 1 out-compete sp 2?\\
+\ind When can sp 1 invade sp 2?
+
 
 \begin{table*}[h]
 \centering
@@ -200,6 +176,34 @@ Priority effect: & intra $<$ inter for both\\
 & \ind \ind (i.e. $\frac{K_i}{\alpha_{ii}}=\frac{K_i}{1} > \frac{K_j}{\alpha_{ji}} \Rightarrow \alpha_{ii}<\alpha_{ji}$)
 \end{tabular} 
 \end{table*}
+
+\textbf{Simulations}\\
+\ind \note{R-demonstration - Walk through first set of parameter values.}\\
+
+\ind With $r_1 = r_2 = K_1 = K_2 = 1$ and $N_1(0) = N_2(0)=0.01$
+
+\begin{table*}[h]
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		$\alpha_{21}$ & $\alpha_{12}$ & Outcome & Initial\\ 
+		\hline
+		\hline
+		0.5 & 0.7 & \textit{coexist} & \\
+		1.5 & 0.5 & sp 1 & \\
+		0.5 & 1.5 & sp 2 & $N_1(0)=N_2(0)$\\
+		1.5 & 1.7 & sp 2 & \\
+		\hline
+		2 & 2 & sp $i$ & $N_i(0)>N_j(0)$\\
+		\hline
+		\hline
+	\end{tabular} 
+\end{table*}
+\ind \ind \ind \ind \ind \ind $\Rightarrow$ Priority effect\\
+\ind \ind \ind \ind \ind \ind  $\Rightarrow$ Alternative stable states
+
+\note{R-code: Work through other parameter values}\\
+\note{Show \textit{VectorField.R}}
 
 \rule[0.5ex]{\linewidth}{1pt}
 \rule[0.5ex]{\linewidth}{1pt}

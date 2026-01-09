@@ -2,6 +2,7 @@
 ##########################################################################################
 rm(list = ls()) # clears workspace
 qm <- 2
+quartz.options(pointsize = 12 * qm)
 
 # Define function for Discrete logistic
 Dlogis <- function(N0, T, r, a) {

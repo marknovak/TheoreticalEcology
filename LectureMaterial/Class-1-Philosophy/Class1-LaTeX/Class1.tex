@@ -102,13 +102,14 @@ Next class: Density-independent geometric deterministic single-species growth \\
 	]
 		\setlength{\columnseprule}{0.2pt}
 	Feeding rate of $Z$ on $Y$ depends on $Y$'s abundance\\
-	$\implies f(Y) = \gamma Y$
+	e.g., $f(Y) = \gamma Y$
 	
 \begin{center}
 	\includegraphics[width=4cm]{figs/img1}
 \end{center}
 
-	Could be non-linear
+	Could be non-linear, 
+	e.g., $f(Y) = \gamma Y^{1/2}$
 	\begin{center}
 		\includegraphics[width=4cm]{figs/img2}
 	\end{center}
@@ -119,7 +120,7 @@ Next class: Density-independent geometric deterministic single-species growth \\
 	\begin{equation*}
 		Y_{t+1} = Y_t +( \alpha W_t + \beta X_t - \gamma Z_t  ) Y_t
 	\end{equation*}
-	Value of $Y$ depends on the value before it.
+	Value of $Y$ depends on the \textit{previous} $Y$ value.
 	
 \end{multicols}
 
@@ -174,7 +175,7 @@ Quantitative models are tools for \textit{evaluating} hypotheses/conceptual mode
 	Analytical inference\\
 	Simulation \& Numerical analysis\\
 	
-	e.g., intercept = 0 makes no sense for functional response
+	e.g., intercept > 0 nonsensical for functional response
 	\begin{center}
 	\includegraphics[width=7cm]{figs/img4}
 	
@@ -191,7 +192,7 @@ The best modern-day quantitative modeling \textit{combines} traditional Statisti
 		\end{equation*}
 \end{center}
 
-$\implies$ New world of process-model fitting \& information-theoretic model comparisons\\
+$\implies$ Modern world of process-model fitting \& information-theoretic model comparisons\\
 
 Models are \textit{not} the same as hypotheses or theories\\
 Multiple models can encapsulate the same hypotheses\\
@@ -227,8 +228,8 @@ Much work has shown low-dimensional model can explain most of the observed varia
 Low-dimensional models allow:\\
 \-\hspace{1cm}  identify \& focus on most critical parameters, variables, processes\\
 \-\hspace{1cm} rigorous exploration/understanding of uncertainty\\
-\-\hspace{1cm}decision-making tools\\
-\-\hspace{1cm}general understanding is the goal\\
+\-\hspace{1cm} decision-making tools\\
+\-\hspace{1cm} general understanding is the goal\\
 
 ``No model can be general, precise, and realistic.'' -- Puccia \& Levins\\
 
@@ -242,7 +243,6 @@ Model it using polynomial regression:\\
 	N(t) = \sum_{n=0}^\infty \beta_n t^n = \beta_0 \cancelto{1}{t^0} + \beta_1 t^1 + \beta_2 t^2 + \ldots + \beta_n t^n
 \end{equation*}
 
-\note{Group exercise}
 Repeat with random numbers\\
 What have we learned from our polynomial model?  Nothing!\\
 Yet this statistical model is a perfect fit to the data!\\

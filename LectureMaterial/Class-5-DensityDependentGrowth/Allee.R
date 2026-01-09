@@ -43,6 +43,7 @@ N3 <- out3$N
 dNdt3 <- N3[-1] - N3[-length(N3)]
 
 # Put plots side-by-side
+quartz()
 par(mfrow = c(2, 2))
 
 plot(out1$time,
@@ -156,3 +157,4 @@ points(
   pch = 21,
   bg = 'black'
 )
+

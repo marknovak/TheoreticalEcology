@@ -4,6 +4,7 @@
 # Phase portrait
 ################
 qm <- 2
+quartz.options(pointsize = 12 * qm)
 
 source('VectorField.R')
 

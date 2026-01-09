@@ -32,7 +32,7 @@
 		\textbf{Eigenvalues ($\lambda_i$)} & \textbf{Interpretation} \\ 
 		\hline
 		$Re(\lambda_i)< 0$  for all $i$& Stable node\\ 
-		$Re(\lambda_i)< 0$ for some $i$ & Saddle node \\ 
+		$Re(\lambda_i)< 0$ for some $i$ & Saddle point \\ 
 		$Re(\lambda_i)> 0$ for all $i$ & Unstable node \\ 
 		$Re(\lambda_i) = 0$ for all $i$ & Neutrally stable \\ 
 		\hline
@@ -207,7 +207,7 @@ Multi-species extension:\\
 
 \textbf{Extension to Holling Type III}
 \begin{equation*}
-	f(R)=\frac{aR^m}{1+ahR^m}
+	f(R)=\frac{\hat{a}R^m}{1+\hat{a}hR^m}
 \end{equation*}
 \ind If $m>1\; \Rightarrow $Type II functional response.\\
 \includegraphics[width=4cm]{figs/FR_T3.pdf}
@@ -218,7 +218,9 @@ Multi-species extension:\\
 \ind $\Rightarrow$ Reduces to Type I if $m=1$ \& $h=0$\\
 
 Phenomenological model of prey switching where consumer ignores focal prey at low prey densities.\\
-\ind e.g., Let $a = \hat{a}R$ (preference increases with density), then get $f(R)=\frac{aR^2}{1+ahR^2}$.\\
+\ind e.g., Let $a = \hat{a}R$ (preference increases with density), then get 
+$f(R)=\frac{\hat{a}R^2}{1+\hat{a}hR^2}$.\\
+Note that units of $\hat{a}$ are different than those of $a$!\\
 
 Many more functional response models exist! \note{Slide}
 
@@ -254,7 +256,7 @@ Many more functional response models exist! \note{Slide}
 \includegraphics[width=1cm]{figs/CR_digraph2.pdf}
 \end{wrapfigure}
 
-\textbf{MacArthur-Rosenzweig Model (1963)}(a.k.a. Paradox of enrichment model)
+\textbf{Rosenzweig-MacArthur Model (1963)} (a.k.a. Paradox of enrichment model)
 
 \begin{equation*}
 	\frac{dR}{dt}=bR(1-\alpha R) - \frac{aRC}{1+ahR} \qquad \qquad  \frac{dC}{dt}=\frac{eaRC}{1+ahR}-dC 
@@ -268,7 +270,7 @@ Remember from LV-model:
 	R^*=\frac{d}{ae} \qquad \qquad C^* = \frac{b}{a}
 \end{equation*}
 
-For MacArthur-Rosenzweig model:
+For Rosenzweig-MacArthur model:
 \begin{equation*}
 	R^*=\frac{d}{ae-adh} \qquad \qquad C^* = \frac{b}{a} + \frac{bR(ah-\alpha-a \alpha h R)}{a}
 \end{equation*}
@@ -294,6 +296,7 @@ Sometimes may be given \emph{four} equilibria !?!?!
 \ind \circled{4} $R^*<0, C^*=0$ unfeasible\\
 
 \textbf{Study isoclines}\\
+At given parameter values (other responses possible)
 \begin{equation*}
 \begin{rcases}
   \text{decreasing }d & \\

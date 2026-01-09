@@ -1,4 +1,5 @@
 rm(list = ls()) # clears workspace
+quartz.options(pointsize = 12 * qm)
 ###########################################################
 ###########################################################
 # Geometric growth - Arithmetic (natural) vs. Log-scale
@@ -30,23 +31,44 @@ plot(
   N ~ x,
   xlab = 'Time Steps',
   ylab = 'Population size - N(t)',
-  type = 'b',
+  type = 'p',
   pch = 19,
   axes = F
 )
+segments(x[-length(x)], N[-length(N)], 
+         x[-1], N[-length(N)], 
+         lty = 1,
+         lwd = 1,
+         col = 'grey')
+segments(x[-1], N[-length(x)], 
+         x[-1], N[-1], 
+         lty = 1,
+         lwd = 1,
+         col = 'grey')
+points(x, N)
 box(lwd = 2)
 axis(1, at = x, label = x - 1)
 axis(2, at = lab, labels = lab)
+
 #---- Log-scale
 plot(
   N ~ x,
   log = 'y',
   xlab = 'Time Steps',
   ylab = 'log N(t)',
-  type = 'b',
   pch = 19,
   axes = F
 )
+segments(x[-length(x)], N[-length(N)], 
+         x[-1], N[-length(N)], 
+         lty = 1,
+         lwd = 1,
+         col = 'grey')
+segments(x[-1], N[-length(x)], 
+         x[-1], N[-1], 
+         lty = 1,
+         lwd = 1,
+         col = 'grey')
 box(lwd = 2)
 axis(1, at = x, label = x - 1)
 axis(2, at = lab, labels = lab)
@@ -76,11 +98,20 @@ plot(
   N ~ x,
   xlab = 'Time Steps',
   ylab = 'Population size - N(t)',
-  type = 'b',
   pch = 19,
   axes = F,
   ylim = c(1, max(lab))
 )
+segments(x[-length(x)], N[-length(N)], 
+         x[-1], N[-length(N)], 
+         lty = 1,
+         lwd = 1,
+         col = 'grey')
+segments(x[-1], N[-length(x)], 
+         x[-1], N[-1], 
+         lty = 1,
+         lwd = 1,
+         col = 'grey')
 box(lwd = 2)
 axis(1, at = x, label = x - 1)
 axis(2, at = lab, labels = lab)
@@ -92,7 +123,18 @@ x <- c(T, max(T) + 1)
 for (t in T) {
   N[t + 1] <- lambda * N[t]
 }
-points(N ~ x, type = 'b', pch = 19)
+points(N ~ x,
+       pch = 18)
+segments(x[-length(x)], N[-length(N)], 
+         x[-1], N[-length(N)], 
+         lty = 2,
+         lwd = 1,
+         col = 'grey')
+segments(x[-1], N[-length(x)], 
+         x[-1], N[-1], 
+         lty = 2,
+         lwd = 1,
+         col = 'grey')
 
 #---- log scale
 lambda <- 2
@@ -108,11 +150,20 @@ plot(
   log = 'y',
   xlab = 'Time Steps',
   ylab = 'log N(t)',
-  type = 'b',
   pch = 19,
   axes = F,
   ylim = c(1, max(lab))
 )
+segments(x[-length(x)], N[-length(N)], 
+         x[-1], N[-length(N)], 
+         lty = 2,
+         lwd = 1,
+         col = 'grey')
+segments(x[-1], N[-length(x)], 
+         x[-1], N[-1], 
+         lty = 2,
+         lwd = 1,
+         col = 'grey')
 box(lwd = 2)
 axis(1, at = x, label = x - 1)
 axis(2, at = lab, labels = lab)
@@ -124,7 +175,17 @@ x <- c(T, max(T) + 1)
 for (t in T) {
   N[t + 1] <- lambda * N[t]
 }
-points(N ~ x, type = 'b', pch = 19)
+points(N ~ x, pch = 18)
+segments(x[-length(x)], N[-length(N)], 
+         x[-1], N[-length(N)], 
+         lty = 2,
+         lwd = 1,
+         col = 'grey')
+segments(x[-1], N[-length(x)], 
+         x[-1], N[-1], 
+         lty = 2,
+         lwd = 1,
+         col = 'grey')
 
 # lambda vs N
 quartz(height = 8, width = 20)
@@ -238,7 +299,7 @@ text(max(n) / 2, 1.2,
      bquote('Compare: when r = 1, e' ^ 'r' == .(round(e, 6))))
 
 #########
-n <- seq(0, 1000, 1)
+n <- seq(0, 200, 1)
 N1 <- N0 * (1 + rd / n) ^ n
 
 est.e <- max(N1 / N0)
@@ -264,3 +325,53 @@ text(max(n) / 2, 1.2,
 ########################################################################
 ########################################################################
 ########################################################################
+
+lab <- c(1, 2, 4, 8, 16, 32)
+lambda <-  2
+N <- numeric()
+N[1] <- 1
+T <- 1:5
+x <- c(T, max(T) + 1)
+for (t in T) {
+  N[t + 1] <- lambda * N[t]
+}
+par(
+  mar = c(5, 5, 1.5, 1),
+  lwd = 2,
+  cex.lab = 1.2,
+  mgp = c(2, 0.5, 0),
+  tcl = -0.3
+)
+#---- Natural scale
+plot(
+  N ~ x,
+  xlab = 'Time Steps',
+  ylab = 'Population size - N(t)',
+  type = 'p',
+  pch = 19,
+  axes = F
+)
+segments(x[-length(x)], N[-length(N)], 
+         x[-1], N[-length(N)], 
+         lty = 1,
+         lwd = 1,
+         col = 'grey')
+segments(x[-1], N[-length(x)], 
+         x[-1], N[-1], 
+         lty = 1,
+         lwd = 1,
+         col = 'grey')
+points(x, N)
+box(lwd = 2)
+axis(1, at = x, label = x - 1)
+axis(2, at = lab, labels = lab)
+
+r <- log(lambda)
+curve(N[1] * exp(r * (x-1)),
+      add = TRUE)
+
+message(paste0('lambda = ', lambda, 
+               ', r_d = ', lambda-1, 
+               ', r = ', round(r,4)))
+
+        

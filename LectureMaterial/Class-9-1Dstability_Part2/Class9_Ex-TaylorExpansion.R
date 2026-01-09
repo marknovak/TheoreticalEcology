@@ -2,6 +2,7 @@
 # Taylor expansion example
 ##########################
 qm <- 2
+quartz.options(pointsize = 10 * qm)
 
 pfunc <- function(x) {
   a + 
@@ -76,7 +77,7 @@ legend(
   ),
   lty = c(1, 2, 1, 4, 5),
   lwd = c(5, rep(2, 4)),
-  cex = 2,
+  cex = 1,
   bty = "n",
   col = c('black', 'grey', 'red', 'grey', 'grey')
 )

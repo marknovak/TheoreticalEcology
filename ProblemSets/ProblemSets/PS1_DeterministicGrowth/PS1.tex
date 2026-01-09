@@ -13,7 +13,7 @@
 
 \setcounter{secnumdepth}{0}  % don't number sections (stars not needed)
 
-\title{\textbf{Problem Set 1}\\Deterministic Growth\vspace{-3em}}
+\title{\textbf{Problem Set}\\Deterministic Growth\vspace{-3em}}
 \date{}
 \author{}
 
@@ -107,7 +107,7 @@ Notice also that I've used the pound symbol \R{\#} (aka hashtag) to annotate my 
 Believe me, it is very useful to annotate your code as fully as you can.  
 You'll be amazed at how often seemingly obvious code is totally impenetrable to you a year (or even a week) later.
 	
-\subsection{Part B.2}
+\subsection{Part B.1}
 
 \textbf{Finally, your assignment...}
 Extend your code to iterate eqn.~\ref{eqn1} and to plot $log_e(N(t))$ versus time for \R{t} going from 1 to the total number of time steps.  
@@ -129,13 +129,13 @@ Now repeat the above and use either the function \R{points()} or the function \R
 \subsection{Part B.2} 
 How does the plot of $log_e(N)$ vs. time compare to the plot of $N$ vs. time? 
 What does plotting $log_e$ population size as a function of time indicate about the population's growth rate?  
-Confirm this by plotting the relationship between the population's growth rate (i.e. the \textit{relative} change in $N$ between successive time steps) and $N$ or $log_e(N)$.
+Confirm this by plotting the population's multipilcative growth rate (i.e. the \textit{relative} change in 
+$N$ between successive time steps calculated from the data) and its population size. 
+That is, calculate $\lambda[t] = N[t+1] / N[t]$ and plot it as a function of $N[t]$.
+Use the function \R{abline(h=lambda, lty=2, col='red')} to check your answer. 
 
 \noindent
 \textbf{Hint \#4}:  You may need to use the function \R{length()} and a shortcut command described on the R Reference Card under the heading \textit{Slicing and extracting data} to do this calculation in one line of code.   
-
-\noindent
-Use the function \R{abline(h=lambda, lty=2, col='red')} to check your answer. 
 
 \subsection{Part B.3}
 Suppose a different population had a starting population size of 1000 individuals but had $\lambda = 0.8$.  

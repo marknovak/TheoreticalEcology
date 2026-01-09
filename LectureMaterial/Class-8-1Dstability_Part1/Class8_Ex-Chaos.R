@@ -1,4 +1,6 @@
 qm <- 3
+quartz.options(pointsize = 12 * qm)
+library(sonify)
 #######################
 # The discrete logistic
 ########################
@@ -6,7 +8,7 @@ qm <- 3
 Dlogis <- function(N0 = 0.01,
                    K = 10,
                    T = 2000,
-                   rd = 3) {
+                   rd = 1.5) {
   N <- numeric()
   N[1] <- N0
   for (t in 1:T) {
@@ -20,7 +22,7 @@ quartz(height = 4 * qm, width = 8 * qm)
 
 par(mar = c(5, 5, 1, 1))
 
-out <- Dlogis(rd = 0.5, T = 50)
+out <- Dlogis(rd = 1.5, T = 100)
 plot(
   out,
   type = 'b',
@@ -29,6 +31,13 @@ plot(
   ylim = c(0, 1.1 * max(out))
 )
 out
+
+sonify(
+  y = out,
+  duration = 10,
+  interpolation = 'constant',
+  flim = c(150, 800)
+)
 
 ##################################################################
 ##################################################################
@@ -115,34 +124,35 @@ for (rd in rd.vals) {
   out <- out[(9 * l):(10 * l)]
   p <- peaks(out)
   points(rep(rd, length(p)), p, pch = ".")
+  Sys.sleep(0.01)
 }
 
 # OR using apply statements to do all rd values at once.
 # This might take a while to run
-rd.vals <- seq(1, 3, 0.001)
-out <-
-  sapply(rd.vals, function(rd) {
-    out <- Dlogis(rd = rd,
-                  K = 10,
-                  N0 = 0.01,
-                  T = 2000)
-  })
-l <- nrow(out) %/% 10 # use only the last 10%
-out <- out[(9 * l):(10 * l),]
-p <- apply(out, 2, peaks)
-
-plot(
-  0,
-  0,
-  xlim = range(rd.vals),
-  ylim = c(0, 15),
-  type = "n",
-  xlab = bquote(r[d]),
-  ylab = "N*"
-)
-lapply(1:length(p), function(y) {
-  points(rep(rd.vals[y], length(p[[y]])), p[[y]], pch = '.')
-})
+# rd.vals <- seq(1, 3, 0.001)
+# out <-
+#   sapply(rd.vals, function(rd) {
+#     out <- Dlogis(rd = rd,
+#                   K = 10,
+#                   N0 = 0.01,
+#                   T = 2000)
+#   })
+# l <- nrow(out) %/% 10 # use only the last 10%
+# out <- out[(9 * l):(10 * l),]
+# p <- apply(out, 2, peaks)
+# 
+# plot(
+#   0,
+#   0,
+#   xlim = range(rd.vals),
+#   ylim = c(0, 15),
+#   type = "n",
+#   xlab = bquote(r[d]),
+#   ylab = "N*"
+# )
+# lapply(1:length(p), function(y) {
+#   points(rep(rd.vals[y], length(p[[y]])), p[[y]], pch = '.')
+# })
 
 ##################################################################
 ##################################################################

@@ -66,7 +66,8 @@ Isoclines:
 	 0 , & 0  \\
 	0, & 1  \\
 	1, & 0\\
-	\frac{1-a_{12}}{1- a_{12} a_{21} }, & \frac{1-a_{21}}{1- a_{12} a_{21} } \quad \text{\note{multiply Mathematica output top by -1, then top and bottom by -1}}
+	\frac{1-a_{12}}{1- a_{12} a_{21} }, & \frac{1-a_{21}}{1- a_{12} a_{21} } \quad \text{\note{multiply 
+	Mathematica output top and bottom by -1}}
 \end{cases}
 \end{align*}
 
@@ -111,8 +112,10 @@ Do same thing in two dimensions (note use of \emph{partial} derivatives):\\
 To simplify syntax, let's denote $f_i(u_1^*,u_2^*) = f_i$\\
 \ind (i.e. $f_i$ is implicitly evaluated at steady state abundances)
 \begin{align*}
-	f_1(u_1^* + x, u_2^* + y) = & f_1(u_1^*,u_2^*) + \frac{\partial f_1}{1! \phantom{.}\partial u_1} \cdot x + \frac{\partial^2 f_1}{2! \phantom{.} \partial u_1^2} \cdot x^2 + h.o.t. + \dots \\
-	&\quad \quad \quad \quad \dots  + \frac{\partial f_1}{1!\phantom{.} \partial u_2} \cdot y + \frac{\partial^2 f_1}{2!\phantom{.} \partial u_2^2} \cdot y^2 +  h.o.t.\\
+	f_1(u_1^* + x, u_2^* + y) = & f_1(u_1^*,u_2^*) + \frac{\frac{\partial f_1}{\partial u_1}}{1! } \cdot x + 
+	\frac{\frac{\partial^2 f_1}{\partial u_1^2}}{2! } \cdot x^2 + h.o.t. + \dots \\
+	&\quad \quad \quad \quad \dots  + \frac{\frac{\partial f_1}{\partial u_2}}{1!} \cdot y + 
+	\frac{\frac{\partial^2 f_1}{\partial u_2^2}}{2!}\cdot y^2 +  h.o.t.\\
 	 \approx & f_1(u_1^*, u_2^*) + \left. \frac{\partial f_1}{\partial u_1}\right|_{u_1^*, u_2^*} \cdot x + \left. \frac{\partial f_1}{\partial u_2}\right|_{u_1^*, u_2^*} \cdot y
 \end{align*}
 Since at steady-state (by definition)..
@@ -160,12 +163,12 @@ We will return to this in more detail next time.\\
 		\textbf{Eigenvalues ($\lambda_i$)} & \textbf{Interpretation} \\ 
 		\hline
 		$Re(\lambda_i)< 0$  for all $i$& Stable node (point attractor)\\ 
-		$Re(\lambda_i)< 0$ for some $i$ & Saddle node (repellor-attractor) \\ 
+		$Re(\lambda_i)< 0$ for some $i$ & Saddle point (attractor-repellor) \\ 
 		$Re(\lambda_i)> 0$ for all $i$ & Unstable node (repellor)\\ 
 		$Re(\lambda_i) = 0$ for all $i$ & Neutrally stable \\ 
 		\hline
 		$Im(\lambda_i) = 0$ for all $i$ & No oscillations \\ 
-		$Im(\lambda_i) \neq 0$ for some $i$  & Oscillations \\ 
+		$Im(\lambda_i) \neq 0$ for some $i$  & Oscillations (spiral) \\ 
 		\hline
 	\end{tabular} 
 \end{center}

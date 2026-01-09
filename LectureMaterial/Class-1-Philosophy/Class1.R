@@ -1,5 +1,7 @@
 rm(list = ls()) # clears workspace
 options(stringsAsFactors = F, warn = -1)
+qm <- 8
+quartz.options(pointsize = 12 * qm)
 ###########################################################
 ###########################################################
 # Sum of Polynomials - Lynx-Hare Dynamics
@@ -10,7 +12,6 @@ x <- dat$Year
 y <- dat$Hare
 z <- dat$Lynx
 
-qm <- 3
 quartz(width = 3.5 * qm, height = 2 * qm)
 par(
   mar = c(4, 4, 2, 1),

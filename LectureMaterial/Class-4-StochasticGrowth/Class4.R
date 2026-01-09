@@ -3,6 +3,7 @@
 ##################################################
 rm(list = ls()) # clears workspace
 qm <- 2 # quartz size multiplier
+quartz.options(pointsize = 12 * qm)
 
 TimeSteps <- 500
 t <- c(1:TimeSteps)
@@ -139,11 +140,11 @@ abline(0, 1, lty = 2, col = 'grey') # adds a line with intercept = 0 and slope =
 # Run the calculation again,  with slightly higher variance and add the data to your existing plot:
 output <- calc(
   reps = 100,
-  n = 1000,
+  n = 10,
   mu = 1.5,
   sigma = 0.03
 )
-points(gmlambda ~ mlambda, data = output, col = 'red')
+points(gmlambda ~ mlambda, data = output, col = 'blue')
 
 # Experiment with more levels of sigma
 # You may need to plot your output in a new plot to see it all if your sigma is large
@@ -202,6 +203,7 @@ t <- c(1:TimeSteps)
 mu <- 0
 sigma <- 0.05
 reps <- 300
+reps2show <- 300
 rlambda <- array(NA, dim = c(reps, length(t)))
 N <- array(NA, dim = c(reps, (length(t) + 1)))
 N[, 1] <- 100
@@ -231,7 +233,7 @@ plot(
   ylab = 'N_t',
   xlab = 'Time'
 )
-for (i in 1:15) {
+for (i in 1:reps2show) {
   lines(N[i,], lwd = 2)
 }
 plot(
@@ -242,7 +244,8 @@ plot(
   ylab = 'log(N_t)',
   xlab = 'Time'
 )
-for (i in 1:15) {
+
+for (i in 1:reps2show) {
   lines(N[i,], lwd = 2)
 }
 
